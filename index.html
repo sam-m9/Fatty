@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Fatty</title>
+  <meta name="description" content="Personal restaurant tracker.">
+  <meta name="theme-color" content="#F7F4EC" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1B1D18" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Fatty">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Figtree:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash.
+    try {
+      var s = JSON.parse(localStorage.getItem('fatty.v1') || '{}');
+      if (s.dark) document.documentElement.dataset.theme = 'dark';
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="header">
+      <div class="header-text">
+        <div class="subtitle" id="subtitle">Hungry?</div>
+        <h1 class="title">Fatty</h1>
+      </div>
+      <div class="header-actions">
+        <button class="round-btn" id="btn-theme" aria-label="Switch to dark mode"></button>
+        <button class="round-btn" id="btn-data" aria-label="Data and backup"></button>
+        <button class="round-btn round-btn-q" id="btn-setup" aria-label="Setup guide">?</button>
+      </div>
+    </header>
+
+    <main class="views">
+      <!-- Food -->
+      <section class="view" id="view-food" data-tab="food">
+        <div class="search-row">
+          <input class="search" id="food-search" type="search" placeholder="Search name, area, dish, tag" autocomplete="off" enterkeyhint="search" aria-label="Search spots">
+          <div class="sort-btn">
+            <span class="sort-icon" aria-hidden="true"></span>
+            <select id="sort" aria-label="Sort spots">
+              <option value="rating">Top rated</option>
+              <option value="newest">Newest</option>
+              <option value="nearest">Nearest</option>
+              <option value="area">Neighborhood</option>
+              <option value="price">Price</option>
+              <option value="cuisine">Cuisine</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-grid" id="food-filters"></div>
+        <div class="scroll list" id="food-list"></div>
+      </section>
+
+      <!-- Map -->
+      <section class="view" id="view-map" data-tab="map" hidden>
+        <div class="search-row">
+          <input class="search" id="map-search" type="search" placeholder="Search the map" autocomplete="off" enterkeyhint="search" aria-label="Search the map">
+        </div>
+        <div class="filter-grid" id="map-filters"></div>
+        <div class="map-wrap">
+          <div class="map" id="map"></div>
+          <div class="map-empty" id="map-empty" hidden></div>
+          <div class="map-card" id="map-card" hidden></div>
+        </div>
+      </section>
+
+      <!-- Dunno -->
+      <section class="view" id="view-dunno" data-tab="dunno" hidden>
+        <div class="filter-grid filter-grid-dunno" id="dunno-filters"></div>
+        <div class="stage" id="stage" role="button" tabindex="0" aria-label="Spin to pick a spot"></div>
+      </section>
+
+      <!-- Happy hours -->
+      <section class="view" id="view-happy" data-tab="happy" hidden>
+        <div class="scroll happy">
+          <h2 class="happy-title">Happy hours</h2>
+          <div class="dashed-box">
+            <div class="dashed-title">Nothing here yet</div>
+            <div class="dashed-body">Deals will list here by day once they are added to the sheet.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabbar" id="tabbar" aria-label="Sections"></nav>
+
+    <div class="backdrop" id="backdrop" hidden></div>
+    <div id="sheet-root"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
