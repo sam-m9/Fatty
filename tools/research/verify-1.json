@@ -1,0 +1,204 @@
+[
+  {
+    "key": "A:0",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "3736 Bee Cave Rd, Ste 6, Austin, TX 78746",
+    "area": "West Lake Hills",
+    "hours": "Mon-Sat 7am-6pm; Sun 8am-2pm",
+    "price": "$",
+    "changes": "Address (3736 Bee Caves Rd) confirmed; suite number not seen but kept. Atmosfy listing shows Mon-Sat closing 6pm, not 3pm. Price not confirmed, kept.",
+    "sources": [
+      "https://atmosfy.io/location/austin/texas-honey-ham-company",
+      "https://communityimpact.com/lake-travis-westlake/dining/thanksgiving-to-go-options-in-the-lake-travis-and-westlake-area/"
+    ]
+  },
+  {
+    "key": "H:15",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "3908 Ave B, Austin, TX 78751",
+    "area": "Hyde Park",
+    "hours": null,
+    "price": "$",
+    "note": "Walk-up coffee bar in the Baker Center's old boiler room; wine bar next door",
+    "changes": "Address confirmed. Sources say it moved from the trailer into the Baker Center's converted boiler room, so the food-truck note/tag is out of date (drop Food truck tag). Hours not found, so set to null.",
+    "sources": [
+      "https://communityimpact.com/central-austin/dining/terrible-love-coffee-owner-to-bring-neighborhood-wine-bar-to-hyde-park/",
+      "https://theinfatuation.com/austin/reviews/terrible-love"
+    ]
+  },
+  {
+    "key": "A:17",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "405 E 7th St, Austin, TX 78701",
+    "area": "Downtown",
+    "hours": null,
+    "price": "$",
+    "changes": "405 E 7th St (Asador at Las Perlas) confirmed. Asador also runs stands at The Grackle (900 Red River) and on Rainey St. 4pm-2am daily is Las Perlas bar's hours, not confirmed for the Asador stand, so hours set to null. Price not confirmed.",
+    "sources": [
+      "https://www.theinfatuation.com/austin/reviews/asador-at-las-perlas",
+      "https://www.theinfatuation.com/austin/reviews/asador-on-rainey",
+      "https://www.timeout.com/austin/bars/las-perlas"
+    ]
+  },
+  {
+    "key": "B1:8",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "600 W 2nd St, Austin, TX 78701",
+    "area": "Downtown",
+    "hours": "Sun-Thu 11am-10pm; Fri noon-10pm; Sat 11am-10pm",
+    "price": "$$$$",
+    "changes": "Proper Hotel site shows restaurant hours Sun-Thu 11am-10pm, Fri 12pm-10pm, Sat 11am-10pm, not 11pm on Fri-Sat. Fifth-floor rooftop at Austin Proper confirmed; the street address itself wasn't in the snippet, kept. Price not confirmed.",
+    "sources": [
+      "https://www.properhotel.com/austin/rooftop-pool/",
+      "https://therooftopguide.com/rooftop-bars-in-austin/la-piscina-at-austin-proper-hotel.html"
+    ]
+  },
+  {
+    "key": "B1:9",
+    "verdict": "corrected",
+    "status": "moved",
+    "address": "1290 Bebee Rd, Kyle, TX 78640",
+    "area": "Kyle",
+    "hours": null,
+    "price": "$$",
+    "note": "Quesabirria tacos and consomme, now inside Bread Basket convenience store in Kyle",
+    "changes": "Community Impact: moved from the truck at 1701 Bebee Rd into the Bread Basket Convenience Store at 1290 Bebee Rd on March 9, 2024. No newer source found. Hours not found, so set to null.",
+    "sources": [
+      "https://communityimpact.com/san-marcos-buda-kyle/business/birria-food-truck-love-c-spot-relocates-to-brick-and-mortar-in-kyle/"
+    ]
+  },
+  {
+    "key": "B1:10",
+    "verdict": "corrected",
+    "status": "closed_permanently",
+    "address": "1817 S Lamar Blvd, Austin, TX 78704",
+    "area": "South Lamar",
+    "hours": null,
+    "price": "$$",
+    "note": "Closed 2024 after ~18 months; Tacodeli took over the South Lamar space",
+    "changes": "Masa y Mas closed; Tacodeli took over 1817 S Lamar in summer 2024, and the website redirects to Tacodeli. Status changed to closed_permanently; hours set to null.",
+    "sources": [
+      "https://communityimpact.com/south-central-austin/dining/tacodeli-taking-over-masa-y-mas-location-on-south-lamar-boulevard-in-july/",
+      "https://aol.com/tacodeli-opening-south-lamar-location-130134025.html"
+    ]
+  },
+  {
+    "key": "B1:11",
+    "verdict": "unverified",
+    "status": "open",
+    "address": "2410 E Riverside Dr, Austin, TX 78741",
+    "area": "East Riverside",
+    "hours": null,
+    "price": "$",
+    "changes": "Found a Tacos La Catrina food truck in Austin (Wanderlog), but no source confirmed the 2410 E Riverside address or the 7am-midnight hours. Hours set to null; address kept but unconfirmed.",
+    "sources": [
+      "https://wanderlog.com/place/details/10575807/la-catrina-taco-truck"
+    ]
+  },
+  {
+    "key": "C:7",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2207 Justin Ln, Ste D, Austin, TX 78757",
+    "area": "Brentwood",
+    "hours": null,
+    "price": "$$",
+    "note": "NY slices, grandma pies and Detroit squares; takeout window at Lala's",
+    "changes": "8315 Burnet Rd was the truck at Night Owl. The flagship brick-and-mortar (opened 2024) is 2207 Justin Ln Ste D, takeout only, with dine-in at host bar Lala's. There's also a Round Rock spot and a new Airport Blvd location (2026). Switched to the flagship, area set to Brentwood, drop Food truck tag. Hours not found, so set to null.",
+    "sources": [
+      "https://hoodline.com/2024/05/austin-s-culinary-scene-heats-up-as-pedroso-s-pizza-launches-first-restaurant-in-brentwood/",
+      "https://www.theinfatuation.com/austin/reviews/pedrosos-pizza-justine-lane",
+      "https://communityimpact.com/austin/east-austin/dining/2026/04/27/pedrosos-pizza-expands-with-new-location-on-airport-boulevard"
+    ]
+  },
+  {
+    "key": "C:8",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "4415 Menchaca Rd, Austin, TX 78745",
+    "area": "South Lamar",
+    "hours": null,
+    "price": "$$",
+    "changes": "No source ties Grata to 2425 E Oltorf. Sources give 4415 Menchaca Rd 78745: Seasoned job listings, plus Community Impact on the opening inside Beatniks. Infatuation places it at The Tailor Shop food hall near S Lamar/Menchaca. Area set to South Lamar as the closest listed. Hours not found, so set to null.",
+    "sources": [
+      "https://communityimpact.com/southwest-austin/impacts/pizzeria-grata-brings-neapolitan-style-pizza-to-south-austin/",
+      "https://seasoned.co/job/cook-pizzeria-grata-austin-tx_356ac3b7-a783-4d2d-a096-86d9ef328b35",
+      "https://www.theinfatuation.com/austin/reviews/the-tailor-shop-foodery"
+    ]
+  },
+  {
+    "key": "C:9",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "3111 W 35th St, Austin, TX 78703",
+    "area": "Tarrytown",
+    "hours": null,
+    "price": "$$",
+    "changes": "Address confirmed: an outdoor window on Flo's patio. Other locations exist, including Hyde Park and Daydreamer. 'Daily noon-10pm' not seen in any source, so hours set to null.",
+    "sources": [
+      "https://communityimpact.com/central-austin/dining/flos-wine-bar-bottle-shop-brings-over-190-hand-selected-wines-to-tarrytown/",
+      "https://www.theinfatuation.com/austin/reviews/allday-pizza"
+    ]
+  },
+  {
+    "key": "C:10",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2805 Manor Rd, Austin, TX 78722",
+    "area": "Cherrywood",
+    "hours": "Mon-Thu 5pm-10pm; Fri 4pm-11pm; Sat noon-11pm; Sun noon-10pm",
+    "price": "$$",
+    "changes": "Address confirmed. Posted hours differ: Mon-Thu open 5pm (not 4pm), Sat/Sun open noon (not 11am). Price not confirmed.",
+    "sources": [
+      "https://www.toasttab.com/local/love-supreme/r-00b1a0bc-af0f-40d5-b9ca-af9574b85ee2",
+      "https://www.opentable.com.au/r/love-supreme-pizza-bar-austin"
+    ]
+  },
+  {
+    "key": "C:11",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2907 E 12th St, Austin, TX 78702",
+    "area": "Rosewood",
+    "hours": null,
+    "price": "$$",
+    "changes": "Sources put the Sammataro trailer at Camp East, 2907 E 12th St, not 1108 E 12th. Brick-and-mortars include Sammataro Sports at 519 W 37th St (opened Dec 2024), plus Lost Creek and downtown. Area changed to Rosewood. Hours in the snippet were garbled, so set to null.",
+    "sources": [
+      "https://www.ubereats.com/store/sammataro-east/kvr4sq1vUSa0XPWj-J3rhg",
+      "https://communityimpact.com/south-central-austin/dining/sammataro-brings-ny-pizza-flavor-to-first-brick-and-mortar-sports-bar-near-ut-campus/",
+      "https://www.theinfatuation.com/austin/reviews/sammataro"
+    ]
+  },
+  {
+    "key": "C:12",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "440 E St Elmo Rd, Ste G-2, Austin, TX 78745",
+    "area": "St. Elmo",
+    "hours": null,
+    "price": "$$",
+    "changes": "Address (Ste G-2, at St. Elmo Brewing) confirmed by Austin Chronicle. 'Daily 11am-10pm' not seen; hours set to null. Other locations: E 6th, Metric Blvd, Rainey, Zilker Brewing.",
+    "sources": [
+      "https://www.austinchronicle.com/locations/spicy-boys-2827810",
+      "https://communityimpact.com/northwest-austin/impacts/fried-chicken-food-truck-spicy-boys-opens-new-north-austin-location/"
+    ]
+  },
+  {
+    "key": "C:13",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2701 Manor Rd, Austin, TX 78722",
+    "area": "Cherrywood",
+    "hours": "Tue-Sun 7am-2pm; Mon closed",
+    "price": "$",
+    "changes": "Address confirmed. Atmosfy listing shows closed Mondays, not 'Daily'; search noted an older source with different weekend hours. Price not confirmed.",
+    "sources": [
+      "https://atmosfy.io/listing/459987/texas/austin/bird-bird-biscuit-1186240",
+      "https://www.theinfatuation.com/austin/reviews/bird-bird-biscuit"
+    ]
+  }
+]

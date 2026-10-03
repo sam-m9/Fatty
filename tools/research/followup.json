@@ -1,68 +1,922 @@
 [
-{"key":"E:1","name":"Maiko Sushi Lounge","status":"open","address":"207 San Jacinto Blvd, Ste 202, Austin, TX 78701","area":"Downtown","cuisine":"Sushi","price":"$$","hours":"Mon-Thu 11:30am-2pm, 4pm-10pm; Fri 11:30am-2pm, 4pm-11pm; Sat 12:30pm-11pm; Sun 12:30pm-10pm","link":"https://www.instagram.com/maikosushilounge","tags":["Date night","Cocktails"],"note":"Fusion rolls, sake mac and cheese and a happy hour","checked":"address"},
-{"key":"A:13","name":"Paco's Tacos","status":"closed_permanently"},
-{"key":"C:0","name":"Salty Cargo","status":"closed_permanently"},
-{"key":"C:2","name":"Burrata House","status":"closed_permanently"},
-{"key":"C:4","name":"Dough Boys","status":"closed_permanently"},
-{"key":"F:4","name":"Forthright Cafe","status":"closed_permanently"},
-{"key":"G:1","name":"Lola's Donuts","status":"closed_permanently"},
-{"key":"H:2","name":"Freewheelin' Coffee","status":"closed_permanently","checked":"status"},
-{"key":"I:3","name":"Black Gold","status":"closed_permanently"},
-{"key":"A:0","name":"Texas Honey Ham Company","status":"open","address":"3736 Bee Cave Rd, Ste 6, Austin, TX 78746","area":"West Lake Hills","cuisine":"Sandwiches","price":"$","hours":"Mon-Sat 7am-3pm; Sun 8am-2pm","link":"https://www.instagram.com/texashoneyham","tags":["Cheap eats","Solo","Brunch"],"note":"Honey-glazed ham breakfast tacos, rolls and lunch sandwiches"},
-{"key":"A:4","name":"Mission Street Burrito","status":"closed_permanently","note":"Vegan Mission-style burritos on Harmon Ave; reported closed March 2023"},
-{"key":"B1:5","name":"Coco'ma","status":"not_found"},
-{"key":"D:0","name":"Thai Crush","status":"not_found"},
-{"key":"E:8","name":"Brooklyn Bagel","status":"not_found"},
-{"key":"G:3","name":"Andy K's Donuts","status":"closed_permanently"},
-{"key":"H:15","name":"Terrible Love Coffee","status":"open","address":"3908 Ave B, Austin, TX 78751","area":"Hyde Park","cuisine":"Coffee","price":"$","hours":"Mon-Fri 7:30am-2pm; Sat-Sun 8:30am-3pm","link":"https://www.instagram.com/terriblelovecoffee","tags":["Outdoor seating","Solo","Food truck"],"note":"Coffee truck at the Baker Center in Hyde Park"},
-{"key":"I:4","name":"Chop Omakase","status":"not_found","note":"Only a Houston location found"},
-{"key":"A:17","name":"Asador","status":"open","address":"405 E 7th St, Austin, TX 78701","area":"Downtown","cuisine":"Mexican","price":"$","hours":"Daily 5pm-2am","link":"https://www.instagram.com/asador_atx","tags":["Food truck","Late night"],"note":"Charcoal-grilled tacos on heirloom tortillas"},
-{"key":"B1:8","name":"La Piscina","status":"open","address":"600 W 2nd St, Austin, TX 78701","area":"Downtown","cuisine":"Mexican","price":"$$$$","hours":"Sun-Thu 11am-10pm; Fri-Sat 11am-11pm","link":"https://www.instagram.com/lapiscinaaustin","tags":["Cocktails","Date night","Outdoor seating"],"note":"Rooftop pool bar at Austin Proper: ceviches, fajitas, mezcal"},
-{"key":"B1:9","name":"Love C Spot","status":"moved","address":"1701 Bebee Rd, Kyle, TX 78640","area":"Kyle","cuisine":"Mexican","price":"$$","hours":"Wed-Sun 11am-8pm; Mon-Tue closed","link":"https://www.instagram.com/lovecspot","tags":["Cheap eats"],"note":"Quesabirria tacos and consomme; moved from E Cesar Chavez to Kyle"},
-{"key":"B1:10","name":"Masa Y Más","status":"open","address":"1817 S Lamar Blvd, Austin, TX 78704","area":"South Lamar","cuisine":"Mexican","price":"$$","hours":"Sun-Thu 11am-9pm; Fri-Sat 11am-10pm","link":"https://www.instagram.com/masaymasatx","tags":["Outdoor seating","Cocktails","Group friendly"],"note":"Nixtamalized corn tacos, suadero, al pastor and frozen margaritas"},
-{"key":"B1:11","name":"Tacos La Catrina","status":"open","address":"2410 E Riverside Dr, Austin, TX 78741","area":"East Riverside","cuisine":"Mexican","price":"$","hours":"Daily 7am-midnight","link":"https://www.instagram.com/tacoslacatrinaatx","tags":["Cheap eats","Food truck","Late night"],"note":"Street tacos, tripas, barbacoa and late-night tortas"},
-{"key":"C:6","name":"Bufalina","status":"open","address":"2215 E Cesar Chavez St, Austin, TX 78702","area":"East Cesar Chavez","cuisine":"Pizza","price":"$$","hours":"Daily 4pm-10:30pm","link":"https://www.instagram.com/bufalinapizza","tags":["Date night","Michelin"],"note":"Wood-fired Neapolitan pizza and a deep wine list","checked":"address"},
-{"key":"C:7","name":"Pedroso's Pizza","status":"open","address":"8315 Burnet Rd, Austin, TX 78757","area":"North Shoal Creek","cuisine":"Pizza","price":"$$","hours":"Tue-Sun noon-9pm; Mon closed","link":"https://www.instagram.com/pedrosospizza","tags":["Food truck","Solo"],"note":"NY slices, grandma pies and Detroit-style squares"},
-{"key":"C:8","name":"Pizzeria Grata","status":"open","address":"2425 E Oltorf St, Ste H, Austin, TX 78741","area":"East Riverside","cuisine":"Pizza","price":"$$","hours":"Tue-Sun 11:30am-9pm; Mon closed","link":"https://www.instagram.com/pizzeriagrata","tags":["Solo"],"note":"Sourdough wood-fired pizza, calzones and grinders"},
-{"key":"C:9","name":"Allday Pizza","status":"open","address":"3111 W 35th St, Austin, TX 78703","area":"Tarrytown","cuisine":"Pizza","price":"$$","hours":"Daily noon-10pm","link":"https://www.instagram.com/alldaypizza","tags":["Outdoor seating","Solo"],"note":"Thin NY-style pies and slices with roasted garlic dip"},
-{"key":"C:10","name":"Love Supreme Pizza","status":"open","address":"2805 Manor Rd, Austin, TX 78722","area":"Cherrywood","cuisine":"Pizza","price":"$$","hours":"Mon-Thu 4pm-10pm; Fri 4pm-11pm; Sat 11am-11pm; Sun 11am-10pm","link":"https://www.instagram.com/lovesupremepizza","tags":["Outdoor seating","Cocktails"],"note":"Sourdough rounds, Detroit squares, wings and patio cocktails"},
-{"key":"C:11","name":"Sammataro","status":"open","address":"1108 E 12th St, Austin, TX 78702","area":"Central East Austin","cuisine":"Pizza","price":"$$","hours":"Wed-Sun noon-9pm; Mon-Tue closed","link":"https://www.instagram.com/sammataro_pizza","tags":["Outdoor seating","Food truck"],"note":"Thin, crisp 16-inch Brooklyn-style cheese and pepperoni pies"},
-{"key":"C:12","name":"Spicy Boys Fried Chicken","status":"open","address":"440 E St Elmo Rd, Austin, TX 78745","area":"St. Elmo","cuisine":"Fried chicken","price":"$$","hours":"Daily 11am-10pm","link":"https://www.instagram.com/spicyboysfriedchicken","tags":["Food truck","Outdoor seating"],"note":"Spicy Asian-style fried chicken sandwiches, tots and roti"},
-{"key":"C:13","name":"Bird Bird Biscuit","status":"open","address":"2701 Manor Rd, Austin, TX 78722","area":"Cherrywood","cuisine":"Fried chicken","price":"$","hours":"Daily 7am-2pm","link":"https://www.instagram.com/birdbirdbiscuit","tags":["Cheap eats","Solo","Brunch"],"note":"Biscuit sandwiches with fried chicken and pepper jelly"},
-{"key":"C:14","name":"Songbird","status":"open","address":"1108 E 12th St, Austin, TX 78702","area":"Central East Austin","cuisine":"Fried chicken","price":"$$","hours":"Wed-Sun 11am-3pm; Mon-Tue closed","link":"https://www.instagram.com/songbird.atx","tags":["Food truck","Outdoor seating","Solo"],"note":"Sandwiches and crispy chicken cutlets"},
-{"key":"C:15","name":"Old Thousand","status":"open","address":"1000 E 11th St, Ste 150, Austin, TX 78702","area":"Central East Austin","cuisine":"New American","price":"$$","hours":"Mon-Thu 4pm-10pm; Fri-Sat noon-11pm; Sun noon-10pm","link":"https://www.instagram.com/oldthousandatx","tags":["Cocktails","Date night","Group friendly"],"note":"Chinese-American: brisket fried rice and orange chicken","checked":"address"},
-{"key":"C:16","name":"Seoulju","status":"open","address":"9515 N Lamar Blvd, Ste 230, Austin, TX 78753","area":"North Lamar","cuisine":"Korean","price":"$$","hours":"Wed-Mon 5pm-midnight; Tue closed","link":"https://www.instagram.com/seouljuatx","tags":["Group friendly","Late night","Cocktails"],"note":"Korean bar food: double-fried wings, kimchi pancake and soju"},
-{"key":"D:6","name":"The Peacock","status":"open","address":"600 W 2nd St, Austin, TX 78701","area":"Downtown","cuisine":"Mediterranean","price":"$$$$","hours":"Daily 7am-11am, 11:30am-2:30pm, 5pm-10pm","link":"https://www.instagram.com/thepeacockaustin","tags":["Date night","Cocktails","Brunch"],"note":"Mediterranean meze, dips and kebabs at the Austin Proper"},
-{"key":"D:7","name":"Halal Gurus","status":"open","address":"2125 E Cesar Chavez St, Austin, TX 78702","area":"East Cesar Chavez","cuisine":"Middle Eastern","price":"$","hours":"Daily 11am-11pm","link":"https://www.instagram.com/halalgurus","tags":["Cheap eats","Food truck","Late night"],"note":"NYC-style chicken and gyro over rice with white sauce"},
-{"key":"D:8","name":"Phoenician Resto Cafe","status":"open","address":"4104 Spicewood Springs Rd, Austin, TX 78759","area":"Northwest Hills","cuisine":"Middle Eastern","price":"$$","hours":"Tue-Sat 11am-8:30pm; Sun noon-7:30pm; Mon closed","link":"https://www.instagram.com/phoenician_restocafe","tags":["Solo","Cheap eats"],"note":"Lebanese shawarma, falafel wraps and garlic toum"},
-{"key":"D:9","name":"CAVA","status":"open","address":"2422 Guadalupe St, Austin, TX 78705","area":"University","cuisine":"Mediterranean","price":"$","hours":"Daily 10:45am-10pm","link":"https://www.instagram.com/cava","tags":["Cheap eats","Solo"],"note":"Build-your-own Mediterranean bowls; many Austin locations"},
-{"key":"D:10","name":"Aba","status":"open","address":"1011 S Congress Ave, Bldg 2, Ste 180, Austin, TX 78704","area":"South Congress","cuisine":"Mediterranean","price":"$$$","hours":"Mon-Thu 11am-10pm; Fri 11am-11pm; Sat 10am-11pm; Sun 10am-10pm","link":"https://www.instagram.com/abarestaurant","tags":["Date night","Outdoor seating","Cocktails","Brunch"],"note":"Whipped feta, short rib and a big shaded patio on Music Lane"},
-{"key":"D:11","name":"Ezov","status":"open","address":"2708 E Cesar Chavez St, Austin, TX 78702","area":"East Cesar Chavez","cuisine":"Mediterranean","price":"$$$","hours":"Sun-Thu 5pm-10pm; Fri-Sat 5pm-10:30pm","link":"https://www.instagram.com/ezov_austin","tags":["Date night","Cocktails","Michelin"],"note":"Tel Aviv-inspired: fresh pita, crudo and skewers"},
-{"key":"D:12","name":"Bad Larry Burger Club","status":"open","address":"1618 E 6th St, Austin, TX 78702","area":"Central East Austin","cuisine":"Burgers","price":"$","hours":"Thu-Sat 5pm-10pm; Sun noon-5pm; Mon-Wed closed","link":"https://www.instagram.com/badlarryburgerclub","tags":["Food truck","Solo","Cheap eats"],"note":"Thin, lacy-edged smash burgers with griddled onions"},
-{"key":"D:13","name":"Hopdoddy Burger Bar","status":"open","address":"1400 S Congress Ave, Ste A190, Austin, TX 78704","area":"South Congress","cuisine":"Burgers","price":"$$","hours":"Sun-Thu 11am-10pm; Fri-Sat 11am-11pm","link":"https://www.instagram.com/hopdoddy","tags":["Group friendly","Cocktails"],"note":"Original location: burgers, truffle fries and shakes"},
-{"key":"D:14","name":"NADC Burger","status":"open","address":"1007 E 6th St, Austin, TX 78702","area":"Central East Austin","cuisine":"Burgers","price":"$$","hours":"Daily 11:30am-midnight","link":"https://www.instagram.com/nadcburger","tags":["Late night","Solo"],"note":"Wagyu double smash burgers and tallow fries"},
-{"key":"D:15","name":"Golden Tiger","status":"open","address":"1816 E 6th St, Austin, TX 78702","area":"Central East Austin","cuisine":"Burgers","price":"$","hours":"Mon-Fri 4pm-1:30am; Sat-Sun 2pm-1:30am","link":"https://www.instagram.com/goldentigeratx","tags":["Late night","Food truck","Outdoor seating"],"note":"Truck at Whisler's: double smash burgers and fried chicken sandwiches","checked":"address,hours"},
-{"key":"D:16","name":"Howard's","status":"not_found","note":"No Austin burger spot by this name confirmed"},
-{"key":"D:17","name":"Teal House Coffee & Bakery","status":"open","address":"2304 S Congress Ave, Austin, TX 78704","area":"South Congress","cuisine":"Bakery","price":"$","hours":"Mon-Fri 6:30am-2pm; Sat-Sun 7:30am-3pm","link":"https://www.instagram.com/tealhousebakery","tags":["Cheap eats","Brunch"],"note":"Signature cinnamon rolls, kolaches and sticky buns","checked":"address"},
-{"key":"E:11","name":"Pecan Square Cafe","status":"open","address":"1200 W 6th St, Ste B, Austin, TX 78703","area":"Clarksville","cuisine":"New American","price":"$$$","hours":"Mon-Thu 11am-2:30pm, 5pm-10pm; Fri 11am-2:30pm, 5pm-10:30pm; Sat 10am-2:30pm, 5pm-10:30pm; Sun 10am-2:30pm, 5pm-9pm","link":"https://www.instagram.com/pecansquarecafe","tags":["Date night","Cocktails","Brunch"],"note":"Seasonal pastas, wood-roasted fish and classic cocktails","checked":"address"},
-{"key":"E:12","name":"Phoebe's Diner","status":"open","address":"533 W Oltorf St, Austin, TX 78704","area":"Galindo","cuisine":"American","price":"$$","hours":"Daily 7am-3pm","link":"https://www.instagram.com/phoebesdiner","tags":["Brunch","Solo"],"note":"Diner brunch: brisket benedict, biscuits and hash browns","checked":"address"},
-{"key":"E:13","name":"Holdout Brewing","status":"open","address":"1208 W 4th St, Austin, TX 78703","area":"Clarksville","cuisine":"Burgers","price":"$$","hours":"Mon-Thu 11am-10pm; Fri-Sat 11am-11pm; Sun 11am-9pm","link":"https://www.instagram.com/holdoutbrewing","tags":["Outdoor seating","Group friendly","Dog friendly"],"note":"Brewpub: the Clasico smash burger, fish sandwich and lagers"},
-{"key":"E:14","name":"The Well","status":"open","address":"440 W 2nd St, Austin, TX 78701","area":"Downtown","cuisine":"New American","price":"$$$","hours":"Mon-Fri 8am-9pm; Sat-Sun 9am-9pm","link":"https://www.instagram.com/eatwellatx","tags":["Outdoor seating","Brunch"],"note":"Health-focused menu: gluten-free, bone broths, pasture-raised meats"},
-{"key":"E:15","name":"The Meteor","status":"open","address":"2110 S Congress Ave, Austin, TX 78704","area":"South Congress","cuisine":"Cafe","price":"$$","hours":"Daily 7am-10pm","link":"https://www.instagram.com/themeteorcafe","tags":["Outdoor seating","Dog friendly","Work friendly"],"note":"Coffee, Roman-style pizza and natural wine"},
-{"key":"E:16","name":"Fonda San Miguel","status":"open","address":"2330 W North Loop Blvd, Austin, TX 78756","area":"North Loop","cuisine":"Mexican","price":"$$$$","hours":"Mon-Thu 5pm-9:30pm; Fri-Sat 5pm-10pm; Sun 10:30am-1:30pm, 5pm-9pm","link":"https://www.instagram.com/fondasanmiguelatx","tags":["Date night","Cocktails","Brunch","Michelin"],"note":"Interior Mexican classics, cochinita pibil and Sunday brunch"},
-{"key":"E:17","name":"Hillside Farmacy","status":"open","address":"1209 E 11th St, Austin, TX 78702","area":"Central East Austin","cuisine":"New American","price":"$$","hours":"Mon-Thu 9am-10pm; Fri-Sat 9am-11pm; Sun 9am-10pm","link":"https://www.instagram.com/hillsidefarmacy","tags":["Date night","Brunch","Cocktails","Outdoor seating"],"note":"Old drugstore setting: oysters, mac and cheese and cocktails"},
-{"key":"F:13","name":"Daymaker","status":"open","address":"2310 S Lamar Blvd, Ste 102, Austin, TX 78704","area":"South Lamar","cuisine":"Cafe","price":"$$","hours":"Daily 7am-3pm","link":"https://www.instagram.com/daymaker.atx","tags":["Brunch","Outdoor seating","Solo"],"note":"Daytime cafe: breakfast bowls, sourdough toasts and espresso"},
-{"key":"F:14","name":"Citizens","status":"open","address":"","area":"Rosedale","cuisine":"Cafe","price":"","hours":"","link":"","tags":["Brunch"],"note":"Australian-style all-day cafe on Burnet Rd; $1 espresso martinis 3-6pm","checked":"status"},
-{"key":"F:15","name":"Épicerie","status":"open","address":"2307 Hancock Dr, Austin, TX 78756","area":"Rosedale","cuisine":"Cafe","price":"$$","hours":"Mon-Thu 10am-9pm; Fri-Sat 10am-9:30pm; Sun 10am-3pm","link":"https://www.instagram.com/epicerietx","tags":["Date night","Brunch","Michelin"],"note":"French-Louisiana cafe: beignets, po'boys and cheeses"},
-{"key":"F:16","name":"Rosewood Social Club","status":"open","address":"1309 Rosewood Ave, Austin, TX 78702","area":"Rosewood","cuisine":"American","price":"","hours":"","link":"","tags":["Brunch","Cocktails","Outdoor seating"],"note":"All-day brunch, sandwiches and cocktails; big patio with fire pits","checked":"status,address"},
-{"key":"F:17","name":"Bagel Brigade","status":"uncertain","note":"Hyderabad-born bagel brand said to have expanded to Austin; address not confirmed"},
-{"key":"H:10","name":"The Spokesman","status":"open","address":"440 E St Elmo Rd, Ste A-2, Austin, TX 78745","area":"St. Elmo","cuisine":"Coffee","price":"$","hours":"Mon-Fri 7am-6pm; Sat-Sun 8am-6pm","link":"https://www.instagram.com/thespokesmancoffee","tags":["Work friendly","Dog friendly","Solo"],"note":"House-roasted espresso plus local beer on draft"},
-{"key":"H:11","name":"Hometown Coffee Company","status":"open","address":"1101 Springdale Rd, Austin, TX 78721","area":"Springdale","cuisine":"Coffee","price":"$","hours":"Mon-Fri 7:30am-1pm; Sat-Sun 8am-1pm","link":"https://www.instagram.com/hometowncoffeeatx","tags":["Food truck","Dog friendly","Outdoor seating"],"note":"Miso caramel latte, strawberry matcha and croissant sandwiches"},
-{"key":"H:12","name":"Funky Sol Coffee","status":"open","address":"","area":"South Lamar","cuisine":"Coffee","price":"","hours":"","link":"","tags":["Food truck","Outdoor seating"],"note":"Vintage Airstream: specialty lattes, ceremonial matcha, chagaccino","checked":"status"},
-{"key":"H:13","name":"Odd Roots Coffee","status":"open","address":"9600 Old Lockhart Rd, Austin, TX","area":"","cuisine":"Coffee","price":"","hours":"Tue-Fri 7am-3pm; Sat-Sun 8am-3pm","link":"","tags":["Food truck"],"note":"Coffee camper: seasonal lattes like the black sesame Black Bear","checked":"status"},
-{"key":"H:14","name":"Spread & Co","status":"open","address":"2406 Manor Rd, Ste B, Austin, TX 78722","area":"Cherrywood","cuisine":"Cafe","price":"$$","hours":"Tue-Sun 7am-6pm; Mon closed","link":"https://www.instagram.com/spreadandco","tags":["Brunch","Outdoor seating","Solo"],"note":"Cheese boards, breakfast toasts, wine and coffee"},
-{"key":"H:16","name":"Second Wind","status":"open","address":"1400 S 1st St, Austin, TX 78704","area":"Bouldin Creek","cuisine":"Coffee","price":"$","hours":"Daily 7am-3pm","link":"https://www.instagram.com/secondwindatx","tags":["Solo","Food truck"],"note":"Walk-up window: espresso and iced matcha drinks"},
-{"key":"H:17","name":"Breeze and Bites","status":"open","address":"7221 McNeil Dr, Austin, TX 78729","area":"Anderson Mill","cuisine":"Mediterranean","price":"$","hours":"Fri-Sun 11am-7pm; Mon-Thu closed","link":"https://www.instagram.com/breezeandbites","tags":["Food truck","Cheap eats"],"note":"Turkish doner wraps, falafel bowls and baklava"},
-{"key":"H:18","name":"Salam's Grill","status":"open","address":"2200 E 7th St, Austin, TX 78702","area":"Central East Austin","cuisine":"Middle Eastern","price":"$","hours":"Daily noon-10pm","link":"https://www.instagram.com/salamsgrill","tags":["Food truck","Cheap eats","Solo"],"note":"Chicken shawarma and smooth hummus"},
-{"key":"H:19","name":"ThoroughBread","status":"open","address":"1709 Bluebonnet Ln, Austin, TX 78704","area":"Zilker","cuisine":"Bakery","price":"$","hours":"Mon-Fri 8am-5:30pm; Sat-Sun 8am-1:30pm","link":"","tags":["Solo"],"note":"Organic sourdough loaves, cookies and breakfast pastries","checked":"address,hours"}
+{
+"key": "E:1",
+"name": "Maiko Sushi Lounge",
+"status": "open",
+"address": "207 San Jacinto Blvd, Ste 202, Austin, TX 78701",
+"area": "Downtown",
+"cuisine": "Sushi",
+"price": "$$",
+"hours": "Mon-Thu 11:30am-2pm, 4pm-10pm; Fri 11:30am-2pm, 4pm-11pm; Sat 12:30pm-11pm; Sun 12:30pm-10pm",
+"link": "https://www.instagram.com/maikosushilounge",
+"tags": [
+"Date night",
+"Cocktails"
+],
+"note": "Fusion rolls, sake mac and cheese and a happy hour",
+"checked": "address"
+},
+{
+"key": "A:13",
+"name": "Paco's Tacos",
+"status": "closed_permanently"
+},
+{
+"key": "C:0",
+"name": "Salty Cargo",
+"status": "closed_permanently"
+},
+{
+"key": "C:2",
+"name": "Burrata House",
+"status": "closed_permanently"
+},
+{
+"key": "C:4",
+"name": "Dough Boys",
+"status": "closed_permanently"
+},
+{
+"key": "F:4",
+"name": "Forthright Cafe",
+"status": "closed_permanently"
+},
+{
+"key": "G:1",
+"name": "Lola's Donuts",
+"status": "closed_permanently"
+},
+{
+"key": "H:2",
+"name": "Freewheelin' Coffee",
+"status": "closed_permanently",
+"checked": "status"
+},
+{
+"key": "I:3",
+"name": "Black Gold",
+"status": "closed_permanently"
+},
+{
+"key": "A:0",
+"name": "Texas Honey Ham Company",
+"status": "open",
+"address": "3736 Bee Cave Rd, Ste 6, Austin, TX 78746",
+"area": "West Lake Hills",
+"cuisine": "Sandwiches",
+"price": "$",
+"hours": "Mon-Sat 7am-3pm; Sun 8am-2pm",
+"link": "https://www.instagram.com/texashoneyham",
+"tags": [
+"Cheap eats",
+"Solo",
+"Brunch"
+],
+"note": "Honey-glazed ham breakfast tacos, rolls and lunch sandwiches"
+},
+{
+"key": "A:4",
+"name": "Mission Street Burrito",
+"status": "closed_permanently",
+"note": "Vegan Mission-style burritos on Harmon Ave; reported closed March 2023"
+},
+{
+"key": "B1:5",
+"name": "Coco'ma",
+"status": "not_found"
+},
+{
+"key": "D:0",
+"name": "Thai Crush",
+"status": "not_found"
+},
+{
+"key": "E:8",
+"name": "Brooklyn Bagel",
+"status": "not_found"
+},
+{
+"key": "G:3",
+"name": "Andy K's Donuts",
+"status": "closed_permanently"
+},
+{
+"key": "H:15",
+"name": "Terrible Love Coffee",
+"status": "open",
+"address": "3908 Ave B, Austin, TX 78751",
+"area": "Hyde Park",
+"cuisine": "Coffee",
+"price": "$",
+"hours": "Mon-Fri 7:30am-2pm; Sat-Sun 8:30am-3pm",
+"link": "https://www.instagram.com/terriblelovecoffee",
+"tags": [
+"Outdoor seating",
+"Solo"
+],
+"note": "Coffee truck at the Baker Center in Hyde Park"
+},
+{
+"key": "I:4",
+"name": "Chop Omakase",
+"status": "not_found",
+"note": "Only a Houston location found"
+},
+{
+"key": "A:17",
+"name": "Asador",
+"status": "open",
+"address": "405 E 7th St, Austin, TX 78701",
+"area": "Downtown",
+"cuisine": "Mexican",
+"price": "$",
+"hours": "Daily 5pm-2am",
+"link": "https://www.instagram.com/asador_atx",
+"tags": [
+"Food truck",
+"Late night"
+],
+"note": "Charcoal-grilled tacos on heirloom tortillas"
+},
+{
+"key": "B1:8",
+"name": "La Piscina",
+"status": "open",
+"address": "600 W 2nd St, Austin, TX 78701",
+"area": "Downtown",
+"cuisine": "Mexican",
+"price": "$$$$",
+"hours": "Sun-Thu 11am-10pm; Fri-Sat 11am-11pm",
+"link": "https://www.instagram.com/lapiscinaaustin",
+"tags": [
+"Cocktails",
+"Date night",
+"Outdoor seating"
+],
+"note": "Rooftop pool bar at Austin Proper: ceviches, fajitas, mezcal"
+},
+{
+"key": "B1:9",
+"name": "Love C Spot",
+"status": "moved",
+"address": "1701 Bebee Rd, Kyle, TX 78640",
+"area": "Kyle",
+"cuisine": "Mexican",
+"price": "$$",
+"hours": "Wed-Sun 11am-8pm; Mon-Tue closed",
+"link": "https://www.instagram.com/lovecspot",
+"tags": [
+"Cheap eats"
+],
+"note": "Quesabirria tacos and consomme; moved from E Cesar Chavez to Kyle"
+},
+{
+"key": "B1:10",
+"name": "Masa Y Más",
+"status": "open",
+"address": "1817 S Lamar Blvd, Austin, TX 78704",
+"area": "South Lamar",
+"cuisine": "Mexican",
+"price": "$$",
+"hours": "Sun-Thu 11am-9pm; Fri-Sat 11am-10pm",
+"link": "https://www.instagram.com/masaymasatx",
+"tags": [
+"Outdoor seating",
+"Cocktails",
+"Group friendly"
+],
+"note": "Nixtamalized corn tacos, suadero, al pastor and frozen margaritas"
+},
+{
+"key": "B1:11",
+"name": "Tacos La Catrina",
+"status": "open",
+"address": "2410 E Riverside Dr, Austin, TX 78741",
+"area": "East Riverside",
+"cuisine": "Mexican",
+"price": "$",
+"hours": "Daily 7am-midnight",
+"link": "https://www.instagram.com/tacoslacatrinaatx",
+"tags": [
+"Cheap eats",
+"Food truck",
+"Late night"
+],
+"note": "Street tacos, tripas, barbacoa and late-night tortas"
+},
+{
+"key": "C:6",
+"name": "Bufalina",
+"status": "open",
+"address": "2215 E Cesar Chavez St, Austin, TX 78702",
+"area": "East Cesar Chavez",
+"cuisine": "Pizza",
+"price": "$$",
+"hours": "Daily 4pm-10:30pm",
+"link": "https://www.instagram.com/bufalinapizza",
+"tags": [
+"Date night",
+"Michelin"
+],
+"note": "Wood-fired Neapolitan pizza and a deep wine list",
+"checked": "address"
+},
+{
+"key": "C:7",
+"name": "Pedroso's Pizza",
+"status": "open",
+"address": "8315 Burnet Rd, Austin, TX 78757",
+"area": "North Shoal Creek",
+"cuisine": "Pizza",
+"price": "$$",
+"hours": "Tue-Sun noon-9pm; Mon closed",
+"link": "https://www.instagram.com/pedrosospizza",
+"tags": [
+"Solo"
+],
+"note": "NY slices, grandma pies and Detroit-style squares"
+},
+{
+"key": "C:8",
+"name": "Pizzeria Grata",
+"status": "open",
+"address": "2425 E Oltorf St, Ste H, Austin, TX 78741",
+"area": "East Riverside",
+"cuisine": "Pizza",
+"price": "$$",
+"hours": "Tue-Sun 11:30am-9pm; Mon closed",
+"link": "https://www.instagram.com/pizzeriagrata",
+"tags": [
+"Solo"
+],
+"note": "Sourdough wood-fired pizza, calzones and grinders"
+},
+{
+"key": "C:9",
+"name": "Allday Pizza",
+"status": "open",
+"address": "3111 W 35th St, Austin, TX 78703",
+"area": "Tarrytown",
+"cuisine": "Pizza",
+"price": "$$",
+"hours": "Daily noon-10pm",
+"link": "https://www.instagram.com/alldaypizza",
+"tags": [
+"Outdoor seating",
+"Solo"
+],
+"note": "Thin NY-style pies and slices with roasted garlic dip"
+},
+{
+"key": "C:10",
+"name": "Love Supreme Pizza",
+"status": "open",
+"address": "2805 Manor Rd, Austin, TX 78722",
+"area": "Cherrywood",
+"cuisine": "Pizza",
+"price": "$$",
+"hours": "Mon-Thu 4pm-10pm; Fri 4pm-11pm; Sat 11am-11pm; Sun 11am-10pm",
+"link": "https://www.instagram.com/lovesupremepizza",
+"tags": [
+"Outdoor seating",
+"Cocktails"
+],
+"note": "Sourdough rounds, Detroit squares, wings and patio cocktails"
+},
+{
+"key": "C:11",
+"name": "Sammataro",
+"status": "open",
+"address": "1108 E 12th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Pizza",
+"price": "$$",
+"hours": "Wed-Sun noon-9pm; Mon-Tue closed",
+"link": "https://www.instagram.com/sammataro_pizza",
+"tags": [
+"Outdoor seating",
+"Food truck"
+],
+"note": "Thin, crisp 16-inch Brooklyn-style cheese and pepperoni pies"
+},
+{
+"key": "C:12",
+"name": "Spicy Boys Fried Chicken",
+"status": "open",
+"address": "440 E St Elmo Rd, Austin, TX 78745",
+"area": "St. Elmo",
+"cuisine": "Fried chicken",
+"price": "$$",
+"hours": "Daily 11am-10pm",
+"link": "https://www.instagram.com/spicyboysfriedchicken",
+"tags": [
+"Food truck",
+"Outdoor seating"
+],
+"note": "Spicy Asian-style fried chicken sandwiches, tots and roti"
+},
+{
+"key": "C:13",
+"name": "Bird Bird Biscuit",
+"status": "open",
+"address": "2701 Manor Rd, Austin, TX 78722",
+"area": "Cherrywood",
+"cuisine": "Fried chicken",
+"price": "$",
+"hours": "Daily 7am-2pm",
+"link": "https://www.instagram.com/birdbirdbiscuit",
+"tags": [
+"Cheap eats",
+"Solo",
+"Brunch"
+],
+"note": "Biscuit sandwiches with fried chicken and pepper jelly"
+},
+{
+"key": "C:14",
+"name": "Songbird",
+"status": "open",
+"address": "1108 E 12th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Fried chicken",
+"price": "$$",
+"hours": "Wed-Sun 11am-3pm; Mon-Tue closed",
+"link": "https://www.instagram.com/songbird.atx",
+"tags": [
+"Food truck",
+"Outdoor seating",
+"Solo"
+],
+"note": "Sandwiches and crispy chicken cutlets"
+},
+{
+"key": "C:15",
+"name": "Old Thousand",
+"status": "open",
+"address": "1000 E 11th St, Ste 150, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "New American",
+"price": "$$",
+"hours": "Mon-Thu 4pm-10pm; Fri-Sat noon-11pm; Sun noon-10pm",
+"link": "https://www.instagram.com/oldthousandatx",
+"tags": [
+"Cocktails",
+"Date night",
+"Group friendly"
+],
+"note": "Chinese-American: brisket fried rice and orange chicken",
+"checked": "address"
+},
+{
+"key": "C:16",
+"name": "Seoulju",
+"status": "open",
+"address": "9515 N Lamar Blvd, Ste 230, Austin, TX 78753",
+"area": "North Lamar",
+"cuisine": "Korean",
+"price": "$$",
+"hours": "Wed-Mon 5pm-midnight; Tue closed",
+"link": "https://www.instagram.com/seouljuatx",
+"tags": [
+"Group friendly",
+"Late night",
+"Cocktails"
+],
+"note": "Korean bar food: double-fried wings, kimchi pancake and soju"
+},
+{
+"key": "D:6",
+"name": "The Peacock",
+"status": "open",
+"address": "600 W 2nd St, Austin, TX 78701",
+"area": "Downtown",
+"cuisine": "Mediterranean",
+"price": "$$$$",
+"hours": "Daily 7am-11am, 11:30am-2:30pm, 5pm-10pm",
+"link": "https://www.instagram.com/thepeacockaustin",
+"tags": [
+"Date night",
+"Cocktails",
+"Brunch"
+],
+"note": "Mediterranean meze, dips and kebabs at the Austin Proper"
+},
+{
+"key": "D:7",
+"name": "Halal Gurus",
+"status": "open",
+"address": "2125 E Cesar Chavez St, Austin, TX 78702",
+"area": "East Cesar Chavez",
+"cuisine": "Middle Eastern",
+"price": "$",
+"hours": "Daily 11am-11pm",
+"link": "https://www.instagram.com/halalgurus",
+"tags": [
+"Cheap eats",
+"Food truck",
+"Late night"
+],
+"note": "NYC-style chicken and gyro over rice with white sauce"
+},
+{
+"key": "D:8",
+"name": "Phoenician Resto Cafe",
+"status": "open",
+"address": "4104 Spicewood Springs Rd, Austin, TX 78759",
+"area": "Northwest Hills",
+"cuisine": "Middle Eastern",
+"price": "$$",
+"hours": "Tue-Sat 11am-8:30pm; Sun noon-7:30pm; Mon closed",
+"link": "https://www.instagram.com/phoenician_restocafe",
+"tags": [
+"Solo",
+"Cheap eats"
+],
+"note": "Lebanese shawarma, falafel wraps and garlic toum"
+},
+{
+"key": "D:9",
+"name": "CAVA",
+"status": "open",
+"address": "2422 Guadalupe St, Austin, TX 78705",
+"area": "University",
+"cuisine": "Mediterranean",
+"price": "$",
+"hours": "Daily 10:45am-10pm",
+"link": "https://www.instagram.com/cava",
+"tags": [
+"Cheap eats",
+"Solo"
+],
+"note": "Build-your-own Mediterranean bowls; many Austin locations"
+},
+{
+"key": "D:10",
+"name": "Aba",
+"status": "open",
+"address": "1011 S Congress Ave, Bldg 2, Ste 180, Austin, TX 78704",
+"area": "South Congress",
+"cuisine": "Mediterranean",
+"price": "$$$",
+"hours": "Mon-Thu 11am-10pm; Fri 11am-11pm; Sat 10am-11pm; Sun 10am-10pm",
+"link": "https://www.instagram.com/abarestaurant",
+"tags": [
+"Date night",
+"Outdoor seating",
+"Cocktails",
+"Brunch"
+],
+"note": "Whipped feta, short rib and a big shaded patio on Music Lane"
+},
+{
+"key": "D:11",
+"name": "Ezov",
+"status": "open",
+"address": "2708 E Cesar Chavez St, Austin, TX 78702",
+"area": "East Cesar Chavez",
+"cuisine": "Mediterranean",
+"price": "$$$",
+"hours": "Sun-Thu 5pm-10pm; Fri-Sat 5pm-10:30pm",
+"link": "https://www.instagram.com/ezov_austin",
+"tags": [
+"Date night",
+"Cocktails",
+"Michelin"
+],
+"note": "Tel Aviv-inspired: fresh pita, crudo and skewers"
+},
+{
+"key": "D:12",
+"name": "Bad Larry Burger Club",
+"status": "open",
+"address": "1618 E 6th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Burgers",
+"price": "$",
+"hours": "Thu-Sat 5pm-10pm; Sun noon-5pm; Mon-Wed closed",
+"link": "https://www.instagram.com/badlarryburgerclub",
+"tags": [
+"Food truck",
+"Solo",
+"Cheap eats"
+],
+"note": "Thin, lacy-edged smash burgers with griddled onions"
+},
+{
+"key": "D:13",
+"name": "Hopdoddy Burger Bar",
+"status": "open",
+"address": "1400 S Congress Ave, Ste A190, Austin, TX 78704",
+"area": "South Congress",
+"cuisine": "Burgers",
+"price": "$$",
+"hours": "Sun-Thu 11am-10pm; Fri-Sat 11am-11pm",
+"link": "https://www.instagram.com/hopdoddy",
+"tags": [
+"Group friendly",
+"Cocktails"
+],
+"note": "Original location: burgers, truffle fries and shakes"
+},
+{
+"key": "D:14",
+"name": "NADC Burger",
+"status": "open",
+"address": "1007 E 6th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Burgers",
+"price": "$$",
+"hours": "Daily 11:30am-midnight",
+"link": "https://www.instagram.com/nadcburger",
+"tags": [
+"Late night",
+"Solo"
+],
+"note": "Wagyu double smash burgers and tallow fries"
+},
+{
+"key": "D:15",
+"name": "Golden Tiger",
+"status": "open",
+"address": "1816 E 6th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Burgers",
+"price": "$",
+"hours": "Mon-Fri 4pm-1:30am; Sat-Sun 2pm-1:30am",
+"link": "https://www.instagram.com/goldentigeratx",
+"tags": [
+"Late night",
+"Food truck",
+"Outdoor seating"
+],
+"note": "Truck at Whisler's: double smash burgers and fried chicken sandwiches",
+"checked": "address,hours"
+},
+{
+"key": "D:16",
+"name": "Howard's",
+"status": "not_found",
+"note": "No Austin burger spot by this name confirmed"
+},
+{
+"key": "D:17",
+"name": "Teal House Coffee & Bakery",
+"status": "open",
+"address": "2304 S Congress Ave, Austin, TX 78704",
+"area": "South Congress",
+"cuisine": "Bakery",
+"price": "$",
+"hours": "Mon-Fri 6:30am-2pm; Sat-Sun 7:30am-3pm",
+"link": "https://www.instagram.com/tealhousebakery",
+"tags": [
+"Cheap eats",
+"Brunch"
+],
+"note": "Signature cinnamon rolls, kolaches and sticky buns",
+"checked": "address"
+},
+{
+"key": "E:11",
+"name": "Pecan Square Cafe",
+"status": "open",
+"address": "1200 W 6th St, Ste B, Austin, TX 78703",
+"area": "Clarksville",
+"cuisine": "New American",
+"price": "$$$",
+"hours": "Mon-Thu 11am-2:30pm, 5pm-10pm; Fri 11am-2:30pm, 5pm-10:30pm; Sat 10am-2:30pm, 5pm-10:30pm; Sun 10am-2:30pm, 5pm-9pm",
+"link": "https://www.instagram.com/pecansquarecafe",
+"tags": [
+"Date night",
+"Cocktails",
+"Brunch"
+],
+"note": "Seasonal pastas, wood-roasted fish and classic cocktails",
+"checked": "address"
+},
+{
+"key": "E:12",
+"name": "Phoebe's Diner",
+"status": "open",
+"address": "533 W Oltorf St, Austin, TX 78704",
+"area": "Galindo",
+"cuisine": "American",
+"price": "$$",
+"hours": "Daily 7am-3pm",
+"link": "https://www.instagram.com/phoebesdiner",
+"tags": [
+"Brunch",
+"Solo"
+],
+"note": "Diner brunch: brisket benedict, biscuits and hash browns",
+"checked": "address"
+},
+{
+"key": "E:13",
+"name": "Holdout Brewing",
+"status": "open",
+"address": "1208 W 4th St, Austin, TX 78703",
+"area": "Clarksville",
+"cuisine": "Burgers",
+"price": "$$",
+"hours": "Mon-Thu 11am-10pm; Fri-Sat 11am-11pm; Sun 11am-9pm",
+"link": "https://www.instagram.com/holdoutbrewing",
+"tags": [
+"Outdoor seating",
+"Group friendly",
+"Dog friendly"
+],
+"note": "Brewpub: the Clasico smash burger, fish sandwich and lagers"
+},
+{
+"key": "E:14",
+"name": "The Well",
+"status": "open",
+"address": "440 W 2nd St, Austin, TX 78701",
+"area": "Downtown",
+"cuisine": "New American",
+"price": "$$$",
+"hours": "Mon-Fri 8am-9pm; Sat-Sun 9am-9pm",
+"link": "https://www.instagram.com/eatwellatx",
+"tags": [
+"Outdoor seating",
+"Brunch"
+],
+"note": "Health-focused menu: gluten-free, bone broths, pasture-raised meats"
+},
+{
+"key": "E:15",
+"name": "The Meteor",
+"status": "open",
+"address": "2110 S Congress Ave, Austin, TX 78704",
+"area": "South Congress",
+"cuisine": "Cafe",
+"price": "$$",
+"hours": "Daily 7am-10pm",
+"link": "https://www.instagram.com/themeteorcafe",
+"tags": [
+"Outdoor seating",
+"Dog friendly",
+"Work friendly"
+],
+"note": "Coffee, Roman-style pizza and natural wine"
+},
+{
+"key": "E:16",
+"name": "Fonda San Miguel",
+"status": "open",
+"address": "2330 W North Loop Blvd, Austin, TX 78756",
+"area": "North Loop",
+"cuisine": "Mexican",
+"price": "$$$$",
+"hours": "Mon-Thu 5pm-9:30pm; Fri-Sat 5pm-10pm; Sun 10:30am-1:30pm, 5pm-9pm",
+"link": "https://www.instagram.com/fondasanmiguelatx",
+"tags": [
+"Date night",
+"Cocktails",
+"Brunch",
+"Michelin"
+],
+"note": "Interior Mexican classics, cochinita pibil and Sunday brunch"
+},
+{
+"key": "E:17",
+"name": "Hillside Farmacy",
+"status": "open",
+"address": "1209 E 11th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "New American",
+"price": "$$",
+"hours": "Mon-Thu 9am-10pm; Fri-Sat 9am-11pm; Sun 9am-10pm",
+"link": "https://www.instagram.com/hillsidefarmacy",
+"tags": [
+"Date night",
+"Brunch",
+"Cocktails",
+"Outdoor seating"
+],
+"note": "Old drugstore setting: oysters, mac and cheese and cocktails"
+},
+{
+"key": "F:13",
+"name": "Daymaker",
+"status": "open",
+"address": "2310 S Lamar Blvd, Ste 102, Austin, TX 78704",
+"area": "South Lamar",
+"cuisine": "Cafe",
+"price": "$$",
+"hours": "Daily 7am-3pm",
+"link": "https://www.instagram.com/daymaker.atx",
+"tags": [
+"Brunch",
+"Outdoor seating",
+"Solo"
+],
+"note": "Daytime cafe: breakfast bowls, sourdough toasts and espresso"
+},
+{
+"key": "F:14",
+"name": "Citizens",
+"status": "open",
+"address": "",
+"area": "Rosedale",
+"cuisine": "Cafe",
+"price": "",
+"hours": "",
+"link": "",
+"tags": [
+"Brunch"
+],
+"note": "Australian-style all-day cafe on Burnet Rd; $1 espresso martinis 3-6pm",
+"checked": "status"
+},
+{
+"key": "F:15",
+"name": "Épicerie",
+"status": "open",
+"address": "2307 Hancock Dr, Austin, TX 78756",
+"area": "Rosedale",
+"cuisine": "Cafe",
+"price": "$$",
+"hours": "Mon-Thu 10am-9pm; Fri-Sat 10am-9:30pm; Sun 10am-3pm",
+"link": "https://www.instagram.com/epicerietx",
+"tags": [
+"Date night",
+"Brunch",
+"Michelin"
+],
+"note": "French-Louisiana cafe: beignets, po'boys and cheeses"
+},
+{
+"key": "F:16",
+"name": "Rosewood Social Club",
+"status": "open",
+"address": "1309 Rosewood Ave, Austin, TX 78702",
+"area": "Rosewood",
+"cuisine": "American",
+"price": "",
+"hours": "",
+"link": "",
+"tags": [
+"Brunch",
+"Cocktails",
+"Outdoor seating"
+],
+"note": "All-day brunch, sandwiches and cocktails; big patio with fire pits",
+"checked": "status,address"
+},
+{
+"key": "F:17",
+"name": "Bagel Brigade",
+"status": "uncertain",
+"note": "Hyderabad-born bagel brand said to have expanded to Austin; address not confirmed"
+},
+{
+"key": "H:10",
+"name": "The Spokesman",
+"status": "open",
+"address": "440 E St Elmo Rd, Ste A-2, Austin, TX 78745",
+"area": "St. Elmo",
+"cuisine": "Coffee",
+"price": "$",
+"hours": "Mon-Fri 7am-6pm; Sat-Sun 8am-6pm",
+"link": "https://www.instagram.com/thespokesmancoffee",
+"tags": [
+"Work friendly",
+"Dog friendly",
+"Solo"
+],
+"note": "House-roasted espresso plus local beer on draft"
+},
+{
+"key": "H:11",
+"name": "Hometown Coffee Company",
+"status": "open",
+"address": "1101 Springdale Rd, Austin, TX 78721",
+"area": "Springdale",
+"cuisine": "Coffee",
+"price": "$",
+"hours": "Mon-Fri 7:30am-1pm; Sat-Sun 8am-1pm",
+"link": "https://www.instagram.com/hometowncoffeeatx",
+"tags": [
+"Food truck",
+"Dog friendly",
+"Outdoor seating"
+],
+"note": "Miso caramel latte, strawberry matcha and croissant sandwiches"
+},
+{
+"key": "H:12",
+"name": "Funky Sol Coffee",
+"status": "open",
+"address": "",
+"area": "South Lamar",
+"cuisine": "Coffee",
+"price": "",
+"hours": "",
+"link": "",
+"tags": [
+"Food truck",
+"Outdoor seating"
+],
+"note": "Vintage Airstream: specialty lattes, ceremonial matcha, chagaccino",
+"checked": "status"
+},
+{
+"key": "H:13",
+"name": "Odd Roots Coffee",
+"status": "open",
+"address": "9600 Old Lockhart Rd, Austin, TX",
+"area": "",
+"cuisine": "Coffee",
+"price": "",
+"hours": "Tue-Fri 7am-3pm; Sat-Sun 8am-3pm",
+"link": "",
+"tags": [
+"Food truck"
+],
+"note": "Coffee camper: seasonal lattes like the black sesame Black Bear",
+"checked": "status"
+},
+{
+"key": "H:14",
+"name": "Spread & Co",
+"status": "open",
+"address": "2406 Manor Rd, Ste B, Austin, TX 78722",
+"area": "Cherrywood",
+"cuisine": "Cafe",
+"price": "$$",
+"hours": "Tue-Sun 7am-6pm; Mon closed",
+"link": "https://www.instagram.com/spreadandco",
+"tags": [
+"Brunch",
+"Outdoor seating",
+"Solo"
+],
+"note": "Cheese boards, breakfast toasts, wine and coffee"
+},
+{
+"key": "H:16",
+"name": "Second Wind",
+"status": "open",
+"address": "1400 S 1st St, Austin, TX 78704",
+"area": "Bouldin Creek",
+"cuisine": "Coffee",
+"price": "$",
+"hours": "Daily 7am-3pm",
+"link": "https://www.instagram.com/secondwindatx",
+"tags": [
+"Solo",
+"Food truck"
+],
+"note": "Walk-up window: espresso and iced matcha drinks"
+},
+{
+"key": "H:17",
+"name": "Breeze and Bites",
+"status": "open",
+"address": "7221 McNeil Dr, Austin, TX 78729",
+"area": "Anderson Mill",
+"cuisine": "Mediterranean",
+"price": "$",
+"hours": "Fri-Sun 11am-7pm; Mon-Thu closed",
+"link": "https://www.instagram.com/breezeandbites",
+"tags": [
+"Food truck",
+"Cheap eats"
+],
+"note": "Turkish doner wraps, falafel bowls and baklava"
+},
+{
+"key": "H:18",
+"name": "Salam's Grill",
+"status": "open",
+"address": "2200 E 7th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Middle Eastern",
+"price": "$",
+"hours": "Daily noon-10pm",
+"link": "https://www.instagram.com/salamsgrill",
+"tags": [
+"Food truck",
+"Cheap eats",
+"Solo"
+],
+"note": "Chicken shawarma and smooth hummus"
+},
+{
+"key": "H:19",
+"name": "ThoroughBread",
+"status": "open",
+"address": "1709 Bluebonnet Ln, Austin, TX 78704",
+"area": "Zilker",
+"cuisine": "Bakery",
+"price": "$",
+"hours": "Mon-Fri 8am-5:30pm; Sat-Sun 8am-1:30pm",
+"link": "",
+"tags": [
+"Solo"
+],
+"note": "Organic sourdough loaves, cookies and breakfast pastries",
+"checked": "address,hours"
+}
 ]

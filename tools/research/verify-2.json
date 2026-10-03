@@ -1,0 +1,184 @@
+[
+  {
+    "key": "C:14",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "3901 Promontory Point Dr, Austin, TX 78744",
+    "area": "East Riverside",
+    "hours": "Wed-Thu 4pm-9pm; Fri 11am-9pm; Sat 10am-9pm; Sun 10am-8pm; Mon-Tue closed",
+    "price": "$$",
+    "note": "Chopped winner's chicken sandwich trailer at Meanwhile Brewing; beef-tallow fryers",
+    "changes": "Address wrong: Songbird is a trailer at Meanwhile Brewing, 3901 Promontory Point Dr (SE Austin, 78744), not E 12th St. Hours replaced with Toast/listing hours. Area set to nearest listed (East Riverside), approximate. Price not seen; kept.",
+    "sources": [
+      "https://www.toasttab.com/local/order/songbird-3901-promontory-point-drive",
+      "https://communityimpact.com/central-austin/dining/food-network-chopped-winner-brings-chicken-sandwiches-to-southeast-austin/",
+      "https://wanderlog.com/place/details/6481863/songbird"
+    ]
+  },
+  {
+    "key": "C:16",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "9515 N Lamar Blvd, Ste 230, Austin, TX 78753",
+    "area": "North Lamar",
+    "hours": null,
+    "price": "$$",
+    "changes": "Address confirmed (9515 N Lamar #230). Hours could not be confirmed (sources conflicting/unclear) -> null. Price not seen; kept.",
+    "sources": [
+      "https://wanderlog.com/place/details/444231/seoulju-korean-kitchen--bar",
+      "https://www.austinchronicle.com/food/exclusive-first-look-inside-seoulju-formerly-known-as-college-roadhouse-12100730/"
+    ]
+  },
+  {
+    "key": "D:6",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "600 W 2nd St, Austin, TX 78701",
+    "area": "Downtown",
+    "hours": "Sun-Wed 7am-10pm; Thu-Sat 7am-10:30pm",
+    "price": "$$$$",
+    "changes": "Status/address confirmed. Hours replaced with Proper Hotel's posted meal periods (breakfast Mon-Fri 7-11, lunch Mon-Fri 11-4, brunch Sat-Sun 7-4, dinner Sun-Wed 4-10, Thu-Sat 4-10:30) collapsed into continuous service. Price not seen; kept.",
+    "sources": [
+      "https://www.properhotel.com/hotels/austin/eat-drink/the-peacock/"
+    ]
+  },
+  {
+    "key": "D:7",
+    "verdict": "unverified",
+    "status": "open",
+    "address": "2125 E Cesar Chavez St, Austin, TX 78702",
+    "area": "East Cesar Chavez",
+    "hours": null,
+    "price": "$",
+    "changes": "Could not confirm. Only source (Hoodline 2020/Yelp snippet) places The Halal Gurus truck at 539 W Oltorf St (Dawson), not E Cesar Chavez; a 2025 listing shows a different business (Halal Hub) at 539 W Oltorf, so Halal Gurus may be closed or renamed. Existing values kept; hours set null. Recommend dropping or manual check.",
+    "sources": [
+      "https://hoodline.com/2020/04/austin-s-4-favorite-spots-to-find-cheap-middle-eastern-food/",
+      "https://www.zabihah.com/restaurants/08dd4ae2-b728-4306-8735-ed1ec49733ea/halal-hub-austin-tx"
+    ]
+  },
+  {
+    "key": "D:8",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2909 Guadalupe St, Austin, TX 78705",
+    "area": "North University",
+    "hours": null,
+    "price": "$$",
+    "changes": "Address wrong: sources list Phoenician Resto Cafe at 2909 Guadalupe St, 78705 (North University), not Spicewood Springs. Hours only seen as '11am-9:45pm' without day breakdown -> null. Price not seen; kept.",
+    "sources": [
+      "https://overlookmaps.com/places/phoenician-resto-cafe-austin-446878054356537",
+      "https://app.zabihah.com/restaurants/cb3f9cdb-7767-11ef-95ae-6045bdeb9f57/phoenician-resto-caf-austin-tx",
+      "https://wanderlog.com/place/details/3878679"
+    ]
+  },
+  {
+    "key": "D:9",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2426 Guadalupe St, Austin, TX 78705",
+    "area": "University",
+    "hours": "Daily 10:45am-10pm",
+    "price": "$",
+    "changes": "Address corrected to 2426 Guadalupe St per Uber Eats store listing (2422 not found). Hours 10:45am-10pm match. Price not seen; kept.",
+    "sources": [
+      "https://ubereats.com/store/cava-2426-guadalupe-st/t7of31bLRlq7zxzfEuQ82g"
+    ]
+  },
+  {
+    "key": "D:10",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "1011 S Congress Ave, Bldg 2, Ste 180, Austin, TX 78704",
+    "area": "South Congress",
+    "hours": null,
+    "price": "$$$",
+    "changes": "Address confirmed. Hours partly seen: Mon-Tue 11am-10pm, Fri 11am-11pm, Sat 10am-11pm, Sun 10am-9pm (existing had Sun to 10pm); Wed-Thu not seen, so hours set null. Weekend brunch 10am-3pm confirmed. Price not seen; kept.",
+    "sources": [
+      "https://atmosfy.io/location/austin/aba-austin",
+      "https://www.aaa.com/tripcanvas/restaurant/aba-austin-AA40092"
+    ]
+  },
+  {
+    "key": "D:11",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "2708 E Cesar Chavez St, Austin, TX 78702",
+    "area": "East Cesar Chavez",
+    "hours": "Mon-Thu 5pm-10pm; Fri-Sat 5pm-11pm; Sun 11am-2:30pm, 5pm-9pm",
+    "price": "$$$",
+    "changes": "Address confirmed; 2025 Michelin Recommended confirmed. Hours corrected: Fri-Sat until 11pm and Sunday brunch + dinner. Price not seen; kept.",
+    "sources": [
+      "https://www.toasttab.com/local/order/ezov",
+      "https://www.enprimeurclub.com/restaurants/ezov-austin-restaurant"
+    ]
+  },
+  {
+    "key": "D:12",
+    "verdict": "unverified",
+    "status": "open",
+    "address": "2027 E Cesar Chavez St, Austin, TX 78702",
+    "area": "East Cesar Chavez",
+    "hours": null,
+    "price": "$",
+    "changes": "Could not confirm current status. 2024 sources say Bad Larry's planned a permanent bar/restaurant at 2027 E Cesar Chavez St opening early 2025 (not 1618 E 6th); no source confirmed it opened or its hours. Address updated to the announced one, hours null; 'Food truck' tag likely outdated.",
+    "sources": [
+      "https://hoodline.com/2024/06/bad-larry-s-smashburgers-to-launch-permanent-location-in-east-austin-next-year/",
+      "https://www.aol.com/bad-larrys-maker-austins-best-150028472.html",
+      "https://www.theinfatuation.com/austin/reviews/bad-larry-burger-club"
+    ]
+  },
+  {
+    "key": "D:13",
+    "verdict": "confirmed",
+    "status": "open",
+    "address": "1400 S Congress Ave, Ste A190, Austin, TX 78704",
+    "area": "South Congress",
+    "hours": "Sun-Thu 11am-10pm; Fri-Sat 11am-11pm",
+    "price": "$$",
+    "changes": "Address and hours (Sun-Thu 11am-10pm; Fri-Sat 11am-11pm) match Hopdoddy's location page. Price not seen; kept.",
+    "sources": [
+      "https://hopdoddy.com/locations/southcongress"
+    ]
+  },
+  {
+    "key": "D:14",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "1007 E 6th St, Austin, TX 78702",
+    "area": "Central East Austin",
+    "hours": null,
+    "price": "$$",
+    "changes": "Address confirmed. Hours conflict with existing 'Daily 11:30am-midnight': listings show Sun-Thu 11:30am-11:45pm, Fri 11:30am-2:30am; Saturday close not seen -> hours null. Price not seen; kept.",
+    "sources": [
+      "https://www.toasttab.com/local/order/nadc-burger-1007-e-6th-st",
+      "https://www.theinfatuation.com/austin/reviews/not-a-damn-chance-burger"
+    ]
+  },
+  {
+    "key": "E:13",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "1208 W 4th St, Austin, TX 78703",
+    "area": "Clarksville",
+    "hours": "Mon 2pm-8pm; Tue-Fri 11am-10pm; Sat-Sun 10am-10pm",
+    "price": "$$",
+    "changes": "Address confirmed (official spelling 'Hold Out Brewing'). Hours corrected per Toast listing; note sources vary slightly. Price not seen; kept.",
+    "sources": [
+      "https://www.toasttab.com/local/hold-out-brewing/r-f1aa9c51-c6c5-498b-97d5-b5f6f9eea346",
+      "https://foodle.pro/restaurants/austin/hold-out-brewing"
+    ]
+  },
+  {
+    "key": "E:14",
+    "verdict": "corrected",
+    "status": "open",
+    "address": "440 W 2nd St, Austin, TX 78701",
+    "area": "Downtown",
+    "hours": "Sun-Thu 9am-9pm; Fri-Sat 9am-9:30pm",
+    "price": "$$$",
+    "changes": "Address confirmed. Hours corrected per OpenTable (opens 9am daily, not 8am weekdays). Price not seen; kept.",
+    "sources": [
+      "https://opentable.com/r/the-well-austin"
+    ]
+  }
+]
