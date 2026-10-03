@@ -8,7 +8,7 @@ export function endpointScript() {
  * The iOS Shortcut POSTs JSON: {"link": "...", "score": "4.5", "note": "..."}
  */
 const FATTY_TAB = ''; // Tab name. Blank = first tab.
-const FATTY_HEADERS = ['Link', 'Score', 'Note', 'Date', 'Name', 'Area', 'Cuisine', 'Price', 'Hours', 'Map link', 'Tags', 'Lat', 'Lng', 'Open'];
+const FATTY_HEADERS = ['Link', 'Score', 'Note', 'Date', 'Name', 'Region', 'Area', 'Address', 'Cuisine', 'Price', 'Hours', 'Map link', 'Tags', 'Lat', 'Lng', 'Open'];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();

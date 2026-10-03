@@ -250,12 +250,23 @@ svg { display: block; }
 
 .clear-all {
   height: 40px;
+  position: relative;
   font-size: 13px;
   font-weight: 600;
   color: var(--sub);
   border-radius: 99px;
 }
-.clear-all.off { visibility: hidden; }
+.results-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 24px;
+  padding: 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sub);
+}
+.results-row .clear-all { height: auto; padding: 4px 0 4px 12px; }
 
 .backdrop { position: absolute; inset: 0; z-index: 9; }
 

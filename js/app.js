@@ -1,5 +1,7 @@
 import { I } from './icons.js';
-import { loadPlaces, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
+import { loadPlaces, loadBundled, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
+import { REGIONS } from './regions.js';
+import { applyCachedCoords, geocodeMissing } from './geo.js';
 import { backupScript, endpointScript } from './scripts.js';
 
 // ---------- Persistence ----------
@@ -18,7 +20,7 @@ const saved = readJSON(STORE) || {};
 
 // ---------- State ----------
 
-const emptyFood = () => ({ area: [], cuisine: [], price: [], status: [], hours: [] });
+const emptyFood = () => ({ region: [], area: [], cuisine: [], price: [], status: [], hours: [] });
 const emptyDunno = () => ({ cuisine: [], price: [], distance: [], mood: [], status: [], rating: [] });
 
 const state = {
@@ -28,6 +30,7 @@ const state = {
   cfg: { sheet: saved.cfg?.sheet || '', folder: saved.cfg?.folder || '' },
   places: [],
   status: 'idle', // idle | loading | ready | error
+  source: 'none', // none | bundle | sheet
   error: '',
   fetchedAt: 0,
   q: '',
@@ -71,7 +74,7 @@ function ratingColor(r) {
 }
 const fmtRating = (r) => r.toFixed(1);
 const badge = (r) => `<span class="badge" style="background:${ratingColor(r)}">${fmtRating(r)}</span>`;
-const meta = (p) => [p.area, p.cuisine, p.price].filter(Boolean).join(' · ');
+const meta = (p) => [p.area || p.region, p.cuisine, p.price].filter(Boolean).join(' · ');
 
 function facts(p, closedWord = 'Closed now') {
   const out = [];
@@ -84,6 +87,7 @@ function facts(p, closedWord = 'Closed now') {
 
 function mapsUrl(p) {
   if (p.mapLink) return p.mapLink;
+  if (p.address) return `https://maps.apple.com/?q=${encodeURIComponent(p.name)}&address=${encodeURIComponent(p.address)}`;
   const q = encodeURIComponent([p.name, p.area].filter(Boolean).join(' '));
   if (p.lat != null && p.lng != null) return `https://maps.apple.com/?ll=${p.lat},${p.lng}&q=${encodeURIComponent(p.name)}`;
   return `https://maps.apple.com/?q=${q}`;
@@ -156,6 +160,7 @@ function ensureLocation({ quiet = false } = {}) {
 // ---------- Filtering & sorting ----------
 
 const PRED = {
+  region: (p, v) => p.region === v,
   area: (p, v) => p.area === v,
   cuisine: (p, v) => p.cuisine === v,
   price: (p, v) => p.price === v,
@@ -213,8 +218,11 @@ function filterDefs(scope) {
       { key: 'rating', label: 'Rating', opts: ['4.0+', '4.5+'] },
     ];
   }
+  // Area options narrow to the chosen regions.
+  const inRegion = state.f.region.length ? state.places.filter((p) => state.f.region.includes(p.region)) : state.places;
   const defs = [
-    { key: 'area', label: 'Area', opts: uniq(state.places.map((p) => p.area)) },
+    { key: 'region', label: 'Region', opts: REGIONS.filter((r) => state.places.some((p) => p.region === r)) },
+    { key: 'area', label: 'Area', opts: uniq(inRegion.map((p) => p.area)) },
     { key: 'cuisine', label: 'Cuisine', opts: uniq(state.places.map((p) => p.cuisine)) },
     { key: 'price', label: 'Price', opts: PRICES },
     { key: 'status', label: 'Status', opts: STATUSES },
@@ -256,10 +264,6 @@ function renderFilters(scope) {
         <span class="label">${esc(filterLabel(def, sel))}</span><span class="chev">${I.chev}</span>
       </button>${panel}</div>`;
   });
-  if (scope === 'food') {
-    const active = state.q.trim() || Object.values(state.f).some((v) => v.length);
-    html.push(`<button class="clear-all${active ? '' : ' off'}" data-clear-all ${active ? '' : 'tabindex="-1" aria-hidden="true"'}>Clear all</button>`);
-  }
   el.innerHTML = html.join('');
   const panel = el.querySelector('.panel');
   if (panel) panel.scrollTop = panelScroll;
@@ -275,11 +279,16 @@ function closeDropdown() {
 
 function onFiltersChanged(scope) {
   if (scope === 'dunno') {
-    if (state.d.distance.length) ensureLocation();
+    if (state.d.distance.length) { ensureLocation(); fillCoords(); }
     if (state.spin.phase === 'result' || state.spin.phase === 'miss') state.spin = { phase: 'idle' };
     renderFilters('dunno');
     renderStage();
   } else {
+    if (state.f.region.length) {
+      // Drop areas that no longer belong to a selected region.
+      const ok = new Set(state.places.filter((p) => state.f.region.includes(p.region)).map((p) => p.area));
+      state.f.area = state.f.area.filter((a) => ok.has(a));
+    }
     renderFilters('food');
     renderFilters('map');
     renderFood();
@@ -396,7 +405,7 @@ const hasData = () => state.places.length > 0;
 
 function renderFood() {
   const el = $('#food-list');
-  const noData = !state.cfg.sheet || (state.status === 'ready' && !hasData());
+  const noData = state.status === 'ready' && !hasData();
   $('#view-food .search-row').hidden = noData;
   $('#food-filters').hidden = noData;
   if (noData) { el.innerHTML = emptyState(); return; }
@@ -406,7 +415,10 @@ function renderFood() {
   }
   const list = foodResults();
   if (state.expanded && !list.some((p) => p.id === state.expanded)) state.expanded = null;
-  el.innerHTML = (state.status === 'error' ? errorCard() : '') + statsCard() +
+  const active = state.q.trim() || Object.values(state.f).some((v) => v.length);
+  const results = `<div class="results-row"><span>${list.length} ${list.length === 1 ? 'spot' : 'spots'}</span>
+    ${active ? '<button class="clear-all" data-clear-all>Clear all</button>' : ''}</div>`;
+  el.innerHTML = (state.status === 'error' ? errorCard() : '') + statsCard() + results +
     (list.length ? list.map(placeCard).join('') : `<div class="list-empty">No spots match these filters.</div>`);
 }
 
@@ -456,6 +468,7 @@ function showMap() {
   }
   map.invalidateSize();
   renderMap();
+  fillCoords();
 }
 
 function mapResults() {
@@ -767,9 +780,9 @@ function deleteLink(kind) {
   renderSheet();
   if (kind === 'sheet') {
     state.places = [];
-    state.status = 'idle';
+    state.status = 'loading';
     writeJSON(DATA_KEY, null);
-    renderData();
+    refresh();
   }
 }
 
@@ -784,24 +797,51 @@ function renderData() {
 }
 
 let loadSeq = 0;
+function placesLoaded(places, source) {
+  state.places = places;
+  state.source = source;
+  state.status = 'ready';
+  state.error = '';
+  state.fetchedAt = Date.now();
+  applyCachedCoords(places);
+  applyDistances();
+}
+
+let geoRender = 0;
+// Looks up coordinates for spots that only have an address (map tab or distance features).
+function fillCoords() {
+  geocodeMissing(state.places, () => {
+    clearTimeout(geoRender);
+    geoRender = setTimeout(() => {
+      applyDistances();
+      if (state.tab === 'map') renderMap();
+      if (state.tab === 'food' && state.sort === 'nearest') renderFood();
+    }, 400);
+  });
+}
+
 async function refresh() {
+  const seq = ++loadSeq;
   if (!state.cfg.sheet) {
-    state.status = 'idle';
+    // No sheet yet: show the list that ships with the app.
+    try {
+      const places = await loadBundled();
+      if (seq !== loadSeq) return;
+      placesLoaded(places, 'bundle');
+    } catch {
+      if (seq !== loadSeq) return;
+      placesLoaded([], 'none');
+    }
     renderData();
     return;
   }
-  const seq = ++loadSeq;
   const sheetAtStart = state.cfg.sheet;
   state.status = 'loading';
   if (!hasData()) renderData();
   try {
     const places = await loadPlaces(sheetAtStart);
     if (seq !== loadSeq) return;
-    state.places = places;
-    state.status = 'ready';
-    state.error = '';
-    state.fetchedAt = Date.now();
-    applyDistances();
+    placesLoaded(places, 'sheet');
     writeJSON(DATA_KEY, { sheet: sheetAtStart, places, at: state.fetchedAt });
   } catch (err) {
     if (seq !== loadSeq) return;
@@ -821,6 +861,8 @@ function restoreCache() {
       addedDaysAgo: p.addedAt ? Math.max(0, Math.floor((now - p.addedAt) / 86400000)) : p.addedDaysAgo,
     }));
     state.status = 'ready';
+    state.source = 'sheet';
+    applyCachedCoords(state.places);
   }
 }
 
@@ -981,7 +1023,7 @@ function boot() {
   sortSel.addEventListener('change', () => {
     state.sort = sortSel.value;
     persist();
-    if (state.sort === 'nearest') ensureLocation();
+    if (state.sort === 'nearest') { ensureLocation(); fillCoords(); }
     renderFood();
   });
 
@@ -989,7 +1031,7 @@ function boot() {
   document.addEventListener('input', onInput);
   document.addEventListener('keydown', onKey);
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && state.cfg.sheet && Date.now() - state.fetchedAt > 60000) refresh();
+    if (document.visibilityState === 'visible' && Date.now() - state.fetchedAt > 60000) refresh();
   });
   window.addEventListener('resize', () => map && map.invalidateSize());
 

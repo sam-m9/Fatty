@@ -2,6 +2,7 @@
 // The sheet must be shared as "Anyone with the link can view".
 
 import { isOpenAt } from './hours.js';
+import { regionFor, normalizeRegion } from './regions.js';
 
 const DAY = 86400000;
 
@@ -88,6 +89,8 @@ const ALIASES = {
   date: ['date', 'added', 'saved', 'date added', 'timestamp'],
   name: ['name', 'restaurant', 'spot', 'place'],
   area: ['area', 'neighborhood', 'neighbourhood', 'hood'],
+  region: ['region', 'side', 'part of town'],
+  address: ['address', 'street address', 'location'],
   cuisine: ['cuisine', 'type', 'food'],
   price: ['price', 'cost', '$'],
   hours: ['hours', 'opening hours'],
@@ -201,10 +204,13 @@ export function rowsToPlaces(table, now = new Date()) {
     const fromHours = isOpenAt(hours, now);
     if (fromHours != null) openNow = fromHours;
 
+    const area = str(cell(row, 'area'));
     places.push({
       id: `r${idx + 2}`,
       name: name || nameFromLink(link),
-      area: str(cell(row, 'area')),
+      area,
+      region: normalizeRegion(cell(row, 'region')) || regionFor(area),
+      address: str(cell(row, 'address')),
       cuisine: str(cell(row, 'cuisine')),
       price: parsePrice(cell(row, 'price')),
       rating,
@@ -222,6 +228,17 @@ export function rowsToPlaces(table, now = new Date()) {
     });
   });
   return places;
+}
+
+// The built-in list ships as {cols: [labels], rows: [[values]]}; reshape it like a gviz table.
+export async function loadBundled(url = 'data/austin.json') {
+  const res = await fetch(url, { cache: 'no-cache' });
+  if (!res.ok) throw new Error('bundle');
+  const data = await res.json();
+  return rowsToPlaces({
+    cols: data.cols.map((label) => ({ label })),
+    rows: data.rows.map((r) => ({ c: r.map((v) => (v === null || v === '' ? null : { v })) })),
+  });
 }
 
 export async function loadPlaces(sheetUrl) {
