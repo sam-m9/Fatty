@@ -1,0 +1,440 @@
+[
+  {
+    "input": "Mochinut",
+    "name": "Mochinut",
+    "status": "uncertain",
+    "address": "6406 N Interstate 35 Frontage Rd Ste 2475, Austin, TX",
+    "neighborhood": "St. John",
+    "cuisine": "Donuts",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": "https://instagram.com/mochinut_atx",
+    "tags": [],
+    "note": "Chain specializing in chewy mochi donuts",
+    "locations": 2,
+    "flags": "Original Austin shop inside Hana World Market (1700 W Parmer Ln) is marked CLOSED on Yelp. Remaining Austin-area listings: 6406 N I-35 Frontage Rd (Yelp, updated Aug 2026) and Cedar Park (11301 Lakeline Blvd). I-35 hours, ZIP and neighborhood not confirmed (ZIP/neighborhood estimated). Instagram @mochinut_atx was cited for the Parmer shop.",
+    "sources": [
+      "https://www.yelp.com/biz/mochinut-austin",
+      "https://www.yelp.com/biz/mochinut-austin-2",
+      "https://www.yelp.com/biz/mochinut-cedar-park-austin",
+      "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2024006103"
+    ]
+  },
+  {
+    "input": "Lola's Donuts",
+    "name": "Lola's Donuts",
+    "status": "closed_permanently",
+    "address": "2406 Manor Rd Ste B, Austin, TX 78722",
+    "neighborhood": "Cherrywood",
+    "cuisine": "Donuts",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Was known for brioche and cruller donuts in flavors like Dr Pepper; weekends only",
+    "locations": 1,
+    "flags": "Shop existed (Austin Chronicle Best of Austin 2021) but sources report it permanently closed. Former hours were Fri-Sun 8am-1pm.",
+    "sources": [
+      "https://austinchronicle.com/best-of-austin/year:2021/poll:critics/category:food-and-drink/lolas-donuts-tastiest-new-offspring-from-a-sugar-mama",
+      "https://www.thedonutwhole.com/best-doughnuts-in-austin/",
+      "https://digital-release.kxan.com/studio-512/the-best-donut-shops-around-austin/"
+    ]
+  },
+  {
+    "input": "Salty Donut",
+    "name": "The Salty Donut",
+    "status": "open",
+    "address": "2000 S Congress Ave, Austin, TX 78704",
+    "neighborhood": "Bouldin Creek",
+    "cuisine": "Donuts",
+    "price": null,
+    "hours": "Sun-Thu 7am-7pm; Fri-Sat 7am-10pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Solo"
+    ],
+    "note": "Miami import doing brioche donuts like candied pistachio and churro dulce de leche",
+    "locations": 2,
+    "flags": "Brand now also styled 'The Salty'. Second Austin shop opened June 2025 at Domain Northside (11501 Rock Rose Ave). Hours say 'or until sold out'. Website/Instagram not confirmed.",
+    "sources": [
+      "https://tribeza.com/restaurants/salty-donut-shop-austin-location",
+      "https://kvue.com/article/life/food/austin-the-salty-donut-south-congress/269-4ba54648-dc8a-47dc-814a-f6cbe45058e7",
+      "https://communityimpact.com/austin/northwest-austin/dining/2025/06/06/the-salty-opens-second-austin-location-at-domain-northside",
+      "https://www.theinfatuation.com/austin/reviews/the-salty"
+    ]
+  },
+  {
+    "input": "AndyK Donuts",
+    "name": "Andy K's Donuts",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": "Dawson",
+    "cuisine": "Donuts",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": "https://www.andyksdonuts.com/",
+    "instagram": null,
+    "tags": [],
+    "note": "Scratch-made donuts sold by delivery and through select Austin coffee shops",
+    "locations": 0,
+    "flags": "Matched to Andy K's Donuts (Andy Krupinski & Nicole Wilson, since Oct 2019). No storefront: delivery/wholesale only; reported on hiatus as of Oct 2025. LLC registered at 3514B Southridge Dr 78704 (business address, not a shop); neighborhood estimated from that. locations=0 since no public shop.",
+    "sources": [
+      "https://www.andyksdonuts.com/",
+      "https://www.andyksdonuts.com/about_us",
+      "https://opencorporates.com/companies/us_tx/0803098045"
+    ]
+  },
+  {
+    "input": "Kessho",
+    "name": "KESSHŌ",
+    "status": "open",
+    "address": "6726 Burnet Rd, Austin, TX 78757",
+    "neighborhood": "Allandale",
+    "cuisine": "Dessert",
+    "price": null,
+    "hours": "Wed-Thu noon-8pm; Fri-Sat noon-9pm; Sun noon-5pm; Mon-Tue closed",
+    "lat": null,
+    "lng": null,
+    "website": "https://kessho.com/",
+    "instagram": "https://instagram.com/kesshocacao",
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Award-winning bean-to-bar chocolate and Asian-inspired gelato: ube, hojicha, milk tea",
+    "locations": 1,
+    "flags": "Burnet Rd spot described as a food trailer. Earlier trailer was in South Austin near Oltorf/S 1st; unclear if still running. Neighborhood estimated (Allandale/Crestview border).",
+    "sources": [
+      "https://communityimpact.com/north-central-austin/dining/kessh-craft-chocolate-expands-with-new-burnet-road-location-in-austin/",
+      "https://www.yelp.com/biz/kessho-austin-4",
+      "https://www.instagram.com/kesshocacao/",
+      "https://kessho.com/",
+      "https://www.austinchronicle.com/food/five-austin-dessert-food-trucks-for-your-sugary-fix-13286354/"
+    ]
+  },
+  {
+    "input": "Desnudo",
+    "name": "Desnudo Coffee",
+    "status": "open",
+    "address": "2505 Webberville Rd, Austin, TX 78702",
+    "neighborhood": "Govalle",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": "Mon-Fri 7am-2pm; Sat-Sun 7:30am-2:30pm",
+    "lat": null,
+    "lng": null,
+    "website": "https://www.desnudocoffee.com/",
+    "instagram": null,
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Colombian-owned trailer; famous for the brown sugar miso oat milk latte",
+    "locations": 3,
+    "flags": "Original trailer at the Webberville food truck park; reportedly 3 trailers incl. downtown (111 Congress Ave). Instagram handle not confirmed. Price level not confirmed.",
+    "sources": [
+      "https://frankiapp.com/business/desnudo-coffee-east-austin-758101",
+      "https://joe.coffee/locations/tx/austin/desnudo-coffee-west-6th-st-austin",
+      "https://austinot.com/best-iced-matcha-cold-brew-austin"
+    ]
+  },
+  {
+    "input": "El Tigre",
+    "name": "El Tigre Coffee",
+    "status": "open",
+    "address": "2909 E 12th St, Austin, TX",
+    "neighborhood": "Rosewood",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": "Mon-Fri 7am-2pm; Sat-Sun 9am-2pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Roaster pouring espresso drinks and cold brew at Arbor Food Park",
+    "locations": 1,
+    "flags": "Moved from South Austin to Arbor Food Park on E 12th St; Food truck tag assumed from food-park setting. ZIP, website, Instagram not confirmed; neighborhood estimated. Also has a San Antonio shop (St. Paul Square, 2025).",
+    "sources": [
+      "https://austin.culturemap.com/news/restaurants-bars/el-tigre-coffee-12th-opening/",
+      "https://frankiapp.com/business/el-tigre-coffee-roasters-18397",
+      "https://ksat.com/news/local/2025/01/22/austin-based-coffee-shop-to-open-first-location-in-san-antonio"
+    ]
+  },
+  {
+    "input": "Civil Goat",
+    "name": "Civil Goat Coffee",
+    "status": "open",
+    "address": "3423 Guadalupe St, Austin, TX",
+    "neighborhood": "North University",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": "Daily 8am-4pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Work friendly"
+    ],
+    "note": "Local roaster with campus, Manor Rd and Cuernavaca shops; popular study spot",
+    "locations": 3,
+    "flags": "3 locations: 2610 Manor Rd, 704 N Cuernavaca Dr, 3423 Guadalupe St; picked Guadalupe (central). ZIP, website, Instagram not confirmed. Work friendly from Chronicle study-spots piece (not confirmed which location).",
+    "sources": [
+      "https://atmosfy.io/location/austin/civil-goat-coffee",
+      "https://www.theinfatuation.com/austin/reviews/civil-goat-east-austin",
+      "https://www.austinchronicle.com/food/wi-fi-with-a-side-of-coffee-at-these-austin-study-spots-12833755/"
+    ]
+  },
+  {
+    "input": "Houndstooth",
+    "name": "Houndstooth Coffee",
+    "status": "open",
+    "address": "4200 N Lamar Blvd, Austin, TX",
+    "neighborhood": "Rosedale",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Austin-founded specialty coffee bar known for precise espresso and pour-overs",
+    "locations": 5,
+    "flags": "Multiple Austin shops incl. 401 Congress Ave (Frost Bank Tower), 2823 E MLK Jr Blvd, 11501 Rock Rose Ave (Domain Northside, 7th overall incl. Dallas). Picked N Lamar (assumed original). Austin count approximate. Hours, ZIP, website not confirmed.",
+    "sources": [
+      "https://www.papercitymag.com/restaurants/houndstooth-coffee-austin-java-power-opens-north-domain-shopping-center/",
+      "https://austinot.com/austin-coffee-shops-houndstooth-coffee",
+      "https://patch.com/texas/eastaustin/3rd-houndstooth-coffee-site-open-east-austin"
+    ]
+  },
+  {
+    "input": "Merit",
+    "name": "Merit Coffee",
+    "status": "open",
+    "address": "222 West Ave #120, Austin, TX",
+    "neighborhood": "Downtown",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": "https://www.meritcoffee.com",
+    "instagram": null,
+    "tags": [],
+    "note": "San Antonio-born roaster; first Austin cafe in the Seaholm District",
+    "locations": 4,
+    "flags": "4 Austin-area cafes (Seaholm, The Triangle, South Lamar, Mueller at 1900 Aldrich St opened Feb 2026). Hours, ZIP, Instagram not confirmed.",
+    "sources": [
+      "https://communityimpact.com/austin/north-central-austin/dining/2026/02/16/merit-coffee-co-pours-up-craft-coffee-lattes-at-new-mueller-cafe",
+      "https://communityimpact.com/local-news/austin-metro/news/2017/12/14/merit-coffee-coming-seaholm-district",
+      "https://www.austinchronicle.com/locations/2282995/"
+    ]
+  },
+  {
+    "input": "Mañana",
+    "name": "Mañana",
+    "status": "open",
+    "address": "1603 S Congress Ave, Austin, TX",
+    "neighborhood": "South Congress",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": "Daily 7am-7pm",
+    "lat": null,
+    "lng": null,
+    "website": "https://newwaterloo.com/who-we-are/our-places/maana",
+    "instagram": null,
+    "tags": [
+      "Work friendly",
+      "Outdoor seating"
+    ],
+    "note": "Courtyard coffee bar at South Congress Hotel with house-made pastries",
+    "locations": 2,
+    "flags": "Hours from older source (Austin Food Magazine/Time Out); may have changed. Second location Mañana Dos at 111 Sandra Muraida Way (Seaholm). Free Wi-Fi per source; Outdoor seating based on hotel courtyard setting. ZIP not confirmed.",
+    "sources": [
+      "https://timeout.com/austin/restaurants/manyana-coffee-juice",
+      "https://austinfoodmagazine.com/?p=10809",
+      "https://newwaterloo.com/who-we-are/our-places/maana",
+      "https://www.toasttab.com/local/order/manana-dos-111-sandra-muraida-way-suite-101"
+    ]
+  },
+  {
+    "input": "Kyoko",
+    "name": "Kyoko Coffee",
+    "status": "open",
+    "address": "6401 Airport Blvd, Austin, TX 78752",
+    "neighborhood": "Highland",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": "https://kyokocoffee.com",
+    "instagram": "https://instagram.com/kyoko.coffee",
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Japanese-inspired drinks from a Honda microvan; get Kyoko Dreams of Ube",
+    "locations": 1,
+    "flags": "Open Wed-Sun per source but exact times not found, so hours null.",
+    "sources": [
+      "https://www.theinfatuation.com/austin/reviews/kyoko-coffee",
+      "https://www.axios.com/local/austin/2026/06/25/summer-drinks-austin-kyoko-coffee",
+      "https://digital-release.kxan.com/studio-512/summer-drink-destination-kyoko-coffee/amp/"
+    ]
+  },
+  {
+    "input": "Klerjecoffee",
+    "name": "Klerje Coffee",
+    "status": "open",
+    "address": "1614 E 6th St Ste 112, Austin, TX 78702",
+    "neighborhood": "East Cesar Chavez",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Pronounced 'clergy'; premium pour-overs, matcha and signature drinks on E 6th",
+    "locations": 1,
+    "flags": "Input matched to Klerje Coffee. Expanded space Aug 2025. Hours, website, Instagram not confirmed. Listing shows 'Apt 112' (unit 112).",
+    "sources": [
+      "https://www.theinfatuation.com/austin/reviews/klerje-coffee",
+      "https://beta2.communityimpact.com/austin/north-central-austin/business/2025/08/01/klerje-coffee-expands-space-to-offer-more-seating-same-speciality-coffee"
+    ]
+  },
+  {
+    "input": "Leche",
+    "name": "Leche Coffee",
+    "status": "open",
+    "address": "1915 E Martin Luther King Jr Blvd, Austin, TX",
+    "neighborhood": "Chestnut",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": "Wed-Fri 9am-2pm; Sat-Sun 10am-2pm; Mon-Tue closed",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": "https://instagram.com/lechecoffee_",
+    "tags": [
+      "Outdoor seating"
+    ],
+    "note": "Chicana-owned matcha/coffee bar; try the miso cajeta latte or pear matcha",
+    "locations": 1,
+    "flags": "Moved into Casa de Luz East (1915 E MLK) in 2026 after pop-ups; old 2511 E 6th St spot listed closed Apr 2026. Hours conflict: one source says Fri-Sun 9am-2pm only. ZIP not confirmed.",
+    "sources": [
+      "https://www.statesman.com/entertainment/dining/article/austin-restaurant-openings-closures-march-2026-22098109.php",
+      "https://www.yelp.com/biz/leche-coffee-austin",
+      "https://www.instagram.com/lechecoffee_/",
+      "https://www.corner.inc/place/pPVoUkoFBFfz"
+    ]
+  },
+  {
+    "input": "Haraz Coffee",
+    "name": "Haraz Coffee House",
+    "status": "open",
+    "address": "500 W Martin Luther King Jr Blvd, Austin, TX 78705",
+    "neighborhood": "West Campus",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": "Daily 7:30am-10pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Yemeni coffee house chain serving traditional Yemeni coffee and tea",
+    "locations": 2,
+    "flags": "Also a Pflugerville location. Hours from aggregator listing; verify. Website/Instagram not confirmed.",
+    "sources": [
+      "https://www.novacircle.com/spots/north-america/united-states/texas/austin/austin-tx/haraz-coffee-house-austin-055df9",
+      "https://www.ubereats.com/store/haraz-coffee-house-austin/tuhN2mfVXhu1geivil3rSA",
+      "https://frankiapp.com/business/haraz-coffee-house-pflugerville-780009.md"
+    ]
+  },
+  {
+    "input": "Luanne's coffee",
+    "name": "Luanne's Coffee & Matcha",
+    "status": "open",
+    "address": null,
+    "neighborhood": "East Cesar Chavez",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Mobile matcha/espresso cart; known for the honey cornbread matcha latte",
+    "locations": 1,
+    "flags": "Mobile cart opened Aug 2025 at a salon off East Cesar Chavez; exact address, hours, website and Instagram not found.",
+    "sources": [
+      "https://beta2.communityimpact.com/austin/north-central-austin/business/2025/09/11/26-energizing-updates-to-the-coffee-scene-in-austin-and-surrounding-areas",
+      "https://newsletter.communityimpact.com/p/new-post-557d"
+    ]
+  },
+  {
+    "input": "Community Garden Austin",
+    "name": "Community Garden",
+    "status": "open",
+    "address": "1401 Cedar Ave, Austin, TX 78702",
+    "neighborhood": "Central East Austin",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Outdoor seating"
+    ],
+    "note": "Coffee and açaí by day, natural wine and DJs on a plant-filled patio by night",
+    "locations": 1,
+    "flags": "Hours, website, Instagram not confirmed.",
+    "sources": [
+      "https://www.theinfatuation.com/austin/reviews/community-garden",
+      "https://www.theinfatuation.com/austin/neighborhoods/east-austin?page=4"
+    ]
+  },
+  {
+    "input": "Praxis Coffee",
+    "name": "Praxis Coffee Roasters",
+    "status": "open",
+    "address": "10400 Menchaca Rd, Austin, TX 78748",
+    "neighborhood": "Manchaca",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Small-batch roaster (est. 2016) focused on direct-trade, light-handed roasts",
+    "locations": 3,
+    "flags": "Several sites: Menchaca Rd (old house), inside Lustre Pearl East/South, and a roastery on Linden St near E 5th. Picked Menchaca since it has a confirmed address. Hours, website, Instagram not confirmed; location count approximate.",
+    "sources": [
+      "https://tryperdiem.com/review/praxis-coffee-roasters",
+      "https://timeout.com/austin/restaurants/austin-coffee-roasters",
+      "https://foresyteapp.com/praxis-coffee-roasters-austin/"
+    ]
+  }
+]

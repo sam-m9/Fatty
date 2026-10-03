@@ -1,12 +1,14 @@
 // Builds data/austin.json (bundled list) and data/austin.csv (for importing into the sheet)
 // from the research files plus the ratings in the original list.
-// Usage: node tools/build-austin.mjs <research-dir>
+// Layers, later wins: first-pass research (A.json…I.json) → followup.json (second pass)
+// → verify-*.json (fact checks of the second pass).
+// Usage: node tools/build-austin.mjs [research-dir]
 import fs from 'node:fs';
 import path from 'node:path';
 import { isOpenAt } from '../js/hours.js';
 import { regionFor } from '../js/regions.js';
 
-const dir = process.argv[2];
+const dir = process.argv[2] || 'tools/research';
 const TODAY = new Date().toISOString().slice(0, 10);
 const CHUNKS = ['A', 'B1', 'B2', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 const TAGS = new Set(['Date night', 'Cheap eats', 'Group friendly', 'Outdoor seating', 'Late night', 'Brunch', 'Solo',
@@ -51,8 +53,21 @@ const DROP = {
 // Michelin tags that weren't confirmed.
 const NO_MICHELIN = new Set(['I:5', 'I:9', 'I:10']);
 
+const readJSON = (f) => (fs.existsSync(path.join(dir, f)) ? JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')) : []);
+const FOLLOWUP = new Map(readJSON('followup.json').map((r) => [r.key, r]));
+for (const f of fs.readdirSync(dir).filter((n) => /^verify-\d+\.json$/.test(n))) {
+  for (const v of readJSON(f)) {
+    const base = FOLLOWUP.get(v.key);
+    if (!base) continue;
+    for (const k of ['name', 'status', 'address', 'area', 'hours', 'price', 'note']) {
+      if (k in v && v[k] !== undefined) base[k] = v[k] ?? '';
+    }
+    base.verdict = v.verdict;
+  }
+}
+
 const rows = [];
-const report = { closed: [], nameOnly: [], unresearched: [], droppedHours: [] };
+const report = { closed: [], nameOnly: [], unresearched: [], unverified: [], droppedHours: [] };
 
 for (const chunk of CHUNKS) {
   const items = JSON.parse(fs.readFileSync(path.join(dir, `${chunk}.json`), 'utf8'));
@@ -64,6 +79,32 @@ for (const chunk of CHUNKS) {
     const unresearched = /not researched/i.test(r.flags || '') || !r.name;
     const category = CATEGORY[chunk][i] || '';
     const brunchList = BRUNCH_CHUNK_RANGES[chunk] && i >= BRUNCH_CHUNK_RANGES[chunk][0] && i <= BRUNCH_CHUNK_RANGES[chunk][1];
+
+    const f = FOLLOWUP.get(key);
+    if (f) {
+      if (f.status === 'closed_permanently') {
+        report.closed.push(`${f.name}${rating != null ? ` (rated ${rating})` : ''}`);
+        return;
+      }
+      let p;
+      if (f.status === 'not_found' || f.status === 'uncertain' || !f.address && !f.area) {
+        const name = f.status === 'not_found' ? (NAME_ONLY[key] || f.name) : f.name;
+        report.nameOnly.push(name);
+        p = { name, area: f.area || '', address: '', cuisine: f.cuisine || category, price: '', hours: '', link: '',
+          note: f.status === 'not_found' ? '' : (f.note || ''), tags: brunchList ? ['Brunch'] : [] };
+      } else {
+        let hours = f.hours || '';
+        if (hours && isOpenAt(hours) === null) { report.droppedHours.push(`${f.name}: ${hours}`); hours = ''; }
+        let tags = (f.tags || []).filter((t) => TAGS.has(t));
+        if (brunchList && !tags.includes('Brunch')) tags.push('Brunch');
+        p = { name: f.name, area: regionFor(f.area) ? f.area : '', address: f.address || '', cuisine: f.cuisine || category,
+          price: f.price || '', hours, link: f.link || '', note: f.note || '', tags };
+        if (f.verdict === 'unverified') report.unverified.push(f.name);
+      }
+      if (isNew) p.tags = ['New', ...p.tags.filter((t) => t !== 'New')];
+      rows.push({ ...p, rating, date: isNew ? TODAY : '', key });
+      return;
+    }
 
     if (r.status === 'closed_permanently' && !NAME_ONLY[key]) {
       report.closed.push(`${r.name || r.input}${rating != null ? ` (rated ${rating})` : ''}`);

@@ -1,0 +1,276 @@
+[
+  {
+    "input": "Paprika  (Paprika ATX, Mexican)",
+    "name": "Paprika ATX",
+    "status": "open",
+    "address": "6519 N Lamar Blvd, Austin, TX 78752",
+    "neighborhood": "North Lamar",
+    "cuisine": "Mexican",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Suadero tacos with salsa macha; on NYT's 2026 best-restaurants list",
+    "locations": 1,
+    "flags": "Brick-and-mortar taqueria opened Oct 2025 next to Michi Ramen on N Lamar. Hours unconfirmed: one listing says Tue-Sat 1pm-8pm (closes when sold out) but shows garbled 24h Sun/Mon; left null. Instagram/website not confirmed. Pages could not be opened (egress blocked); facts from search snippets.",
+    "sources": [
+      "https://hoodline.com/2026/09/paprika-atx-lands-on-nyt-s-50-best-list/",
+      "https://calendar.austinchronicle.com/best-of/2026/food-and-drink-critics-picks/best-place-to-down-suadero-14117714",
+      "https://www.islands.com/2086446/texas-austin-paprika-atx-staple-worth-hype-yelp-top/",
+      "https://www.axios.com/local/austin/2026/02/03/bite-club-paprika-s-tacos"
+    ]
+  },
+  {
+    "input": "La Tunita",
+    "name": "La Tunita 512",
+    "status": "uncertain",
+    "address": "2400 Burleson Rd, Austin, TX",
+    "neighborhood": "Montopolis",
+    "cuisine": "Mexican",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Tijuana-style birria tacos and quesotacos with consome for dunking",
+    "locations": 1,
+    "flags": "Matched to La Tunita 512 birria truck. Only 2021-era sources found (2400 Burleson Rd, Tue-Sat 1pm until sold out); current location/hours not verified for 2026. ZIP not shown in source. Neighborhood approximate (SE of I-35/Ben White).",
+    "sources": [
+      "https://eastsideatx.com/?p=17446",
+      "https://austinchronicle.com/first-plates/year:2021/neighborhood:south/winner:la-tunita-512",
+      "https://www.austinchronicle.com/food/austins-latest-taco-craze-comes-from-tijuana-via-instagram-12005894/"
+    ]
+  },
+  {
+    "input": "Pepe's Tacos Birria",
+    "name": "Pepe's Tacos",
+    "status": "open",
+    "address": "704 N Lamar Blvd, Austin, TX",
+    "neighborhood": "Downtown",
+    "cuisine": "Mexican",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Birria tacos, quesabirria and consome from a downtown truck",
+    "locations": 1,
+    "flags": "Status based on undated Infatuation review; hours, ZIP, website and Instagram not confirmed.",
+    "sources": [
+      "https://theinfatuation.com/austin/reviews/pepes-tacos",
+      "https://www.theinfatuation.com/austin/guides/best-birria-tacos-austin"
+    ]
+  },
+  {
+    "input": "Kikos tacos",
+    "name": "Kiko's Tacos",
+    "status": "open",
+    "address": "729 E Slaughter Ln, Austin, TX",
+    "neighborhood": "Southpark Meadows",
+    "cuisine": "Mexican",
+    "price": "$",
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Food truck",
+      "Cheap eats"
+    ],
+    "note": "Gas-station taco truck; get the mini taco plate with avocado and queso",
+    "locations": 1,
+    "flags": "Single aggregator source (atly); hours, ZIP and current status not independently verified. Price inferred from '3 tacos under $10'.",
+    "sources": [
+      "https://www.atly.com/location/KikosTacos"
+    ]
+  },
+  {
+    "input": "De Nada  (De Nada Cantina)",
+    "name": "De Nada Cantina",
+    "status": "open",
+    "address": "4715 E Cesar Chavez St, Austin, TX 78702",
+    "neighborhood": "East Cesar Chavez",
+    "cuisine": "Mexican",
+    "price": null,
+    "hours": "Mon-Sat 11am-midnight; Sun 11am-10pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Late night"
+    ],
+    "note": "East side cantina for tacos and margaritas",
+    "locations": 2,
+    "flags": "Second location on South 1st per OpenTable. Hours from OpenTable/search snippet; unclear if they apply to the Cesar Chavez location specifically. Website/Instagram not verified (site fetch blocked).",
+    "sources": [
+      "https://opentable.com/restaurant/profile/1186438",
+      "https://www.opentable.ie/r/de-nada-cantina-cesar-chavez-austin",
+      "https://www.opentable.com.au/r/de-nada-cantina-south-1st",
+      "https://www.toasttab.com/local/denada-cantina/r-ad685d0f-7fd1-4a03-b6d3-4a8468e1f475"
+    ]
+  },
+  {
+    "input": "Coco'ma",
+    "name": "Ma'Coco",
+    "status": "closed_permanently",
+    "address": "501 Comal St, Austin, TX 78702",
+    "neighborhood": "East Cesar Chavez",
+    "cuisine": "Mexican",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "California/Baja-style Mexican: tacos, fry-stuffed burritos, churro doughnuts",
+    "locations": 1,
+    "flags": "No Austin spot named Coco'ma found; best match is Ma'Coco (name reversed). Yelp marks it CLOSED (Aug 2026 update); other listings conflict, so closure not confirmed by an official source. A Buda location was announced for 2024.",
+    "sources": [
+      "https://www.yelp.com/biz/ma-coco-austin",
+      "https://communityimpact.com/central-austin/impacts/california-style-mexican-restaurant-macoco-opens-plus-more-business-news-from-east-austin/",
+      "https://www.facebook.com/macocoatx/"
+    ]
+  },
+  {
+    "input": "Unmundo Sabor",
+    "name": "Un Mundo de Sabor",
+    "status": "uncertain",
+    "address": "5333 Fleming Ct, Austin, TX 78744",
+    "neighborhood": "Southpark Meadows",
+    "cuisine": "Mexican",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": "https://unmundodesabor.com",
+    "instagram": null,
+    "tags": [
+      "Food truck"
+    ],
+    "note": "Taco truck known for tacos, enchiladas and tres leches",
+    "locations": 1,
+    "flags": "Old S 1st St (Thicket) truck is marked CLOSED on Yelp (May 2026). A separate Yelp listing at 5333 Fleming Ct (desserts, Jan 2026) may be current base; also appears in Driftwood/Wimberley. Also did 'Somos Taco Arabi' collab with Reem's Falafel at The Yard (440 E St Elmo Rd). Current operating spot unconfirmed; neighborhood approximate from ZIP.",
+    "sources": [
+      "https://www.yelp.com/biz/un-mundo-de-sabor-austin",
+      "https://www.yelp.com/biz/un-mundo-de-sabor-austin-2",
+      "https://www.texasmonthly.com/food/un-mundo-de-sabor-taco-review/",
+      "https://www.theinfatuation.com/austin/reviews/un-mundo-de-sabor",
+      "https://www.theinfatuation.com/austin/reviews/somos-taco-arabi"
+    ]
+  },
+  {
+    "input": "Habanero Mexican  (Habanero Mexican Cafe)",
+    "name": "Habanero Mexican Cafe",
+    "status": "open",
+    "address": "501 W Oltorf St, Austin, TX 78704",
+    "neighborhood": "South First",
+    "cuisine": "Tex-Mex",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch"
+    ],
+    "note": "Family-run Tex-Mex diner known for fajitas and breakfast",
+    "locations": 1,
+    "flags": "Hours conflict between sources (one says 7am-3pm most days, 7am-5pm weekends; older says up to 9pm Fri-Sat); left null.",
+    "sources": [
+      "https://www.timeout.com/austin/restaurants/habanero-mexican-cafe",
+      "https://www.theinfatuation.com/austin/reviews/habanero-cafe",
+      "https://kvue.com/article/money/business/keep-austin-local/keep-austin-local-habanero-mexican-cafe/269-0c2fb284-c728-4dfd-a224-1a232aa96e44"
+    ]
+  },
+  {
+    "input": "La Piscina  (described as pricey/\"spenny\")",
+    "name": null,
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": null,
+    "flags": "NOT RESEARCHED: session web-search budget (200) exhausted and WebFetch egress-blocked before this spot could be looked up. ",
+    "sources": []
+  },
+  {
+    "input": "C Spot",
+    "name": null,
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": null,
+    "flags": "NOT RESEARCHED: session web-search budget (200) exhausted and WebFetch egress-blocked before this spot could be looked up. ",
+    "sources": []
+  },
+  {
+    "input": "Masa Y Mas",
+    "name": null,
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": null,
+    "flags": "NOT RESEARCHED: session web-search budget (200) exhausted and WebFetch egress-blocked before this spot could be looked up. ",
+    "sources": []
+  },
+  {
+    "input": "Tacos La Catrina 24",
+    "name": null,
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": null,
+    "flags": "NOT RESEARCHED: session web-search budget (200) exhausted and WebFetch egress-blocked before this spot could be looked up. ",
+    "sources": []
+  }
+]

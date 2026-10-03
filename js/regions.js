@@ -11,7 +11,7 @@ const GROUPS = {
     'Wells Branch', 'Jollyville', 'Round Rock', 'Cedar Park', 'Pflugerville', 'Leander'],
   South: ['South Congress', 'Bouldin Creek', 'Travis Heights', 'Zilker', 'Barton Hills', 'South Lamar', 'South First',
     'Galindo', 'Dawson', 'St. Elmo', 'Westgate', 'Sunset Valley', 'Manchaca', 'Southpark Meadows', 'Circle C',
-    'Oak Hill', 'West Lake Hills', 'Bee Cave'],
+    'Oak Hill', 'West Lake Hills', 'Bee Cave', 'Kyle', 'Buda'],
 };
 
 const BY_AREA = new Map();

@@ -1,0 +1,419 @@
+[
+  {
+    "input": "Elizabeth Street Cafe",
+    "name": "Elizabeth Street Cafe",
+    "status": "open",
+    "address": "1501 S 1st St, Austin, TX 78704",
+    "neighborhood": "Bouldin Creek",
+    "cuisine": "Vietnamese",
+    "price": null,
+    "hours": "Mon-Fri 11am-10pm; Sat-Sun 8am-10pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch"
+    ],
+    "note": "Vietnamese cafe and French bakery on South First; weekend brunch",
+    "locations": 1,
+    "flags": "Hours from OpenTable/aggregator listing (weekend brunch 8am-2:30pm, dinner 2:30pm-10pm); not checked against official site. Price, website and Instagram not confirmed.",
+    "sources": [
+      "https://www.opentable.co.uk/r/elizabeth-st-cafe-austin",
+      "https://foodle.pro/restaurants/austin/elizabeth-street-cafe"
+    ]
+  },
+  {
+    "input": "Patika",
+    "name": "Patika",
+    "status": "open",
+    "address": "2159 S Lamar Blvd, Austin, TX 78704",
+    "neighborhood": "South Lamar",
+    "cuisine": "Coffee",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Coffee shop with wine and all-day meals; sister Patika Luncheonette downtown",
+    "locations": 2,
+    "flags": "Hours conflict between sources (7am-6pm vs. daily 7:30am-4pm), so hours left null. Second location: Patika Luncheonette, 100 Congress Ave Ste 125 (78701), listed 7:30am-3:30pm.",
+    "sources": [
+      "https://www.spyglassrealty.com/blog/patika-coffee-review.html",
+      "https://austinfoodmagazine.com/patika-coffee-opens-on-south-lamar/amp/",
+      "https://www.theinfatuation.com/austin/reviews/patika-luncheonette",
+      "https://austinmoms.com/2024/08/13/10-south-austin-coffee-shops/"
+    ]
+  },
+  {
+    "input": "Foreign and Domestic",
+    "name": "Foreign & Domestic",
+    "status": "open",
+    "address": "306 E 53rd St, Austin, TX",
+    "neighborhood": "North Loop",
+    "cuisine": "New American",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Rotating seasonal menu; known for Gruyere popovers and gnocchi",
+    "locations": 1,
+    "flags": "Founder Ned Elliot sold the restaurant to chefs Sarah Heard and Nathan Lemley, who now run it. ZIP not shown in sources (likely 78751). Hours, price, website and Instagram not confirmed.",
+    "sources": [
+      "https://communityimpact.com/central-austin/business/foreign-domestic-sold-founder-looks-expand-brand/",
+      "https://www.opentable.ca/foreign-and-domestic-austin",
+      "https://thekeenangroup.com/the-source/austin-best-restaurants-2025"
+    ]
+  },
+  {
+    "input": "Bouldin Creek Cafe",
+    "name": "Bouldin Creek Cafe",
+    "status": "open",
+    "address": "1900 S 1st St, Austin, TX 78704",
+    "neighborhood": "Bouldin Creek",
+    "cuisine": "Cafe",
+    "price": null,
+    "hours": "Mon-Fri 7am-midnight; Sat-Sun 8am-midnight",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch"
+    ],
+    "note": "Organic vegetarian cafe with all-day breakfast, tacos, bowls and veggie plates",
+    "locations": 1,
+    "flags": "Hours come from Time Out / aggregator listings and may be out of date (possibly pre-pandemic); check before using. Price, website and Instagram not confirmed.",
+    "sources": [
+      "https://www.timeout.com/austin/restaurants/bouldin-creek-cafe",
+      "https://www.novacircle.com/spots/north-america/united-states/texas/austin/austin-tx/bouldin-creek-cafe-b52798"
+    ]
+  },
+  {
+    "input": "Forthright Cafe",
+    "name": "Forthright",
+    "status": "closed_permanently",
+    "address": "98 San Jacinto Blvd, Austin, TX 78701",
+    "neighborhood": "Downtown",
+    "cuisine": "Cafe",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch"
+    ],
+    "note": "Former downtown cafe/bakery at Cesar Chavez and Brazos; known for tea and matcha drinks",
+    "locations": 1,
+    "flags": "The Infatuation lists it as permanently closed; closure date not found. Last listed hours were Mon-Fri 7am-7pm, Sat 8am-3pm, Sun 10am-3pm.",
+    "sources": [
+      "https://www.theinfatuation.com/austin/reviews/forthright",
+      "https://www.timeout.com/austin/restaurants/forthright",
+      "https://www.austinchronicle.com/food/review-forthright-11768266/"
+    ]
+  },
+  {
+    "input": "Better Half Coffee and Cocktails",
+    "name": "Better Half Coffee & Cocktails",
+    "status": "open",
+    "address": "406 Walsh St, Austin, TX",
+    "neighborhood": "Clarksville",
+    "cuisine": "Cafe",
+    "price": null,
+    "hours": "Mon 8am-3pm; Tue-Thu 8am-10pm; Fri-Sat 8am-11pm; Sun 8am-8pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Cocktails",
+      "Outdoor seating",
+      "Brunch"
+    ],
+    "note": "Bungalow patio cafe that becomes a cocktail bar; breakfast sandwiches, fried chicken",
+    "locations": 1,
+    "flags": "Hours from a single aggregator listing; sources said hours vary. ZIP not shown (likely 78703). From the New Waterloo group (per Time Out). Price, website and Instagram not confirmed.",
+    "sources": [
+      "https://www.timeout.com/austin/news/a-new-all-day-cafe-with-coffee-and-cocktails-has-opened-in-clarksville-022618",
+      "https://foodle.pro/restaurants/austin/better-half-coffee-cocktails",
+      "https://joinpearl.co/bars/austin-united-states-texas/better-half-coffee-and-cocktails"
+    ]
+  },
+  {
+    "input": "Kerby Lane  (Kerby Lane Cafe)",
+    "name": "Kerbey Lane Cafe",
+    "status": "open",
+    "address": "3704 Kerbey Ln, Austin, TX",
+    "neighborhood": "Rosedale",
+    "cuisine": "American",
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch"
+    ],
+    "note": "Austin diner since 1980, famous for pancakes and queso",
+    "locations": 8,
+    "flags": "Correct spelling is 'Kerbey'. This is the original location (opened 1980). Hours conflict between sources (Mon-Thu 6:30am-11pm vs. weekend 24-hour schedules), so left null. Chain has 10 locations including San Marcos and San Antonio, so about 8 in the Austin area. ZIP not shown (likely 78731).",
+    "sources": [
+      "https://communityimpact.com/austin/central-austin/impacts/2020/06/10/kerbey-lane-cafe-celebrates-40th-anniversary-in-austin",
+      "https://atxtoday.6amcity.com/biz/kerbey-lane-cafe-family-diner-of-atx",
+      "https://atxtoday.6amcity.com/food/kerbey-lane-open-24-hours",
+      "https://houston.culturemap.com/news/travel/07-07-15-famed-austin-cafe-known-for-pancakes-and-queso-celebrates-milestone-anniversary"
+    ]
+  },
+  {
+    "input": "Proud Mary Coffee",
+    "name": "Proud Mary Coffee",
+    "status": "open",
+    "address": "2043 S Lamar Blvd, Austin, TX",
+    "neighborhood": "South Lamar",
+    "cuisine": "Cafe",
+    "price": null,
+    "hours": "Daily 7am-4pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Melbourne-born specialty coffee roaster with an Aussie-style brunch cafe",
+    "locations": 1,
+    "flags": "Permit filed May 2026 for a second cafe at 4301 Guadalupe St Ste 100 (Hyde Park), target completion Sept 2026; opening not confirmed. ZIP not shown (likely 78704). Price, website and Instagram not confirmed.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Proud_Mary_Coffee",
+      "https://www.tripadvisor.ca/Restaurant_Review-g30196-d25087832-Reviews-Proud_Mary_Coffee-Austin_Texas.html",
+      "https://hoodline.com/2026/05/proud-mary-plots-hyde-park-perch-for-second-austin-cafe/",
+      "https://dailycoffeenews.com/2022/09/12/beloved-aussie-born-brand-proud-mary-coffee-opens-in-austin"
+    ]
+  },
+  {
+    "input": "Asti Trattoria",
+    "name": "Asti Trattoria",
+    "status": "open",
+    "address": "408 E 43rd St Ste C, Austin, TX 78751",
+    "neighborhood": "Hyde Park",
+    "cuisine": "Italian",
+    "price": null,
+    "hours": "Tue-Sat 4pm-9pm; Sun 10am-2pm; Mon closed",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch"
+    ],
+    "note": "Hyde Park Italian trattoria; Sunday brunch",
+    "locations": 1,
+    "flags": "Hours from OpenTable listing. Price, website and Instagram not confirmed.",
+    "sources": [
+      "https://opentable.com/restaurant/profile/21220",
+      "https://www.opentable.com/asti-trattoria?lang=es"
+    ]
+  },
+  {
+    "input": "Maie Day",
+    "name": "Maie Day",
+    "status": "open",
+    "address": "1603 S Congress Ave, Austin, TX 78704",
+    "neighborhood": "South Congress",
+    "cuisine": "American",
+    "price": null,
+    "hours": "Mon-Thu 5pm-10pm; Fri-Sat 10am-10pm; Sun 10am-9pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Michelin",
+      "Brunch"
+    ],
+    "note": "Chef Michael Fojtasek's chophouse at South Congress Hotel; prime cuts and sides",
+    "locations": 1,
+    "flags": "Michelin Guide Texas Recommended in 2024 and 2025. Sources disagree on brunch start time (10am vs. 11am-3pm Fri-Sun). Price, website and Instagram not confirmed.",
+    "sources": [
+      "https://austinfoodmagazine.com/maie-day/amp",
+      "https://southcongresshotel.com/on-rotation/maie-day-michelin-guide-recommended-restaurants-2024",
+      "https://www.axios.com/local/austin/2022/05/03/chophouse-maie-day-south-congress",
+      "https://www.aol.com/news/53-austin-restaurants-named-2025-013709089.html"
+    ]
+  },
+  {
+    "input": "Industry  (Austin brunch/restaurant called Industry)",
+    "name": "Industry",
+    "status": "open",
+    "address": "1211 E 5th St Ste 150, Austin, TX",
+    "neighborhood": "Central East Austin",
+    "cuisine": "American",
+    "price": null,
+    "hours": "Mon 9am-11pm; Tue-Fri 9am-1am; Sat 10am-1am; Sun 10am-11pm",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Brunch",
+      "Solo",
+      "Late night"
+    ],
+    "note": "Counter-service Texas fare (tacos, burgers, smoked meats), big bar, Sunday brunch",
+    "locations": 1,
+    "flags": "East Austin location at Plaza Saltillo (the original is in San Marcos). Breakfast daily until noon; Sunday brunch 10am-3pm. Hours from Austin Food Magazine and may be dated. ZIP not shown (likely 78702).",
+    "sources": [
+      "https://austinfoodmagazine.com/industry-east-austin/",
+      "https://www.theinfatuation.com/austin/reviews/industry"
+    ]
+  },
+  {
+    "input": "Mum Foods",
+    "name": "Mum Foods Smokehouse & Delicatessen",
+    "status": "open",
+    "address": "5811 Manor Rd, Austin, TX",
+    "neighborhood": "Windsor Park",
+    "cuisine": "Sandwiches",
+    "price": null,
+    "hours": "Wed-Sun 11am-3pm; Mon-Tue closed",
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [
+      "Michelin"
+    ],
+    "note": "Smokehouse deli known for award-winning pastrami sandwiches",
+    "locations": 1,
+    "flags": "Moved into the former Manor Road Smokehouse space (2022). Listed in the Michelin Guide Texas (award level not confirmed). Hours from Texas Monthly/aggregator. ZIP not shown (likely 78723).",
+    "sources": [
+      "https://www.texasmonthly.com/bbq/mum-foods-austin/",
+      "https://austinchronicle.com/daily/food/2022-11-16/mum-foods-moves-into-manor-road-smokehouse-space",
+      "https://guide.michelin.com/hk/zh_HK/texas/austin_2958315/restaurant/mum-foods-smokehouse-delicatessen",
+      "https://foodle.pro/restaurants/austin/mum-foods-smokehouse-and-delicatessen"
+    ]
+  },
+  {
+    "input": "Casper Fermentables",
+    "name": "Casper Fermentables",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "Fermentation shop (mustard, pickles) with Jewish-Korean influences",
+    "locations": 1,
+    "flags": "Sources confirm a brick-and-mortar shop in Southwest Austin (Community Impact, 2023) but none gave the address or hours, and further searches couldn't run (search budget used up). Status in 2026 not checked.",
+    "sources": [
+      "https://communityimpact.com/southwest-austin-dripping-springs/dining/casper-fermentables-showcases-owners-jewish-korean-heritage/",
+      "https://sustainablefoodcenter.org/latest/blog/casper-fermentables-your-friendly-neighborhood-fermentation-business"
+    ]
+  },
+  {
+    "input": "Daymaker Half Day Cafe",
+    "name": "Daymaker Half Day Cafe",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": 0,
+    "flags": "Not researched: web search budget for the session ran out (200/200) and direct page fetches are blocked by the network proxy. All fields unverified; re-run needed.",
+    "sources": []
+  },
+  {
+    "input": "Citizens All Day",
+    "name": "Citizens All Day",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": 0,
+    "flags": "Not researched: web search budget for the session ran out (200/200) and direct page fetches are blocked by the network proxy. All fields unverified; re-run needed.",
+    "sources": []
+  },
+  {
+    "input": "Epicerie",
+    "name": "Epicerie",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": 0,
+    "flags": "Not researched: web search budget for the session ran out (200/200) and direct page fetches are blocked by the network proxy. All fields unverified; re-run needed.",
+    "sources": []
+  },
+  {
+    "input": "Rosewood Social Club",
+    "name": "Rosewood Social Club",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": 0,
+    "flags": "Not researched: web search budget for the session ran out (200/200) and direct page fetches are blocked by the network proxy. All fields unverified; re-run needed.",
+    "sources": []
+  },
+  {
+    "input": "Bagel Brigade",
+    "name": "Bagel Brigade",
+    "status": "uncertain",
+    "address": null,
+    "neighborhood": null,
+    "cuisine": null,
+    "price": null,
+    "hours": null,
+    "lat": null,
+    "lng": null,
+    "website": null,
+    "instagram": null,
+    "tags": [],
+    "note": "",
+    "locations": 0,
+    "flags": "Not researched: web search budget for the session ran out (200/200) and direct page fetches are blocked by the network proxy. All fields unverified; re-run needed.",
+    "sources": []
+  }
+]
