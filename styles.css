@@ -856,3 +856,33 @@ svg { display: block; }
 @media (min-width: 520px) {
   html, body { background: var(--page); }
 }
+
+/* Map runs edge to edge: under the status bar and behind Safari's bottom bar.
+   lvh = the tallest viewport (toolbars hidden), so nothing shows around it. */
+.app.map-mode #view-map .map-wrap {
+  position: fixed;
+  top: 0;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100vh;
+  height: 100lvh;
+}
+html.map-mode, html.map-mode body { background: #f8f4f0; }
+@media (min-width: 520px) {
+  html.map-mode, html.map-mode body { background: var(--page); }
+}
+/* The map is taller than the visible screen now, so pin the card and the map credits
+   to the visible viewport (they would otherwise sit behind Safari's bottom bar). */
+.app.map-mode #view-map .map-card {
+  position: fixed;
+  max-width: 452px;
+  margin: 0 auto;
+}
+.app.map-mode #view-map .map .maplibregl-ctrl-bottom-right {
+  position: fixed;
+  right: max(0px, calc((100vw - 480px) / 2));
+}

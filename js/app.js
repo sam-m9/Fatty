@@ -337,6 +337,8 @@ function renderTabs() {
   document.querySelectorAll('.view').forEach((v) => { v.hidden = v.dataset.tab !== state.tab; });
   // The Map tab goes full screen: header hidden, map behind everything.
   $('#app').classList.toggle('map-mode', state.tab === 'map');
+  document.documentElement.classList.toggle('map-mode', state.tab === 'map');
+  updateThemeColor();
 }
 
 function setTab(tab) {
@@ -347,12 +349,19 @@ function setTab(tab) {
   if (tab === 'map') showMap();
 }
 
+// Safari tints its bars with theme-color. On the Map tab, match the map's land color.
+const MAP_LAND = '#f8f4f0';
+function updateThemeColor() {
+  const c = state.tab === 'map' ? MAP_LAND : state.dark ? '#1B1D18' : '#F7F4EC';
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => { m.content = c; });
+}
+
 function renderTheme() {
   document.documentElement.dataset.theme = state.dark ? 'dark' : 'light';
   const b = $('#btn-theme');
   b.innerHTML = state.dark ? I.sun : I.moon;
   b.setAttribute('aria-label', state.dark ? 'Switch to light mode' : 'Switch to dark mode');
-  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => { m.content = state.dark ? '#1B1D18' : '#F7F4EC'; });
+  updateThemeColor();
 }
 
 // ---------- Food ----------
