@@ -476,13 +476,12 @@ let markers = null;
 let lastFitKey = '';
 let userMovedMap = false; // stop auto-fitting once you pan the map yourself
 
+// OpenStreetMap's standard tiles need no API key. CSS tints them to match the theme.
 function setTiles() {
-  const style = state.dark ? 'dark_all' : 'light_all';
-  if (tiles) map.removeLayer(tiles);
-  tiles = window.L.tileLayer(`https://{s}.basemaps.cartocdn.com/${style}/{z}/{x}/{y}{r}.png`, {
+  if (tiles) return;
+  tiles = window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    subdomains: 'abcd',
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 }
 

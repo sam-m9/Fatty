@@ -442,8 +442,11 @@ svg { display: block; }
   isolation: isolate;
 }
 .map { position: absolute; inset: 0; background: var(--soft); font-family: var(--font-body); }
-.map .leaflet-tile-pane { filter: sepia(.28) saturate(.75) hue-rotate(28deg) brightness(1.02); }
-:root[data-theme="dark"] .map .leaflet-tile-pane { filter: sepia(.2) saturate(.7) hue-rotate(40deg) brightness(.95); }
+.map .leaflet-tile-pane { filter: grayscale(.65) sepia(.25) brightness(1.03) contrast(.92); }
+/* Dark: invert the light tiles, then pull them toward the app's olive-black. */
+:root[data-theme="dark"] .map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) grayscale(.6) sepia(.25) brightness(.8) contrast(.85);
+}
 .map .leaflet-control-attribution {
   background: transparent;
   font-size: 9px;
