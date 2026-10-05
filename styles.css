@@ -137,7 +137,7 @@ svg { display: block; }
   background: var(--card);
   border-radius: 20px;
   padding: 14px 18px;
-  font-size: 15px;
+  font-size: 16px; /* under 16px makes iOS zoom in when you tap the field */
   box-shadow: 0 1px 12px var(--shadow);
   -webkit-appearance: none;
   appearance: none;
@@ -886,3 +886,46 @@ html.map-mode, html.map-mode body { background: #f8f4f0; }
   position: fixed;
   right: max(0px, calc((100vw - 480px) / 2));
 }
+
+/* iOS only sends taps on plain elements to the page if they look clickable. */
+.backdrop, .scrim { cursor: pointer; }
+.sheet { cursor: auto; }
+
+.map-recenter {
+  position: fixed;
+  z-index: 600;
+  right: max(14px, calc((100vw - 480px) / 2 + 14px));
+  bottom: calc(var(--tab-bottom) + 68px + 22px + 112px);
+  width: 44px; height: 44px;
+  border-radius: 99px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+  display: grid; place-items: center;
+}
+.map-recenter svg { width: 20px; height: 20px; }
+.app:not(.map-mode) .map-recenter { display: none; }
+html.map-mode[data-theme="dark"], html.map-mode[data-theme="dark"] body { background: var(--bg); }
+
+.select-field {
+  margin-top: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--sub) 50%), linear-gradient(135deg, var(--sub) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+
+/* Stop iOS from zooming or bouncing the page.
+   touch-action: manipulation turns off double-tap zoom (quick taps on − / + zoomed in). */
+html, body { touch-action: manipulation; overflow: hidden; overscroll-behavior: none; }
+button, a, input, select, textarea, [role="button"] { touch-action: manipulation; }
+/* The sheet scrolls on its own without dragging the page behind it. */
+.sheet { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.scrim { touch-action: none; }
+.scrim .sheet { touch-action: pan-y; }
+/* Taps shouldn't select or highlight text in the controls. */
+.sheet button, .sheet .sheet-label, .rate-row, .chip-pick, .tabbar, .filter-grid { -webkit-user-select: none; user-select: none; }
+.range { touch-action: pan-x; }

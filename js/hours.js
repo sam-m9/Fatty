@@ -78,6 +78,8 @@ function parseRanges(seg) {
     } else {
       start = toMinutes(a);
     }
+    // "11-9" / "11am-2": an end with no am/pm that lands before the start means pm.
+    if (!b.mer && b.mins == null && end <= start && b.h < 12) end += 720;
     if (end <= start) end += 1440; // overnight
     out.push([start, end]);
   }
@@ -89,16 +91,26 @@ export function parseHours(text) {
   if (!text) return null;
   const s = String(text).toLowerCase().trim();
   if (!s) return null;
-  if (/24\s*(hours|hrs|h)|24\/7/.test(s)) {
-    return Array.from({ length: 7 }, () => [[0, 1440]]);
-  }
+  const ALL_DAY = /24\s*(hours|hrs|h)\b|24\/7/;
   const week = Array.from({ length: 7 }, () => []);
   let any = false;
   let current = [0, 1, 2, 3, 4, 5, 6];
+  let pending = null; // "Mon, Wed, Fri 8am-4pm": days listed before the segment with the time
   for (const seg of s.split(/[;\n|]+|,(?=\s*(?:sun|mon|tue|wed|thu|fri|sat|daily|weekend|weekday))/)) {
-    const days = parseDays(seg);
-    if (days) current = days;
+    let days = parseDays(seg);
     const ranges = parseRanges(seg);
+    const allDay = ALL_DAY.test(seg);
+    if (days && !ranges.length && !allDay && !/\bclosed\b/.test(seg)) {
+      pending = [...new Set([...(pending || []), ...days])];
+      continue;
+    }
+    if (pending) { days = [...new Set([...pending, ...(days || [])])]; pending = null; }
+    if (days) current = days;
+    if (allDay) {
+      for (const d of current) week[d] = [[0, 1440]];
+      any = true;
+      continue;
+    }
     if (!ranges.length && /\bclosed\b/.test(seg)) {
       for (const d of current) week[d] = [];
       any = true;

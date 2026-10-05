@@ -1,6 +1,7 @@
 import { I } from './icons.js';
 import { loadPlaces, loadBundled, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
-import { REGIONS } from './regions.js';
+import { isOpenAt } from './hours.js';
+import { REGIONS, GROUPS, regionFor } from './regions.js';
 import { applyCachedCoords, geocodeMissing, progress as geoProgress } from './geo.js';
 import { backupScript, endpointScript } from './scripts.js';
 
@@ -49,25 +50,45 @@ const state = {
 
 // ---------- Your edits (ratings, notes, price, tags), kept on this device ----------
 
-const editKey = (p) => p.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+// A spot's key is its name plus where it is, so two unnamed Instagram saves (or two
+// branches of a chain) don't share one rating. Older edits were keyed by name only.
+const norm = (v) => String(v || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+// Uses the original address, so editing the address doesn't lose the spot's other edits.
+const editKey = (p) => `${norm(p.name)}|${norm((p.orig ? p.orig.address : p.address) || p.link || p.mapLink)}`;
+const legacyKey = (p) => norm(p.name);
+const EDIT_FIELDS = ['rating', 'note', 'price', 'tags', 'address', 'area'];
 let edits = readJSON(EDITS_KEY) || {};
 
+function findEdit(p) {
+  return edits[editKey(p)] || edits[legacyKey(p)];
+}
+
+// Only fields you changed are stored, so details filled in later still show through.
 function applyEdits(places) {
   for (const p of places) {
-    const e = edits[editKey(p)];
+    p.orig ??= { rating: p.rating, note: p.note, price: p.price, tags: p.tags.slice(), address: p.address, area: p.area };
+    const e = findEdit(p);
     if (!e) continue;
-    p.rating = e.rating;
-    p.note = e.note;
-    p.price = e.price;
-    p.tags = e.tags.slice();
+    for (const f of EDIT_FIELDS) if (f in e) p[f] = f === 'tags' ? e.tags.slice() : e[f];
+    if ('area' in e) p.region = regionFor(p.area) || p.region;
+    if ('address' in e && e.address !== p.orig.address) { p.lat = null; p.lng = null; p.mapLink = ''; }
   }
 }
 
 function saveEdit(p, e) {
   if (e.rating != null) e.tags = e.tags.filter((t) => t !== 'New'); // rated = visited, no longer new
-  edits[editKey(p)] = { ...e, at: Date.now() };
+  const o = p.orig || {};
+  const same = (f) => (f === 'tags' ? (o.tags || []).join('|') === e.tags.join('|') : (o[f] ?? '') === (e[f] ?? ''));
+  const changed = { at: Date.now() };
+  for (const f of EDIT_FIELDS) if (!same(f)) changed[f] = e[f];
+  delete edits[legacyKey(p)];
+  if (Object.keys(changed).length > 1) edits[editKey(p)] = changed;
+  else delete edits[editKey(p)];
   writeJSON(EDITS_KEY, edits);
-  Object.assign(p, { rating: e.rating, note: e.note, price: e.price, tags: e.tags.slice() });
+  const moved = e.address !== p.address;
+  Object.assign(p, { rating: e.rating, note: e.note, price: e.price, tags: e.tags.slice(), address: e.address, area: e.area });
+  p.region = regionFor(p.area) || p.region;
+  if (moved) { p.lat = null; p.lng = null; p.mapLink = ''; } // re-pin from the new address
 }
 
 function persist() {
@@ -118,6 +139,7 @@ function mapsUrl(p) {
 }
 
 function linkBtn(href, cls, label, extra = '') {
+  if (href && !/^https?:\/\//i.test(href)) href = ''; // never render javascript: or other schemes
   if (!href) return `<span class="btn ${cls} disabled" aria-disabled="true" ${extra}>${label}</span>`;
   return `<a class="btn ${cls}" href="${esc(href)}" target="_blank" rel="noopener" ${extra}>${label}</a>`;
 }
@@ -345,6 +367,7 @@ function setTab(tab) {
   if (tab === state.tab) return;
   closeDropdown();
   state.tab = tab;
+  history.replaceState(null, '', `#${tab}`); // a refresh reopens this tab
   renderTabs();
   if (tab === 'map') showMap();
 }
@@ -352,7 +375,7 @@ function setTab(tab) {
 // Safari tints its bars with theme-color. On the Map tab, match the map's land color.
 const MAP_LAND = '#f8f4f0';
 function updateThemeColor() {
-  const c = state.tab === 'map' ? MAP_LAND : state.dark ? '#1B1D18' : '#F7F4EC';
+  const c = state.tab === 'map' && !state.dark ? MAP_LAND : state.dark ? '#1B1D18' : '#F7F4EC';
   document.querySelectorAll('meta[name="theme-color"]').forEach((m) => { m.content = c; });
 }
 
@@ -362,6 +385,7 @@ function renderTheme() {
   b.innerHTML = state.dark ? I.sun : I.moon;
   b.setAttribute('aria-label', state.dark ? 'Switch to light mode' : 'Switch to dark mode');
   updateThemeColor();
+  if (map && state.tab === 'map' && mapStyleUrl !== mapStyle()) map.setStyle((mapStyleUrl = mapStyle()));
 }
 
 // ---------- Food ----------
@@ -375,7 +399,7 @@ function placeCard(p) {
   const open = state.expanded === p.id;
   const right = p.rating != null ? badge(p.rating) : `<span class="bookmark" aria-label="Want to try">${I.bookmark}</span>`;
   const photo = p.photo
-    ? `<div class="photo" style="background-image:url('${esc(p.photo).replace(/'/g, '%27')}')"></div>`
+    ? `<div class="photo" style="background-image:url('${esc(/^https?:\/\//i.test(p.photo) ? p.photo.replace(/['()\\\s]/g, encodeURIComponent) : '')}')"></div>`
     : `<div class="photo">${I.food}</div>`;
   return `<article class="card${open ? ' open' : ''}" data-id="${p.id}">
     <div class="card-head" data-toggle="${p.id}" role="button" tabindex="0" aria-expanded="${open}">
@@ -485,8 +509,15 @@ let markers = [];
 let lastFitKey = '';
 let userMovedMap = false; // stop auto-fitting once you pan the map yourself
 
-// OpenFreeMap's "Liberty" style: free vector tiles, no API key, Google Maps-like look.
-const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+// OpenFreeMap styles: free vector tiles, no API key. Liberty is Google Maps-like; Dark is its night version.
+const mapStyle = () => `https://tiles.openfreemap.org/styles/${state.dark ? 'dark' : 'liberty'}`;
+let mapStyleUrl = '';
+
+function recenterMap() {
+  userMovedMap = false;
+  lastFitKey = '';
+  renderMap();
+}
 
 function showMap() {
   if (!window.maplibregl) {
@@ -497,7 +528,7 @@ function showMap() {
   if (!map) {
     map = new window.maplibregl.Map({
       container: 'map',
-      style: MAP_STYLE,
+      style: (mapStyleUrl = mapStyle()),
       center: [-97.7431, 30.2672], // Austin
       zoom: 11,
       attributionControl: false,
@@ -508,13 +539,16 @@ function showMap() {
     map.addControl(new window.maplibregl.AttributionControl({ compact: true }), 'bottom-right');
     map.on('dragstart', () => { userMovedMap = true; });
   }
+  if (mapStyleUrl !== mapStyle()) map.setStyle((mapStyleUrl = mapStyle()));
   map.resize();
   renderMap();
   fillCoords();
 }
 
+// The Map tab only applies the filters it shows (Region, Area, Cuisine).
 function mapResults() {
-  return applySearch(applyFilters(state.places, state.f), state.q).sort(SORTS.rating);
+  const { region, area, cuisine } = state.f;
+  return applySearch(applyFilters(state.places, { region, area, cuisine }), state.q).sort(SORTS.rating);
 }
 
 function pinHtml(p, sel) {
@@ -797,6 +831,15 @@ function editSheet() {
       <textarea class="field note-field" rows="3" placeholder="What did you order? Would you go back?" data-edit-note>${esc(d.note)}</textarea>
     </div>
     <div class="sheet-card">
+      <div class="sheet-label">Address</div>
+      <input class="field" type="text" autocomplete="off" placeholder="Street, Austin, TX ZIP" value="${esc(d.address)}" data-edit-address aria-label="Address">
+      <select class="field select-field" data-edit-area aria-label="Neighborhood">
+        <option value="">Neighborhood…</option>
+        ${Object.entries(GROUPS).map(([r, areas]) => `<optgroup label="${r}">${areas.map((a) => `<option${a === d.area ? ' selected' : ''}>${esc(a)}</option>`).join('')}</optgroup>`).join('')}
+      </select>
+      <div class="rate-hint" style="text-align:left;margin-top:8px">Changing the address moves the pin and updates Open in Maps.</div>
+    </div>
+    <div class="sheet-card">
       <div class="sheet-label">Price</div>
       <div class="chip-pick">${['$', '$$', '$$$', '$$$$'].map((v) => `<button class="pick${d.price === v ? ' on' : ''}" data-edit-price="${v}">${v}</button>`).join('')}</div>
     </div>
@@ -814,7 +857,8 @@ function editSheet() {
 function openEdit(id) {
   const p = state.places.find((x) => x.id === id);
   if (!p) return;
-  state.editing = { id, rating: p.rating, note: p.note || '', price: p.price || '', tags: p.tags.slice() };
+  state.editing = { id, key: editKey(p), rating: p.rating, note: p.note || '', price: p.price || '', tags: p.tags.slice(),
+    address: p.address || '', area: p.area || '' };
   openSheet('edit');
 }
 
@@ -832,21 +876,23 @@ function updateRateUI() {
 
 function saveEditing() {
   const d = state.editing;
-  const p = state.places.find((x) => x.id === d.id);
+  const p = state.places.find((x) => editKey(x) === d.key);
   if (!p) return closeSheet();
   const wasNew = p.rating == null;
-  saveEdit(p, { rating: d.rating, note: d.note.trim(), price: d.price, tags: d.tags });
+  const moved = d.address.trim() !== (p.address || '');
+  saveEdit(p, { rating: d.rating, note: d.note.trim(), price: d.price, tags: d.tags, address: d.address.trim(), area: d.area });
+  if (moved) { applyDistances(); fillCoords(p); }
   if (state.source === 'sheet') writeJSON(DATA_KEY, { sheet: state.cfg.sheet, places: state.places, at: state.fetchedAt });
   closeSheet();
   renderData();
-  if (state.spin.phase === 'result' && state.spin.winner.id === p.id) renderStage();
+  if (state.spin.phase === 'result' && editKey(state.spin.winner) === d.key) { state.spin.winner = p; renderStage(); }
   toast(d.rating != null && wasNew ? `Marked visited · ${fmtRating(d.rating)}` : 'Saved');
 }
 
 function ratingsCsv() {
   const rows = [['Name', 'Score', 'Note', 'Price', 'Tags']];
   for (const p of state.places) {
-    if (edits[editKey(p)]) rows.push([p.name, p.rating ?? '', p.note, p.price, p.tags.join(', ')]);
+    if (findEdit(p)) rows.push([p.name, p.rating ?? '', p.note, p.price, p.tags.join(', ')]);
   }
   return rows.map((r) => r.map((v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v))).join(',')).join('\n');
 }
@@ -951,6 +997,10 @@ function placesLoaded(places, source) {
   state.fetchedAt = Date.now();
   applyEdits(places);
   applyCachedCoords(places);
+  if (state.spin.winner) {
+    const k = editKey(state.spin.winner);
+    state.spin.winner = places.find((x) => editKey(x) === k) || state.spin.winner;
+  }
   applyDistances();
 }
 
@@ -963,7 +1013,7 @@ function renderGeoProgress() {
   if (active) el.textContent = `Placing pins · ${done} of ${total}`;
 }
 
-function fillCoords() {
+function fillCoords(first = null) {
   geocodeMissing(state.places, () => {
     renderGeoProgress();
     clearTimeout(geoRender);
@@ -972,7 +1022,7 @@ function fillCoords() {
       if (state.tab === 'map') renderMap();
       if (state.tab === 'food' && state.sort === 'nearest') renderFood();
     }, 600);
-  });
+  }, first);
   renderGeoProgress();
 }
 
@@ -1017,11 +1067,14 @@ function restoreCache() {
     state.places = cache.places.map((p) => ({
       ...p,
       addedDaysAgo: p.addedAt ? Math.max(0, Math.floor((now - p.addedAt) / 86400000)) : p.addedDaysAgo,
+      openNow: isOpenAt(p.hours, new Date()) ?? p.openNow,
+      distance: null,
     }));
     state.status = 'ready';
     state.source = 'sheet';
     applyEdits(state.places);
     applyCachedCoords(state.places);
+    applyDistances();
   }
 }
 
@@ -1076,6 +1129,7 @@ function onClick(e) {
     return;
   }
   if (q('[data-retry]')) return refresh();
+  if (q('#map-recenter')) return recenterMap();
 
   if ((el = q('[data-edit-place]'))) return openEdit(el.dataset.editPlace);
 
@@ -1099,9 +1153,10 @@ function onClick(e) {
   if (state.sheet === 'edit') {
     const d = state.editing;
     if ((el = q('[data-rate-step]'))) {
-      const v = (d.rating ?? 4) + (d.rating == null ? 0 : +el.dataset.rateStep);
+      const wasNull = d.rating == null;
+      const v = wasNull ? 4 + (+el.dataset.rateStep < 0 ? -0.1 : 0) : d.rating + +el.dataset.rateStep;
       d.rating = Math.round(Math.max(0, Math.min(5, v)) * 10) / 10;
-      return updateRateUI();
+      return wasNull ? renderSheet() : updateRateUI();
     }
     if (q('[data-rate-clear]')) { d.rating = null; return renderSheet(); }
     if ((el = q('[data-edit-price]'))) {
@@ -1169,11 +1224,25 @@ function onInput(e) {
     return;
   }
   if (t.matches('[data-rate-range]')) {
+    const wasNull = state.editing.rating == null;
     state.editing.rating = Math.round(+t.value * 10) / 10;
+    if (wasNull) {
+      // First score: re-render so "Clear score" appears, then keep the slider focused.
+      renderSheet();
+      return $('[data-rate-range]')?.focus();
+    }
     return updateRateUI();
   }
   if (t.matches('[data-edit-note]')) {
     state.editing.note = t.value;
+    return;
+  }
+  if (t.matches('[data-edit-address]')) {
+    state.editing.address = t.value;
+    return;
+  }
+  if (t.matches('[data-edit-area]')) {
+    state.editing.area = t.value;
     return;
   }
   if (t.dataset.field) {
@@ -1207,6 +1276,16 @@ function onKey(e) {
 
 // ---------- Boot ----------
 
+// Opening hours change minute to minute; refresh "Open now" while the app stays open.
+function refreshOpenNow() {
+  let changed = false;
+  for (const p of state.places) {
+    const v = isOpenAt(p.hours, new Date());
+    if (v != null && v !== p.openNow) { p.openNow = v; changed = true; }
+  }
+  if (changed) renderData();
+}
+
 function boot() {
   $('#btn-data').innerHTML = I.cloud;
   $('.sort-icon').innerHTML = I.sort;
@@ -1227,8 +1306,14 @@ function boot() {
   });
   window.addEventListener('resize', () => map && map.resize());
 
+  setInterval(() => document.visibilityState === 'visible' && refreshOpenNow(), 60000);
+  document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && refreshOpenNow());
+  $('#map-recenter').innerHTML = I.locate;
+  const startTab = location.hash.slice(1);
+  if (TABS.some((t) => t.id === startTab)) state.tab = startTab;
   renderTheme();
   renderTabs();
+  if (state.tab === 'map') showMap();
   restoreCache();
   renderData();
   renderStage();

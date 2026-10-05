@@ -1,6 +1,6 @@
 // Fatty service worker: caches the app shell so it opens offline.
 // Sheet data is never cached here (the app keeps its own copy in localStorage).
-const VERSION = 'fatty-v13';
+const VERSION = 'fatty-v17';
 const SHELL = [
   './',
   'index.html',
@@ -42,7 +42,7 @@ self.addEventListener('fetch', (e) => {
       // no-cache: always ask the server (304 if unchanged), never reuse a stale HTTP-cached copy.
       fetch(req, { cache: 'no-cache' })
         .then((res) => {
-          if (res.ok) caches.open(VERSION).then((c) => c.put(req, res.clone()));
+          if (res.ok) { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); }
           return res;
         })
         .catch(() => caches.match(req, { ignoreSearch: true }).then((r) => r || caches.match('index.html'))),
@@ -54,7 +54,7 @@ self.addEventListener('fetch', (e) => {
   if (CDN.test(req.url)) {
     e.respondWith(
       caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-        if (res.ok || res.type === 'opaque') caches.open(VERSION).then((c) => c.put(req, res.clone()));
+        if (res.ok || res.type === 'opaque') { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); }
         return res;
       })),
     );

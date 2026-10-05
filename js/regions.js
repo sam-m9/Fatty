@@ -1,7 +1,7 @@
 // Austin neighborhoods grouped into the four regions the Region filter uses.
 export const REGIONS = ['East', 'Central', 'South', 'North'];
 
-const GROUPS = {
+export const GROUPS = {
   East: ['East Cesar Chavez', 'Holly', 'Govalle', 'Chestnut', 'Central East Austin', 'Rosewood', 'Cherrywood',
     'Upper Boggy Creek', 'MLK', 'Mueller', 'Windsor Park', 'Springdale', 'Johnston Terrace', 'East Riverside', 'Montopolis'],
   Central: ['Downtown', 'Rainey Street', 'Red River', 'Market District', 'Clarksville', 'Old West Austin', 'Tarrytown',

@@ -155,11 +155,15 @@ function parseBool(v) {
   return null;
 }
 
+function safeDecode(v) {
+  try { return decodeURIComponent(v); } catch { return v; } // one bad %-sequence shouldn't break the sheet
+}
+
 // Pulls coordinates out of common Google / Apple Maps link shapes.
 function coordsFromLink(url) {
   const s = url || '';
   const m = /@(-?\d+\.\d+),(-?\d+\.\d+)/.exec(s) ||
-    /[?&](?:ll|q|query|sll|daddr)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/.exec(decodeURIComponent(s)) ||
+    /[?&](?:ll|q|query|sll|daddr)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/.exec(safeDecode(s)) ||
     /!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/.exec(s);
   return m ? [+m[1], +m[2]] : null;
 }
