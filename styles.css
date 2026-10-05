@@ -782,3 +782,19 @@ svg { display: block; }
   font-weight: 600;
 }
 .pick.on { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+
+.map-progress {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 12px;
+  border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+  white-space: nowrap;
+}

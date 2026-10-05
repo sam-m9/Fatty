@@ -1,7 +1,7 @@
 import { I } from './icons.js';
 import { loadPlaces, loadBundled, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
 import { REGIONS } from './regions.js';
-import { applyCachedCoords, geocodeMissing } from './geo.js';
+import { applyCachedCoords, geocodeMissing, progress as geoProgress } from './geo.js';
 import { backupScript, endpointScript } from './scripts.js';
 
 // ---------- Persistence ----------
@@ -308,6 +308,7 @@ function onFiltersChanged(scope) {
     renderFilters('dunno');
     renderStage();
   } else {
+    userMovedMap = false;
     if (state.f.region.length) {
       // Drop areas that no longer belong to a selected region.
       const ok = new Set(state.places.filter((p) => state.f.region.includes(p.region)).map((p) => p.area));
@@ -473,6 +474,7 @@ let map = null;
 let tiles = null;
 let markers = null;
 let lastFitKey = '';
+let userMovedMap = false; // stop auto-fitting once you pan the map yourself
 
 function setTiles() {
   const style = state.dark ? 'dark_all' : 'light_all';
@@ -495,6 +497,7 @@ function showMap() {
     window.L.control.attribution({ position: 'topright', prefix: false }).addTo(map);
     setTiles();
     markers = window.L.layerGroup().addTo(map);
+    map.on('dragstart', () => { userMovedMap = true; });
   }
   map.invalidateSize();
   renderMap();
@@ -556,7 +559,7 @@ function renderMap() {
   }
   const fitKey = located.map((p) => p.id).join(',');
   // Fitting a hidden map measures a 0×0 box, so wait until the Map tab is visible.
-  if (fitKey && fitKey !== lastFitKey && state.tab === 'map') {
+  if (fitKey && fitKey !== lastFitKey && state.tab === 'map' && !userMovedMap) {
     lastFitKey = fitKey;
     const bounds = window.L.latLngBounds(located.map((p) => [p.lat, p.lng]));
     map.fitBounds(bounds, { paddingTopLeft: [40, 40], paddingBottomRight: [40, 160], maxZoom: 15, animate: false });
@@ -934,15 +937,24 @@ function placesLoaded(places, source) {
 
 let geoRender = 0;
 // Looks up coordinates for spots that only have an address (map tab or distance features).
+function renderGeoProgress() {
+  const el = $('#map-progress');
+  const { active, done, total } = geoProgress;
+  el.hidden = !active;
+  if (active) el.textContent = `Placing pins · ${done} of ${total}`;
+}
+
 function fillCoords() {
   geocodeMissing(state.places, () => {
+    renderGeoProgress();
     clearTimeout(geoRender);
     geoRender = setTimeout(() => {
       applyDistances();
       if (state.tab === 'map') renderMap();
       if (state.tab === 'food' && state.sort === 'nearest') renderFood();
-    }, 400);
+    }, 600);
   });
+  renderGeoProgress();
 }
 
 async function refresh() {
@@ -953,6 +965,7 @@ async function refresh() {
       const places = await loadBundled();
       if (seq !== loadSeq) return;
       placesLoaded(places, 'bundle');
+      fillCoords();
     } catch {
       if (seq !== loadSeq) return;
       placesLoaded([], 'none');
@@ -967,6 +980,7 @@ async function refresh() {
     const places = await loadPlaces(sheetAtStart);
     if (seq !== loadSeq) return;
     placesLoaded(places, 'sheet');
+    fillCoords();
     writeJSON(DATA_KEY, { sheet: sheetAtStart, places, at: state.fetchedAt });
   } catch (err) {
     if (seq !== loadSeq) return;
