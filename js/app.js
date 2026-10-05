@@ -353,7 +353,6 @@ function renderTheme() {
   b.innerHTML = state.dark ? I.sun : I.moon;
   b.setAttribute('aria-label', state.dark ? 'Switch to light mode' : 'Switch to dark mode');
   document.querySelectorAll('meta[name="theme-color"]').forEach((m) => { m.content = state.dark ? '#1B1D18' : '#F7F4EC'; });
-  if (map) setTiles();
 }
 
 // ---------- Food ----------
@@ -473,34 +472,34 @@ function toggleCard(id) {
 // ---------- Map ----------
 
 let map = null;
-let tiles = null;
-let markers = null;
+let markers = [];
 let lastFitKey = '';
 let userMovedMap = false; // stop auto-fitting once you pan the map yourself
 
-// OpenStreetMap's standard tiles need no API key. CSS tints them to match the theme.
-function setTiles() {
-  if (tiles) return;
-  tiles = window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-}
+// OpenFreeMap's "Liberty" style: free vector tiles, no API key, Google Maps-like look.
+const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
 
 function showMap() {
-  if (!window.L) {
-    // Leaflet loads with `defer`; try again shortly if it isn't ready yet.
+  if (!window.maplibregl) {
+    // MapLibre loads with `defer`; try again shortly if it isn't ready yet.
     setTimeout(() => state.tab === 'map' && showMap(), 150);
     return;
   }
   if (!map) {
-    map = window.L.map('map', { zoomControl: false, attributionControl: false }).setView([34.05, -118.3], 11);
-    window.L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
-    setTiles();
-    markers = window.L.layerGroup().addTo(map);
+    map = new window.maplibregl.Map({
+      container: 'map',
+      style: MAP_STYLE,
+      center: [-97.7431, 30.2672], // Austin
+      zoom: 11,
+      attributionControl: false,
+      pitchWithRotate: false,
+      dragRotate: false,
+    });
+    map.touchZoomRotate.disableRotation();
+    map.addControl(new window.maplibregl.AttributionControl({ compact: true }), 'bottom-right');
     map.on('dragstart', () => { userMovedMap = true; });
   }
-  map.invalidateSize();
+  map.resize();
   renderMap();
   fillCoords();
 }
@@ -548,23 +547,32 @@ function renderMap() {
   }
 
   if (!map) return;
-  markers.clearLayers();
+  for (const m of markers) m.remove();
+  markers = [];
   for (const p of located) {
     const isSel = p.id === state.mapSel;
-    const m = window.L.marker([p.lat, p.lng], {
-      icon: window.L.divIcon({ className: 'pin-wrap', html: pinHtml(p, isSel), iconSize: [0, 0] }),
-      zIndexOffset: isSel ? 1000 : Math.round((p.rating ?? 0) * 10),
-      keyboard: false,
+    const el = document.createElement('div');
+    el.className = 'pin-wrap';
+    el.style.zIndex = isSel ? 1000 : Math.round((p.rating ?? 0) * 10);
+    el.innerHTML = pinHtml(p, isSel);
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      state.mapSel = p.id;
+      renderMap();
     });
-    m.on('click', () => { state.mapSel = p.id; renderMap(); });
-    markers.addLayer(m);
+    markers.push(new window.maplibregl.Marker({ element: el }).setLngLat([p.lng, p.lat]).addTo(map));
   }
   const fitKey = located.map((p) => p.id).join(',');
   // Fitting a hidden map measures a 0×0 box, so wait until the Map tab is visible.
   if (fitKey && fitKey !== lastFitKey && state.tab === 'map' && !userMovedMap) {
     lastFitKey = fitKey;
-    const bounds = window.L.latLngBounds(located.map((p) => [p.lat, p.lng]));
-    map.fitBounds(bounds, { paddingTopLeft: [30, 150], paddingBottomRight: [30, 250], maxZoom: 15, animate: false });
+    const lngs = located.map((p) => p.lng);
+    const lats = located.map((p) => p.lat);
+    map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], {
+      padding: { top: 150, bottom: 250, left: 30, right: 30 },
+      maxZoom: 15,
+      animate: false,
+    });
   }
 }
 
@@ -1208,7 +1216,7 @@ function boot() {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && Date.now() - state.fetchedAt > 60000) refresh();
   });
-  window.addEventListener('resize', () => map && map.invalidateSize());
+  window.addEventListener('resize', () => map && map.resize());
 
   renderTheme();
   renderTabs();

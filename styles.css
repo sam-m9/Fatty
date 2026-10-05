@@ -443,20 +443,8 @@ svg { display: block; }
   isolation: isolate;
 }
 .map { position: absolute; inset: 0; background: var(--soft); font-family: var(--font-body); }
-.map .leaflet-tile-pane { filter: grayscale(.65) sepia(.25) brightness(1.03) contrast(.92); }
-/* Dark: invert the light tiles, then pull them toward the app's olive-black. */
-:root[data-theme="dark"] .map .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) grayscale(.6) sepia(.25) brightness(.8) contrast(.85);
-}
-.map .leaflet-control-attribution {
-  background: transparent;
-  font-size: 9px;
-  color: var(--sub);
-}
-.map .leaflet-control-attribution a { color: var(--sub); }
-.map .leaflet-control-zoom { display: none; }
 
-.pin-wrap { background: none; border: 0; }
+.pin-wrap { width: 0; height: 0; background: none; border: 0; cursor: pointer; }
 .pin {
   position: absolute;
   left: 0; top: 0;
@@ -862,12 +850,7 @@ svg { display: block; }
 #view-map .map-card .badge { font-size: 13px; padding: 3px 10px; }
 #view-map .map-card .btn { min-height: 38px; padding: 8px 12px; font-size: 14px; }
 #view-map .map-card .btn-icon { flex-basis: 38px; }
-#view-map .map .leaflet-bottom { bottom: calc(var(--tab-bottom) + 68px + 2px); }
-#view-map .map .leaflet-control-attribution {
-  background: color-mix(in srgb, var(--card) 70%, transparent);
-  border-radius: 6px 0 0 6px;
-  padding: 0 6px;
-}
+#view-map .map .maplibregl-ctrl-bottom-right { bottom: calc(var(--tab-bottom) + 68px + 2px); }
 
 /* Wider screens (tablet/desktop): show the app as a column on a darker page. */
 @media (min-width: 520px) {

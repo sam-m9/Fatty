@@ -1,6 +1,6 @@
 // Fatty service worker: caches the app shell so it opens offline.
 // Sheet data is never cached here (the app keeps its own copy in localStorage).
-const VERSION = 'fatty-v11';
+const VERSION = 'fatty-v12';
 const SHELL = [
   './',
   'index.html',
@@ -17,7 +17,7 @@ const SHELL = [
   'icons/icon-192.png',
   'icons/apple-touch-icon.png',
 ];
-const CDN = /^https:\/\/(cdnjs\.cloudflare\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//;
+const CDN = /^https:\/\/(cdnjs\.cloudflare\.com|unpkg\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//;
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
