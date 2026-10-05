@@ -8,6 +8,7 @@ import { backupScript, endpointScript } from './scripts.js';
 
 const STORE = 'fatty.v1';
 const DATA_KEY = 'fatty.v1.data';
+const EDITS_KEY = 'fatty.v1.edits';
 
 function readJSON(key) {
   try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
@@ -25,7 +26,7 @@ const emptyDunno = () => ({ cuisine: [], price: [], distance: [], mood: [], stat
 
 const state = {
   tab: 'food',
-  dark: !!saved.dark,
+  dark: true, // always opens in dark mode; the toggle lasts for the session
   sort: saved.sort || 'rating',
   cfg: { sheet: saved.cfg?.sheet || '', folder: saved.cfg?.folder || '' },
   places: [],
@@ -45,6 +46,29 @@ const state = {
   sheet: null, // 'data' | 'setup'
   ui: { editing: { sheet: false, folder: false }, confirm: { sheet: false, folder: false }, err: { sheet: '', folder: '' }, copied: '' },
 };
+
+// ---------- Your edits (ratings, notes, price, tags), kept on this device ----------
+
+const editKey = (p) => p.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+let edits = readJSON(EDITS_KEY) || {};
+
+function applyEdits(places) {
+  for (const p of places) {
+    const e = edits[editKey(p)];
+    if (!e) continue;
+    p.rating = e.rating;
+    p.note = e.note;
+    p.price = e.price;
+    p.tags = e.tags.slice();
+  }
+}
+
+function saveEdit(p, e) {
+  if (e.rating != null) e.tags = e.tags.filter((t) => t !== 'New'); // rated = visited, no longer new
+  edits[editKey(p)] = { ...e, at: Date.now() };
+  writeJSON(EDITS_KEY, edits);
+  Object.assign(p, { rating: e.rating, note: e.note, price: e.price, tags: e.tags.slice() });
+}
 
 function persist() {
   writeJSON(STORE, { cfg: state.cfg, dark: state.dark, sort: state.sort });
@@ -331,6 +355,11 @@ function renderTheme() {
 
 // ---------- Food ----------
 
+function rateButton(p, extra = '') {
+  const label = p.rating != null ? `${I.pencil}<span>Edit rating and note</span>` : `${I.star}<span>Been here? Rate it</span>`;
+  return `<button class="btn btn-rate" data-edit-place="${p.id}" ${extra}>${label}</button>`;
+}
+
 function placeCard(p) {
   const open = state.expanded === p.id;
   const right = p.rating != null ? badge(p.rating) : `<span class="bookmark" aria-label="Want to try">${I.bookmark}</span>`;
@@ -350,6 +379,7 @@ function placeCard(p) {
       ${p.note ? `<p class="note">${esc(p.note)}</p>` : ''}
       ${facts(p) ? `<div class="facts">${esc(facts(p))}</div>` : ''}
       <div class="btn-row">${linkBtn(mapsUrl(p), 'btn-accent', 'Open in Maps')}${linkBtn(p.link, 'btn-soft', 'View reel')}</div>
+      ${rateButton(p)}
     </div></div></div>
   </article>`;
 }
@@ -506,7 +536,8 @@ function renderMap() {
     card.innerHTML = `<div class="map-card-top"><div style="flex:1;min-width:0">
         <h3 class="map-card-name">${esc(sel.name)}</h3>${meta(sel) ? `<div class="meta">${esc(meta(sel))}</div>` : ''}
       </div>${sel.rating != null ? badge(sel.rating) : `<span class="bookmark" aria-label="Want to try">${I.bookmark}</span>`}</div>
-      <div class="btn-row">${linkBtn(mapsUrl(sel), 'btn-accent', 'Open in Maps')}${linkBtn(sel.link, 'btn-soft', 'View reel')}</div>`;
+      <div class="btn-row">${linkBtn(mapsUrl(sel), 'btn-accent', 'Open in Maps')}${linkBtn(sel.link, 'btn-soft', 'View reel')}
+        <button class="btn btn-soft btn-icon" data-edit-place="${sel.id}" aria-label="${sel.rating != null ? 'Edit rating' : 'Rate it'}">${sel.rating != null ? I.pencil : I.star}</button></div>`;
   } else {
     card.hidden = true;
   }
@@ -568,7 +599,8 @@ function renderStage() {
       ${p.rating != null || meta(p) ? `<div class="result-line">${p.rating != null ? badge(p.rating) : ''}<span class="meta">${esc(meta(p))}</span></div>` : ''}
       ${p.note ? `<p class="result-note">${esc(p.note)}</p>` : ''}
       ${f ? `<div class="result-facts">${esc(f)}</div>` : ''}
-      <div class="btn-row">${linkBtn(mapsUrl(p), 'btn-cream', 'Take me there', 'data-stop')}${linkBtn(p.link, 'btn-outline', 'View reel', 'data-stop')}</div>
+      <div class="btn-row">${linkBtn(mapsUrl(p), 'btn-cream', 'Take me there', 'data-stop')}${linkBtn(p.link, 'btn-outline', 'View reel', 'data-stop')}
+        <button class="btn btn-outline btn-icon" data-stop data-edit-place="${p.id}" aria-label="${p.rating != null ? 'Edit rating' : 'Rate it'}">${p.rating != null ? I.pencil : I.star}</button></div>
       <div class="footer-hint">Tap anywhere to spin again</div>`;
   }
 }
@@ -676,6 +708,11 @@ function dataSheet() {
     ${linkCard('sheet')}
     ${linkCard('folder')}
     <div class="sheet-card">
+      <div class="sheet-label">Your ratings on this phone</div>
+      <p class="sheet-text">${Object.keys(edits).length ? `${Object.keys(edits).length} spots rated or edited here.` : 'Scores and notes you add in the app are saved here.'} Copy them to paste into your sheet or keep a backup.</p>
+      <button class="btn ${Object.keys(edits).length ? 'btn-accent' : 'btn-soft disabled'}" style="width:100%" data-copy="ratings">${state.ui.copied === 'ratings' ? 'Copied' : 'Copy my ratings'}</button>
+    </div>
+    <div class="sheet-card">
       <div class="sheet-label">Weekly backup</div>
       <div class="next-run">Next: ${nextMonday()}</div>
       <p class="sheet-text">Every Monday at 3am a copy of your sheet goes into the backup folder. Two copies are kept, so a bad week never wipes your list.</p>
@@ -705,6 +742,93 @@ function setupSheet() {
     <button class="btn btn-accent done" data-close-sheet>Done</button>`;
 }
 
+const EDIT_TAGS = ['Date night', 'Cheap eats', 'Group friendly', 'Outdoor seating', 'Late night', 'Brunch', 'Solo',
+  'Food truck', 'Work friendly', 'Dog friendly', 'Cocktails', 'Michelin', 'New'];
+
+function rateDisplay(r) {
+  return r == null
+    ? { text: '–', style: 'background:var(--soft);color:var(--sub)' }
+    : { text: fmtRating(r), style: `background:${ratingColor(r)}` };
+}
+
+function editSheet() {
+  const p = state.places.find((x) => x.id === state.editing.id);
+  const d = state.editing;
+  if (!p) return '';
+  const rd = rateDisplay(d.rating);
+  const tags = [...new Set([...EDIT_TAGS, ...d.tags])];
+  return `<h2 class="sheet-title" id="sheet-title">${esc(p.name)}</h2>
+    <p class="sheet-lead">${esc(meta(p) || 'Austin')}</p>
+    <div class="sheet-card">
+      <div class="sheet-label">Your score</div>
+      <div class="rate-row">
+        <button class="step" data-rate-step="-0.1" aria-label="Lower score">−</button>
+        <span class="badge rate-big" data-rate-badge style="${rd.style}">${rd.text}</span>
+        <button class="step" data-rate-step="0.1" aria-label="Raise score">+</button>
+      </div>
+      <input class="range" type="range" min="0" max="5" step="0.1" value="${d.rating ?? 4}" data-rate-range aria-label="Score from 0 to 5">
+      <div class="rate-hint" data-rate-hint>${d.rating == null ? 'Slide or tap + to score it. Saving a score marks it visited.' : 'Saving keeps it in your visited list.'}</div>
+      ${d.rating != null ? '<button class="panel-clear" style="padding-left:0" data-rate-clear>Clear score (back to want to try)</button>' : ''}
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Note</div>
+      <textarea class="field note-field" rows="3" placeholder="What did you order? Would you go back?" data-edit-note>${esc(d.note)}</textarea>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Price</div>
+      <div class="chip-pick">${['$', '$$', '$$$', '$$$$'].map((v) => `<button class="pick${d.price === v ? ' on' : ''}" data-edit-price="${v}">${v}</button>`).join('')}</div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Tags</div>
+      <div class="chip-pick">${tags.map((t) => `<button class="pick${d.tags.includes(t) ? ' on' : ''}" data-edit-tag="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-accent btn-grow" data-edit-save>Save</button>
+      <button class="btn btn-soft" data-close-sheet>Cancel</button>
+    </div>
+    <p class="sheet-text" style="margin:12px 0 0;text-align:center">Saved on this phone. Copy them anytime from the cloud button.</p>`;
+}
+
+function openEdit(id) {
+  const p = state.places.find((x) => x.id === id);
+  if (!p) return;
+  state.editing = { id, rating: p.rating, note: p.note || '', price: p.price || '', tags: p.tags.slice() };
+  openSheet('edit');
+}
+
+function updateRateUI() {
+  const d = state.editing;
+  const rd = rateDisplay(d.rating);
+  const b = $('[data-rate-badge]');
+  b.textContent = rd.text;
+  b.setAttribute('style', rd.style);
+  if (d.rating != null) $('[data-rate-range]').value = d.rating;
+  $('[data-rate-hint]').textContent = d.rating == null
+    ? 'Slide or tap + to score it. Saving a score marks it visited.'
+    : 'Saving a score marks it visited.';
+}
+
+function saveEditing() {
+  const d = state.editing;
+  const p = state.places.find((x) => x.id === d.id);
+  if (!p) return closeSheet();
+  const wasNew = p.rating == null;
+  saveEdit(p, { rating: d.rating, note: d.note.trim(), price: d.price, tags: d.tags });
+  if (state.source === 'sheet') writeJSON(DATA_KEY, { sheet: state.cfg.sheet, places: state.places, at: state.fetchedAt });
+  closeSheet();
+  renderData();
+  if (state.spin.phase === 'result' && state.spin.winner.id === p.id) renderStage();
+  toast(d.rating != null && wasNew ? `Marked visited · ${fmtRating(d.rating)}` : 'Saved');
+}
+
+function ratingsCsv() {
+  const rows = [['Name', 'Score', 'Note', 'Price', 'Tags']];
+  for (const p of state.places) {
+    if (edits[editKey(p)]) rows.push([p.name, p.rating ?? '', p.note, p.price, p.tags.join(', ')]);
+  }
+  return rows.map((r) => r.map((v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v))).join(',')).join('\n');
+}
+
 function openSheet(which) {
   closeDropdown();
   state.sheet = which;
@@ -716,7 +840,7 @@ function openSheet(which) {
 function renderSheet() {
   const body = $('#sheet-root .sheet-body');
   if (!body) return;
-  body.innerHTML = state.sheet === 'data' ? dataSheet() : setupSheet();
+  body.innerHTML = state.sheet === 'data' ? dataSheet() : state.sheet === 'edit' ? editSheet() : setupSheet();
 }
 
 function closeSheet() {
@@ -803,6 +927,7 @@ function placesLoaded(places, source) {
   state.status = 'ready';
   state.error = '';
   state.fetchedAt = Date.now();
+  applyEdits(places);
   applyCachedCoords(places);
   applyDistances();
 }
@@ -862,6 +987,7 @@ function restoreCache() {
     }));
     state.status = 'ready';
     state.source = 'sheet';
+    applyEdits(state.places);
     applyCachedCoords(state.places);
   }
 }
@@ -918,6 +1044,8 @@ function onClick(e) {
   }
   if (q('[data-retry]')) return refresh();
 
+  if ((el = q('[data-edit-place]'))) return openEdit(el.dataset.editPlace);
+
   if (q('#stage')) {
     if (q('[data-stop]')) return;
     return spin();
@@ -935,6 +1063,27 @@ function onClick(e) {
   // Sheets
   if (t.matches('[data-scrim]') || q('[data-close-sheet]')) return closeSheet();
   if ((el = q('[data-save]'))) return saveLink(el.dataset.save);
+  if (state.sheet === 'edit') {
+    const d = state.editing;
+    if ((el = q('[data-rate-step]'))) {
+      const v = (d.rating ?? 4) + (d.rating == null ? 0 : +el.dataset.rateStep);
+      d.rating = Math.round(Math.max(0, Math.min(5, v)) * 10) / 10;
+      return updateRateUI();
+    }
+    if (q('[data-rate-clear]')) { d.rating = null; return renderSheet(); }
+    if ((el = q('[data-edit-price]'))) {
+      d.price = d.price === el.dataset.editPrice ? '' : el.dataset.editPrice;
+      document.querySelectorAll('[data-edit-price]').forEach((b) => b.classList.toggle('on', b.dataset.editPrice === d.price));
+      return;
+    }
+    if ((el = q('[data-edit-tag]'))) {
+      const tag = el.dataset.editTag;
+      d.tags = d.tags.includes(tag) ? d.tags.filter((x) => x !== tag) : [...d.tags, tag];
+      el.classList.toggle('on', d.tags.includes(tag));
+      return;
+    }
+    if (q('[data-edit-save]')) return saveEditing();
+  }
   if ((el = q('[data-cancel]'))) {
     state.ui.editing[el.dataset.cancel] = false;
     state.ui.err[el.dataset.cancel] = '';
@@ -954,7 +1103,9 @@ function onClick(e) {
   if ((el = q('[data-copy]'))) {
     const which = el.dataset.copy;
     if (which === 'backup' && !state.cfg.folder) return;
-    const text = which === 'backup' ? backupScript(folderId(state.cfg.folder)) : endpointScript();
+    if (which === 'ratings' && !Object.keys(edits).length) return;
+    const text = which === 'backup' ? backupScript(folderId(state.cfg.folder))
+      : which === 'ratings' ? ratingsCsv() : endpointScript();
     copyText(text).then((ok) => {
       if (!ok) return toast('Copy failed. Try again.');
       state.ui.copied = which;
@@ -982,6 +1133,14 @@ function onInput(e) {
     renderFilters('food');
     renderFood();
     renderMap();
+    return;
+  }
+  if (t.matches('[data-rate-range]')) {
+    state.editing.rating = Math.round(+t.value * 10) / 10;
+    return updateRateUI();
+  }
+  if (t.matches('[data-edit-note]')) {
+    state.editing.note = t.value;
     return;
   }
   if (t.dataset.field) {

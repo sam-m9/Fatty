@@ -742,3 +742,43 @@ svg { display: block; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- Rate / edit ---------- */
+
+.btn-rate {
+  width: 100%;
+  margin-top: 8px;
+  gap: 8px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  color: var(--ink);
+}
+.btn-rate svg, .btn-icon svg { width: 16px; height: 16px; }
+.btn-icon { flex: 0 0 48px; padding: 0; }
+.rate-row { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 4px 0 14px; }
+.rate-big { font-size: 28px; padding: 8px 20px; min-width: 96px; text-align: center; transition: background-color .15s; }
+.step {
+  width: 48px; height: 48px;
+  border-radius: 99px;
+  background: var(--soft);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  padding-bottom: 2px;
+}
+.range { width: 100%; accent-color: var(--accent); height: 32px; }
+.rate-hint { font-size: 12px; color: var(--sub); text-align: center; margin-top: 4px; }
+.note-field { resize: vertical; min-height: 84px; font-family: inherit; line-height: 1.4; }
+.chip-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+.pick {
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 13px;
+  font-weight: 600;
+}
+.pick.on { background: var(--accent); color: var(--accent-ink); box-shadow: none; }

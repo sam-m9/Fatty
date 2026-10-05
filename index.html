@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
   <title>Fatty</title>
   <meta name="description" content="Personal restaurant tracker.">
-  <meta name="theme-color" content="#F7F4EC" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#1B1D18" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#1B1D18">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -20,11 +19,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="styles.css">
   <script>
-    // Apply the saved theme before first paint to avoid a flash.
-    try {
-      var s = JSON.parse(localStorage.getItem('fatty.v1') || '{}');
-      if (s.dark) document.documentElement.dataset.theme = 'dark';
-    } catch (e) {}
+    // Fatty always opens in dark mode; set it before first paint to avoid a flash.
+    document.documentElement.dataset.theme = 'dark';
   </script>
 </head>
 <body>

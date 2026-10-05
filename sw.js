@@ -1,6 +1,6 @@
 // Fatty service worker: caches the app shell so it opens offline.
 // Sheet data is never cached here (the app keeps its own copy in localStorage).
-const VERSION = 'fatty-v3';
+const VERSION = 'fatty-v4';
 const SHELL = [
   './',
   'index.html',
