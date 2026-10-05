@@ -55,7 +55,8 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: var(--page);
+  /* Same as the app so Safari tints its top and bottom bars to match. */
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -866,4 +867,9 @@ svg { display: block; }
   background: color-mix(in srgb, var(--card) 70%, transparent);
   border-radius: 6px 0 0 6px;
   padding: 0 6px;
+}
+
+/* Wider screens (tablet/desktop): show the app as a column on a darker page. */
+@media (min-width: 520px) {
+  html, body { background: var(--page); }
 }
