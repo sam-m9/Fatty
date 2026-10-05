@@ -802,3 +802,68 @@ svg { display: block; }
   box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
   white-space: nowrap;
 }
+
+/* ---------- Map tab: full-screen map ---------- */
+
+.app.map-mode .header { display: none; }
+.app.map-mode #view-map { display: block; }
+#view-map .map-wrap {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.map-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  padding: calc(var(--safe-top) + 10px) 14px 0;
+  pointer-events: none; /* let drags reach the map between the controls */
+}
+.map-top > * { pointer-events: auto; }
+#view-map .search-row { padding: 0; }
+#view-map .search {
+  padding: 10px 16px;
+  font-size: 16px; /* 16px stops iOS from zooming in on focus */
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .25);
+}
+#view-map .filter-grid { padding: 8px 0 0; gap: 6px; }
+#view-map .filter-btn {
+  height: 32px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 10px 0 13px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .2);
+}
+#view-map .filter-btn.on { background: var(--soft); }
+#view-map .filter-btn .chev svg { width: 10px; height: 10px; }
+#view-map .map-progress { top: calc(var(--safe-top) + 106px); }
+#view-map .map-empty { padding-top: 120px; }
+
+/* Compact info card, floating just above the tab bar. */
+#view-map .map-card {
+  left: 14px; right: 14px;
+  bottom: calc(var(--tab-bottom) + 68px + 22px);
+  border-radius: 20px;
+  padding: 10px 10px 10px 14px;
+}
+#view-map .map-card-top { margin-bottom: 8px; align-items: center; }
+#view-map .map-card-name { font-size: 15px; }
+#view-map .map-card .meta { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#view-map .map-card .badge { font-size: 13px; padding: 3px 10px; }
+#view-map .map-card .btn { min-height: 38px; padding: 8px 12px; font-size: 14px; }
+#view-map .map-card .btn-icon { flex-basis: 38px; }
+#view-map .map .leaflet-bottom { bottom: calc(var(--tab-bottom) + 68px + 2px); }
+#view-map .map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  border-radius: 6px 0 0 6px;
+  padding: 0 6px;
+}

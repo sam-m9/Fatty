@@ -335,6 +335,8 @@ function renderTabs() {
     `<button class="tab${state.tab === t.id ? ' on' : ''}" data-tab="${t.id}" aria-current="${state.tab === t.id ? 'page' : 'false'}">${I[t.icon]}<span>${t.label}</span></button>`).join('');
   $('#subtitle').textContent = TABS.find((t) => t.id === state.tab).sub;
   document.querySelectorAll('.view').forEach((v) => { v.hidden = v.dataset.tab !== state.tab; });
+  // The Map tab goes full screen: header hidden, map behind everything.
+  $('#app').classList.toggle('map-mode', state.tab === 'map');
 }
 
 function setTab(tab) {
@@ -493,7 +495,7 @@ function showMap() {
   }
   if (!map) {
     map = window.L.map('map', { zoomControl: false, attributionControl: false }).setView([34.05, -118.3], 11);
-    window.L.control.attribution({ position: 'topright', prefix: false }).addTo(map);
+    window.L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
     setTiles();
     markers = window.L.layerGroup().addTo(map);
     map.on('dragstart', () => { userMovedMap = true; });
@@ -525,12 +527,13 @@ function renderMap() {
   } else if (!list.length) {
     empty.hidden = false;
     empty.textContent = 'No spots match these filters.';
-  } else if (!located.length) {
+  } else if (!located.length && !geoProgress.active) {
     empty.hidden = false;
-    empty.textContent = 'None of these spots have a location yet. Add Lat and Lng or a Map link in the sheet.';
+    empty.textContent = 'None of these spots have an address yet, so they can't be pinned.';
   } else {
     empty.hidden = true;
   }
+  if (!located.length && geoProgress.active) empty.hidden = true;
 
   const card = $('#map-card');
   if (sel) {
@@ -561,7 +564,7 @@ function renderMap() {
   if (fitKey && fitKey !== lastFitKey && state.tab === 'map' && !userMovedMap) {
     lastFitKey = fitKey;
     const bounds = window.L.latLngBounds(located.map((p) => [p.lat, p.lng]));
-    map.fitBounds(bounds, { paddingTopLeft: [40, 40], paddingBottomRight: [40, 160], maxZoom: 15, animate: false });
+    map.fitBounds(bounds, { paddingTopLeft: [30, 150], paddingBottomRight: [30, 250], maxZoom: 15, animate: false });
   }
 }
 

@@ -60,10 +60,12 @@
 
       <!-- Map -->
       <section class="view" id="view-map" data-tab="map" hidden>
-        <div class="search-row">
-          <input class="search" id="map-search" type="search" placeholder="Search the map" autocomplete="off" enterkeyhint="search" aria-label="Search the map">
+        <div class="map-top">
+          <div class="search-row">
+            <input class="search" id="map-search" type="search" placeholder="Search the map" autocomplete="off" enterkeyhint="search" aria-label="Search the map">
+          </div>
+          <div class="filter-grid" id="map-filters"></div>
         </div>
-        <div class="filter-grid" id="map-filters"></div>
         <div class="map-wrap">
           <div class="map" id="map"></div>
           <div class="map-empty" id="map-empty" hidden></div>
