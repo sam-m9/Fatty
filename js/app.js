@@ -529,7 +529,7 @@ function renderMap() {
     empty.textContent = 'No spots match these filters.';
   } else if (!located.length && !geoProgress.active) {
     empty.hidden = false;
-    empty.textContent = 'None of these spots have an address yet, so they can't be pinned.';
+    empty.textContent = "None of these spots have an address yet, so they can't be pinned.";
   } else {
     empty.hidden = true;
   }

@@ -22,6 +22,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          for f in js/*.js; do node --input-type=module --check < "$f" || { echo "Syntax error in $f"; exit 1; }; done
+          node --check sw.js
       - name: Collect site files
         run: |
           mkdir _site
