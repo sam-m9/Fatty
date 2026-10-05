@@ -509,7 +509,7 @@ function mapResults() {
 
 function pinHtml(p, sel) {
   const rated = p.rating != null;
-  return `<div class="pin${rated ? '' : ' unrated'}${sel ? ' sel' : ''}" style="${rated ? `background:${ratingColor(p.rating)}` : ''}" role="button" aria-label="${esc(p.name)}">${rated ? fmtRating(p.rating) : ''}</div>`;
+  return `<div class="pin${rated ? '' : ' unrated'}${sel ? ' sel' : ''}" style="${rated ? `background:${ratingColor(p.rating)}` : ''}" role="button" aria-label="${esc(p.name)}">${rated ? fmtRating(p.rating) : I.bookmark}</div>`;
 }
 
 function renderMap() {

@@ -918,5 +918,84 @@
 ],
 "note": "Organic sourdough loaves, cookies and breakfast pastries",
 "checked": "address,hours"
+},
+{
+"key": "A:12",
+"name": "Nixta Taqueria",
+"status": "open",
+"address": "2512 E 12th St, Austin, TX 78702",
+"area": "Chestnut",
+"cuisine": "Mexican",
+"price": "",
+"hours": "Tue-Thu 5pm-9pm; Fri-Sat 11am-2pm, 5pm-10pm; Sun 11am-3pm; Mon closed",
+"link": "",
+"tags": [
+"Date night"
+],
+"note": "Heirloom corn tortillas and tacos at 12th & Cedar",
+"checked": "address"
+},
+{
+"key": "A:16",
+"name": "Cuantos Tacos",
+"status": "open",
+"address": "1108 E 12th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Mexican",
+"price": "$",
+"hours": "Tue-Sat 11am-10pm; Sun 10am-4pm; Mon closed",
+"link": "",
+"tags": [
+"Food truck",
+"Michelin",
+"Cheap eats"
+],
+"note": "Michelin Bib Gourmand taco truck in the Arbor Food Park",
+"checked": "address,hours"
+},
+{
+"key": "A:15",
+"name": "Papalote Taco House",
+"status": "open",
+"address": "2803 S Lamar Blvd, Austin, TX 78704",
+"area": "South Lamar",
+"cuisine": "Mexican",
+"price": "",
+"hours": "",
+"link": "",
+"tags": [],
+"note": "Original South Lamar taco house; second spot in Northwest Austin",
+"checked": "address"
+},
+{
+"key": "A:7",
+"name": "Veracruz All Natural",
+"status": "open",
+"address": "3504 Montopolis Dr, Austin, TX 78744",
+"area": "Montopolis",
+"cuisine": "Mexican",
+"price": "",
+"hours": "",
+"link": "",
+"tags": [
+"Food truck",
+"Brunch"
+],
+"note": "Migas tacos; truck at Radio East, several Austin locations",
+"checked": "address"
+},
+{
+"key": "C:5",
+"name": "Via 313",
+"status": "open",
+"address": "1802 E 6th St, Austin, TX 78702",
+"area": "Central East Austin",
+"cuisine": "Pizza",
+"price": "",
+"hours": "",
+"link": "",
+"tags": [],
+"note": "Detroit-style square pizza; East Side location (several in Austin)",
+"checked": "address"
 }
 ]
