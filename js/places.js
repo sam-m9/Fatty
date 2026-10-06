@@ -1,6 +1,5 @@
-// Google Places (New) photos. Your API key stays on this device (localStorage).
-// Saved photo values look like "gphoto:places/…/photos/…"; the image URL is built
-// with the key when shown, so nothing private ends up in the app's code or data.
+// Google Places (New) photos. Your API key stays on this device (localStorage) and is
+// only used to look photos up; the saved direct image links don't contain it.
 
 const KEY_STORE = 'fatty.v1.gkey';
 const AUSTIN = { latitude: 30.2672, longitude: -97.7431 };
@@ -13,10 +12,51 @@ export function setKey(k) {
 }
 export const looksLikeKey = (k) => /^AIza[\w-]{30,}$/.test(k.trim());
 
-export function gphotoUrl(value, key, width = 480) {
-  const name = value.slice('gphoto:'.length);
-  if (!/^places\/[\w-]+\/photos\/[\w-]+$/.test(name) || !key) return '';
-  return `https://places.googleapis.com/v1/${name}/media?maxWidthPx=${width}&key=${encodeURIComponent(key)}`;
+// Hard monthly limit on Google requests made by this app, kept below Google's smallest
+// free monthly allowance (1,000 calls) so normal use stays free. Filling ~150 spots
+// takes about 300 (one search + one photo link each).
+export const MONTHLY_CAP = 400;
+const USAGE_STORE = 'fatty.v1.gusage';
+const thisMonth = () => new Date().toISOString().slice(0, 7);
+
+export function usage() {
+  try {
+    const u = JSON.parse(localStorage.getItem(USAGE_STORE) || '{}');
+    return u.month === thisMonth() ? u.n : 0;
+  } catch { return 0; }
+}
+function count() {
+  const n = usage() + 1;
+  try { localStorage.setItem(USAGE_STORE, JSON.stringify({ month: thisMonth(), n })); } catch { /* blocked */ }
+}
+function guard() {
+  if (usage() >= MONTHLY_CAP) {
+    throw new Error(`Fatty's limit of ${MONTHLY_CAP} Google requests this month is reached. It resets on the 1st.`);
+  }
+}
+
+// Saved values: "gphoto:<photo name>#<direct image link>". The direct link loads without
+// the key and isn't billed per view; it is refreshed (one request) if it ever expires.
+export function gphotoUrl(value) {
+  const uri = value.split('#').slice(1).join('#');
+  return /^https:\/\//.test(uri) ? uri : '';
+}
+
+async function mediaUri(name, key) {
+  if (!/^places\/[\w-]+\/photos\/[\w-]+$/.test(name)) return '';
+  guard();
+  count();
+  const res = await fetch(`https://places.googleapis.com/v1/${name}/media?maxWidthPx=480&skipHttpRedirect=true&key=${encodeURIComponent(key)}`);
+  const body = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(apiError(res.status, body));
+  return body?.photoUri || '';
+}
+
+// Gets a fresh direct link for a saved Google photo (when the old one expired).
+export async function refreshPhoto(value, key) {
+  const name = value.slice('gphoto:'.length).split('#')[0];
+  const uri = await mediaUri(name, key);
+  return uri ? `gphoto:${name}#${uri}` : '';
 }
 
 function apiError(status, body) {
@@ -31,6 +71,8 @@ function apiError(status, body) {
 
 // Finds the top Google photo for a spot. Returns "gphoto:…" or '' when Google has none.
 export async function findPhoto(p, key) {
+  guard();
+  count();
   const where = p.address || [p.area, 'Austin, TX'].filter(Boolean).join(', ');
   const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
     method: 'POST',
@@ -48,5 +90,7 @@ export async function findPhoto(p, key) {
   const body = await res.json().catch(() => null);
   if (!res.ok) throw new Error(apiError(res.status, body));
   const photo = body?.places?.[0]?.photos?.[0]?.name;
-  return photo ? `gphoto:${photo}` : '';
+  if (!photo) return '';
+  const uri = await mediaUri(photo, key);
+  return uri ? `gphoto:${photo}#${uri}` : '';
 }

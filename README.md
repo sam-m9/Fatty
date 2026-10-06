@@ -79,12 +79,21 @@ Each spot's edit sheet has a **Photo** section: choose one from your camera roll
 
 ### Photos from Google (optional)
 
-1. In [Google Cloud Console](https://console.cloud.google.com/), create a project and attach a billing account.
+Google requires a billing account, but this setup keeps it at $0:
+
+- **Free trial:** new Google Cloud accounts get a trial credit, and the card isn't charged during the trial unless you upgrade.
+- **Free monthly allowance:** each Places request type has a free monthly allowance (1,000 to 10,000 calls).
+- **Fatty's own limit:** at most 400 Google requests a month. Filling ~150 spots takes about 300; after that, viewing photos costs nothing (Fatty saves a direct image link per spot and only asks Google again if a link expires).
+- **Google-side hard cap (do this):** set daily quotas so Google refuses requests instead of billing.
+
+Steps:
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), create a project and add a billing account (start the free trial if offered).
 2. **APIs & Services → Library**: enable **Places API (New)**.
 3. **APIs & Services → Credentials → Create credentials → API key**. Edit the key:
    - Application restrictions: **Websites**, add `https://sam-m9.github.io/*`
    - API restrictions: **Places API (New)** only
-4. Optional but smart: **Quotas** for Places API (New), cap requests per day.
-5. In Fatty, open the cloud button → **Photos from Google**, paste the key, tap **Find photos**.
+4. **APIs & Services → Places API (New) → Quotas & System Limits**: edit the per-day request limits down to about **100 per day** each. When a limit is hit, Google just stops answering until tomorrow.
+5. In Fatty, open the cloud button → **Photos from Google**, paste the key, tap **Find photos**. The card shows how many Google requests Fatty has used this month.
 
-The key is saved only on your phone. Fatty fetches the top Google photo for every spot that has none; photos you added or deleted are never overwritten.
+The key is saved only on your phone. Photos you added or deleted are never overwritten.

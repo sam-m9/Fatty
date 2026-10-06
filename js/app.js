@@ -2,7 +2,7 @@ import { I } from './icons.js';
 import { loadPlaces, loadBundled, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
 import { isOpenAt } from './hours.js';
 import { loadPhotos, savePhoto, deletePhoto, resizeImage } from './photos.js';
-import { getKey, setKey, looksLikeKey, gphotoUrl, findPhoto } from './places.js';
+import { getKey, setKey, looksLikeKey, gphotoUrl, findPhoto, refreshPhoto, usage, MONTHLY_CAP } from './places.js';
 import { REGIONS, GROUPS, regionFor } from './regions.js';
 import { applyCachedCoords, geocodeMissing, progress as geoProgress } from './geo.js';
 import { backupScript, endpointScript } from './scripts.js';
@@ -97,7 +97,7 @@ function saveEdit(p, e) {
 
 let photos = new Map(); // editKey → data URL, https link, or '' (photo removed)
 
-const resolvePhoto = (v) => (v && v.startsWith('gphoto:') ? gphotoUrl(v, getKey()) : v || '');
+const resolvePhoto = (v) => (v && v.startsWith('gphoto:') ? gphotoUrl(v) : v || '');
 
 function photoSrc(p) {
   return resolvePhoto(photos.get(editKey(p)) ?? p.photo ?? '');
@@ -105,12 +105,28 @@ function photoSrc(p) {
 
 // ---------- Google photos ----------
 
+// A Google image link that stopped loading gets one fresh link per session.
+const refreshed = new Set();
+async function refreshGooglePhoto(key) {
+  const v = photos.get(key);
+  if (!v || !v.startsWith('gphoto:') || refreshed.has(key) || !getKey()) return;
+  refreshed.add(key);
+  try {
+    const fresh = await refreshPhoto(v, getKey());
+    if (!fresh) return;
+    photos.set(key, fresh);
+    await savePhoto(key, fresh).catch(() => {});
+    renderFood();
+  } catch { /* limit reached or offline: keep the placeholder */ }
+}
+
 const gp = { running: false, done: 0, total: 0, found: 0, error: '' };
 
 async function findGooglePhotos() {
   const key = getKey();
   if (!key || gp.running) return;
   // Skip spots that already have a photo, or whose photo you deleted.
+  if (usage() >= MONTHLY_CAP) { gp.error = `Fatty's limit of ${MONTHLY_CAP} Google requests this month is reached. It resets on the 1st.`; return renderSheet(); }
   const todo = state.places.filter((p) => !photos.has(editKey(p)) && !p.photo);
   Object.assign(gp, { running: true, done: 0, total: todo.length, found: 0, error: '' });
   renderSheet();
@@ -163,6 +179,7 @@ function googleCard() {
     <p class="sheet-text" style="margin:10px 0" data-gp-status>${gp.running ? `Finding photos · ${gp.done} of ${gp.total}`
       : gp.error ? esc(gp.error)
       : missing ? `${missing} spots have no photo yet.` : 'Every spot has a photo.'}</p>
+    <p class="sheet-text" style="margin:-4px 0 10px">Google requests this month: ${usage()} of ${MONTHLY_CAP}. Fatty stops at the limit, below Google's free allowance.</p>
     <div class="btn-row">
       <button class="btn ${missing && !gp.running ? 'btn-accent' : 'btn-soft disabled'} btn-grow" data-gp-find>${gp.running ? 'Working…' : 'Find photos'}</button>
       <button class="btn btn-soft" data-gkey-edit>Change key</button>
@@ -486,8 +503,9 @@ function placeCard(p) {
   const open = state.expanded === p.id;
   const right = p.rating != null ? badge(p.rating) : `<span class="bookmark" aria-label="Want to try">${I.bookmark}</span>`;
   const src = photoSrc(p);
+  const own = photos.get(editKey(p)) ?? p.photo ?? '';
   const photo = photoStyle(src)
-    ? `<div class="photo" style="${photoStyle(src)}"></div>`
+    ? `<div class="photo"><img class="photo-img" src="${esc(src)}" alt="" loading="lazy" decoding="async"${own.startsWith('gphoto:') ? ` data-gref="${esc(editKey(p))}"` : ''}></div>`
     : `<div class="photo">${I.food}</div>`;
   return `<article class="card${open ? ' open' : ''}" data-id="${p.id}">
     <div class="card-head" data-toggle="${p.id}" role="button" tabindex="0" aria-expanded="${open}">
@@ -1503,6 +1521,11 @@ function boot() {
   if (state.tab === 'map') showMap();
   restoreCache();
   loadPhotos().then((m) => { photos = m; if (m.size) renderFood(); });
+  // An expired Google image link: fetch a fresh one (capture phase; img errors don't bubble).
+  document.addEventListener('error', (e) => {
+    const img = e.target;
+    if (img && img.tagName === 'IMG' && img.dataset.gref) refreshGooglePhoto(img.dataset.gref);
+  }, true);
   renderData();
   renderStage();
   refresh();
