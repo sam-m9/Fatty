@@ -72,3 +72,19 @@ In Fatty, open the cloud button and paste your Drive folder link. Tap **Copy bac
 ## Stored on the device
 
 `localStorage["fatty.v1"]` holds `{ cfg: { sheet, folder }, dark, sort }`. `fatty.v1.data` caches the last sheet read, so the app opens instantly and still works offline.
+
+## Photos
+
+Each spot's edit sheet has a **Photo** section: choose one from your camera roll, paste an image link, or tap **From Google**. Changes apply on **Save**; **Delete** removes the photo. Photos are stored on the device (IndexedDB).
+
+### Photos from Google (optional)
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), create a project and attach a billing account.
+2. **APIs & Services → Library**: enable **Places API (New)**.
+3. **APIs & Services → Credentials → Create credentials → API key**. Edit the key:
+   - Application restrictions: **Websites**, add `https://sam-m9.github.io/*`
+   - API restrictions: **Places API (New)** only
+4. Optional but smart: **Quotas** for Places API (New), cap requests per day.
+5. In Fatty, open the cloud button → **Photos from Google**, paste the key, tap **Find photos**.
+
+The key is saved only on your phone. Fatty fetches the top Google photo for every spot that has none; photos you added or deleted are never overwritten.

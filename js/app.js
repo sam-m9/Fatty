@@ -2,6 +2,7 @@ import { I } from './icons.js';
 import { loadPlaces, loadBundled, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
 import { isOpenAt } from './hours.js';
 import { loadPhotos, savePhoto, deletePhoto, resizeImage } from './photos.js';
+import { getKey, setKey, looksLikeKey, gphotoUrl, findPhoto } from './places.js';
 import { REGIONS, GROUPS, regionFor } from './regions.js';
 import { applyCachedCoords, geocodeMissing, progress as geoProgress } from './geo.js';
 import { backupScript, endpointScript } from './scripts.js';
@@ -96,9 +97,78 @@ function saveEdit(p, e) {
 
 let photos = new Map(); // editKey → data URL, https link, or '' (photo removed)
 
+const resolvePhoto = (v) => (v && v.startsWith('gphoto:') ? gphotoUrl(v, getKey()) : v || '');
+
 function photoSrc(p) {
-  const mine = photos.get(editKey(p));
-  return mine ?? p.photo ?? '';
+  return resolvePhoto(photos.get(editKey(p)) ?? p.photo ?? '');
+}
+
+// ---------- Google photos ----------
+
+const gp = { running: false, done: 0, total: 0, found: 0, error: '' };
+
+async function findGooglePhotos() {
+  const key = getKey();
+  if (!key || gp.running) return;
+  // Skip spots that already have a photo, or whose photo you deleted.
+  const todo = state.places.filter((p) => !photos.has(editKey(p)) && !p.photo);
+  Object.assign(gp, { running: true, done: 0, total: todo.length, found: 0, error: '' });
+  renderSheet();
+  let redraw = 0;
+  for (const p of todo) {
+    try {
+      const v = await findPhoto(p, key);
+      if (v) {
+        photos.set(editKey(p), v);
+        await savePhoto(editKey(p), v).catch(() => {});
+        gp.found++;
+      }
+    } catch (err) {
+      gp.error = err.message;
+      break; // a key/billing problem fails every request; stop and say why
+    }
+    gp.done++;
+    if (state.sheet === 'data') renderGpProgress();
+    clearTimeout(redraw);
+    redraw = setTimeout(renderFood, 300);
+    await new Promise((r) => setTimeout(r, 120));
+  }
+  gp.running = false;
+  renderFood();
+  if (state.sheet === 'data') renderSheet();
+  toast(gp.error ? 'Stopped: see Photos from Google' : `Added ${gp.found} photos`);
+}
+
+function renderGpProgress() {
+  const el = $('[data-gp-status]');
+  if (el) el.textContent = `Finding photos · ${gp.done} of ${gp.total}`;
+}
+
+function googleCard() {
+  const key = getKey();
+  const missing = state.places.filter((p) => !photos.has(editKey(p)) && !p.photo).length;
+  if (!key || state.ui.editing.gkey) {
+    return `<div class="sheet-card">
+      <div class="sheet-label">Photos from Google</div>
+      <p class="sheet-text">Paste a Google Maps Platform API key with Places API (New) turned on. It stays on this phone.</p>
+      <input class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="AIza…" data-gkey aria-label="Google API key">
+      <div class="field-err" data-gkey-err ${state.ui.err.gkey ? '' : 'hidden'}>${esc(state.ui.err.gkey || '')}</div>
+      <div class="btn-row"><button class="btn btn-accent btn-grow" data-gkey-save>Save key</button>
+        ${key ? '<button class="btn btn-soft" data-gkey-cancel>Cancel</button>' : ''}</div>
+    </div>`;
+  }
+  return `<div class="sheet-card">
+    <div class="sheet-label">Photos from Google</div>
+    <div class="locked">${I.lock}<span>Key ••••${esc(key.slice(-4))}</span></div>
+    <p class="sheet-text" style="margin:10px 0" data-gp-status>${gp.running ? `Finding photos · ${gp.done} of ${gp.total}`
+      : gp.error ? esc(gp.error)
+      : missing ? `${missing} spots have no photo yet.` : 'Every spot has a photo.'}</p>
+    <div class="btn-row">
+      <button class="btn ${missing && !gp.running ? 'btn-accent' : 'btn-soft disabled'} btn-grow" data-gp-find>${gp.running ? 'Working…' : 'Find photos'}</button>
+      <button class="btn btn-soft" data-gkey-edit>Change key</button>
+      <button class="btn ${state.ui.confirm.gkey ? 'btn-danger' : 'btn-soft'}" data-gkey-remove>${state.ui.confirm.gkey ? 'Tap to confirm' : 'Remove'}</button>
+    </div>
+  </div>`;
 }
 
 // Only https links and our own resized JPEGs may be used as a background image.
@@ -786,6 +856,7 @@ function dataSheet() {
       <p class="sheet-text">${Object.keys(edits).length ? `${Object.keys(edits).length} spots rated or edited here.` : 'Scores and notes you add in the app are saved here.'} Copy them to paste into your sheet or keep a backup.</p>
       <button class="btn ${Object.keys(edits).length ? 'btn-accent' : 'btn-soft disabled'}" style="width:100%" data-copy="ratings">${state.ui.copied === 'ratings' ? 'Copied' : 'Copy my ratings'}</button>
     </div>
+    ${googleCard()}
     <div class="sheet-card">
       <div class="sheet-label">Weekly backup</div>
       <div class="next-run">Next: ${nextMonday()}</div>
@@ -831,7 +902,7 @@ function editSheet() {
   if (!p) return '';
   const rd = rateDisplay(d.rating);
   const tags = [...new Set([...EDIT_TAGS, ...d.tags])];
-  const src = d.photo !== undefined ? (d.photo || '') : photoSrc(p);
+  const src = d.photo !== undefined ? resolvePhoto(d.photo) : photoSrc(p);
   const style = photoStyle(src);
   return `<h2 class="sheet-title" id="sheet-title">${esc(p.name)}</h2>
     <p class="sheet-lead">${esc(meta(p) || 'Austin')}</p>
@@ -843,6 +914,7 @@ function editSheet() {
           <label class="btn btn-soft photo-btn">${I.image}<span>${style ? 'Change' : 'Choose photo'}</span>
             <input type="file" accept="image/*" data-photo-file hidden></label>
           <button class="btn btn-soft photo-btn" data-photo-link>${I.link}<span>Paste link</span></button>
+          ${getKey() ? `<button class="btn btn-soft photo-btn" data-photo-google>${I.image}<span>From Google</span></button>` : ''}
           ${style ? `<button class="btn photo-btn photo-del" data-photo-delete>${I.trash}<span>Delete</span></button>` : ''}
         </div>
       </div>
@@ -931,6 +1003,13 @@ function saveEditing() {
   renderData();
   if (state.spin.phase === 'result' && editKey(state.spin.winner) === d.key) { state.spin.winner = p; renderStage(); }
   toast(d.rating != null && wasNew ? `Marked visited · ${fmtRating(d.rating)}` : 'Saved');
+}
+
+// Re-render the sheet but keep the photo error that was just shown.
+function renderSheetKeepErr() {
+  const msg = $('[data-photo-err]')?.textContent;
+  renderSheet();
+  if (msg) photoError(msg);
 }
 
 function photoError(msg) {
@@ -1222,6 +1301,24 @@ function onClick(e) {
   // Sheets
   if (t.matches('[data-scrim]') || q('[data-close-sheet]')) return closeSheet();
   if ((el = q('[data-save]'))) return saveLink(el.dataset.save);
+  if (q('[data-gkey-save]')) {
+    const k = ($('[data-gkey]')?.value || '').trim();
+    if (!looksLikeKey(k)) { state.ui.err.gkey = 'Google API keys start with "AIza".'; return renderSheet(); }
+    setKey(k);
+    state.ui.err.gkey = '';
+    state.ui.editing.gkey = false;
+    return renderSheet();
+  }
+  if (q('[data-gkey-cancel]')) { state.ui.editing.gkey = false; return renderSheet(); }
+  if (q('[data-gkey-edit]')) { state.ui.editing.gkey = true; return renderSheet(); }
+  if (q('[data-gkey-remove]')) {
+    if (!state.ui.confirm.gkey) { state.ui.confirm.gkey = true; return renderSheet(); }
+    setKey('');
+    state.ui.confirm.gkey = false;
+    renderFood(); // Google photos need the key to show
+    return renderSheet();
+  }
+  if (q('[data-gp-find]')) return findGooglePhotos();
   if (state.sheet === 'edit') {
     const d = state.editing;
     if ((el = q('[data-rate-step]'))) {
@@ -1251,6 +1348,15 @@ function onClick(e) {
       return;
     }
     if (q('[data-photo-url-apply]')) return applyPhotoLink();
+    if ((el = q('[data-photo-google]'))) {
+      const p = state.places.find((x) => editKey(x) === d.key);
+      el.classList.add('disabled');
+      el.querySelector('span').textContent = 'Looking…';
+      findPhoto(p, getKey())
+        .then((v) => { if (v) { d.photo = v; renderSheet(); } else { photoError('Google has no photo for this spot.'); renderSheetKeepErr(); } })
+        .catch((err) => { photoError(err.message); el.classList.remove('disabled'); el.querySelector('span').textContent = 'From Google'; });
+      return;
+    }
   }
   if ((el = q('[data-cancel]'))) {
     state.ui.editing[el.dataset.cancel] = false;
@@ -1286,8 +1392,8 @@ function onClick(e) {
   }
 
   // Any tap elsewhere resets a pending delete confirmation.
-  if (state.sheet && (state.ui.confirm.sheet || state.ui.confirm.folder)) {
-    state.ui.confirm = { sheet: false, folder: false };
+  if (state.sheet && (state.ui.confirm.sheet || state.ui.confirm.folder || state.ui.confirm.gkey)) {
+    state.ui.confirm = { sheet: false, folder: false, gkey: false };
     renderSheet();
   }
 }
