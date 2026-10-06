@@ -1,6 +1,7 @@
 import { I } from './icons.js';
 import { loadPlaces, loadBundled, errorText, isSheetLink, isFolderLink, folderId } from './sheet.js';
 import { isOpenAt } from './hours.js';
+import { loadPhotos, savePhoto, deletePhoto, resizeImage } from './photos.js';
 import { REGIONS, GROUPS, regionFor } from './regions.js';
 import { applyCachedCoords, geocodeMissing, progress as geoProgress } from './geo.js';
 import { backupScript, endpointScript } from './scripts.js';
@@ -89,6 +90,22 @@ function saveEdit(p, e) {
   Object.assign(p, { rating: e.rating, note: e.note, price: e.price, tags: e.tags.slice(), address: e.address, area: e.area });
   p.region = regionFor(p.area) || p.region;
   if (moved) { p.lat = null; p.lng = null; p.mapLink = ''; } // re-pin from the new address
+}
+
+// ---------- Photos (yours, on this device) ----------
+
+let photos = new Map(); // editKey → data URL, https link, or '' (photo removed)
+
+function photoSrc(p) {
+  const mine = photos.get(editKey(p));
+  return mine ?? p.photo ?? '';
+}
+
+// Only https links and our own resized JPEGs may be used as a background image.
+function photoStyle(src) {
+  if (/^data:image\/(jpeg|png|webp);base64,[a-z0-9+/=]+$/i.test(src)) return `background-image:url('${src}')`;
+  if (/^https:\/\//i.test(src)) return `background-image:url('${esc(src.replace(/['()\\\s]/g, encodeURIComponent))}')`;
+  return '';
 }
 
 function persist() {
@@ -398,8 +415,9 @@ function rateButton(p, extra = '') {
 function placeCard(p) {
   const open = state.expanded === p.id;
   const right = p.rating != null ? badge(p.rating) : `<span class="bookmark" aria-label="Want to try">${I.bookmark}</span>`;
-  const photo = p.photo
-    ? `<div class="photo" style="background-image:url('${esc(/^https?:\/\//i.test(p.photo) ? p.photo.replace(/['()\\\s]/g, encodeURIComponent) : '')}')"></div>`
+  const src = photoSrc(p);
+  const photo = photoStyle(src)
+    ? `<div class="photo" style="${photoStyle(src)}"></div>`
     : `<div class="photo">${I.food}</div>`;
   return `<article class="card${open ? ' open' : ''}" data-id="${p.id}">
     <div class="card-head" data-toggle="${p.id}" role="button" tabindex="0" aria-expanded="${open}">
@@ -813,8 +831,28 @@ function editSheet() {
   if (!p) return '';
   const rd = rateDisplay(d.rating);
   const tags = [...new Set([...EDIT_TAGS, ...d.tags])];
+  const src = d.photo !== undefined ? (d.photo || '') : photoSrc(p);
+  const style = photoStyle(src);
   return `<h2 class="sheet-title" id="sheet-title">${esc(p.name)}</h2>
     <p class="sheet-lead">${esc(meta(p) || 'Austin')}</p>
+    <div class="sheet-card">
+      <div class="sheet-label">Photo</div>
+      <div class="photo-edit">
+        <div class="photo-preview" style="${style}">${style ? '' : I.food}</div>
+        <div class="photo-actions">
+          <label class="btn btn-soft photo-btn">${I.image}<span>${style ? 'Change' : 'Choose photo'}</span>
+            <input type="file" accept="image/*" data-photo-file hidden></label>
+          <button class="btn btn-soft photo-btn" data-photo-link>${I.link}<span>Paste link</span></button>
+          ${style ? `<button class="btn photo-btn photo-del" data-photo-delete>${I.trash}<span>Delete</span></button>` : ''}
+        </div>
+      </div>
+      <div class="photo-link-row" data-photo-link-row hidden>
+        <input class="field" type="url" inputmode="url" autocomplete="off" autocapitalize="off" placeholder="https://… link to an image" data-photo-url>
+        <button class="btn btn-accent" data-photo-url-apply>Use</button>
+      </div>
+      <div class="field-err" data-photo-err hidden></div>
+      ${d.photo !== undefined ? '<div class="rate-hint" style="text-align:left;margin-top:8px">Tap Save to keep this change.</div>' : ''}
+    </div>
     <div class="sheet-card">
       <div class="sheet-label">Your score</div>
       <div class="rate-row">
@@ -881,12 +919,46 @@ function saveEditing() {
   const wasNew = p.rating == null;
   const moved = d.address.trim() !== (p.address || '');
   saveEdit(p, { rating: d.rating, note: d.note.trim(), price: d.price, tags: d.tags, address: d.address.trim(), area: d.area });
+  if (d.photo !== undefined) {
+    const k = editKey(p);
+    if (d.photo) { photos.set(k, d.photo); savePhoto(k, d.photo).catch(() => toast('Photo could not be saved on this device.')); }
+    else if (p.photo) { photos.set(k, ''); savePhoto(k, '').catch(() => {}); } // hide the built-in photo
+    else { photos.delete(k); deletePhoto(k).catch(() => {}); }
+  }
   if (moved) { applyDistances(); fillCoords(p); }
   if (state.source === 'sheet') writeJSON(DATA_KEY, { sheet: state.cfg.sheet, places: state.places, at: state.fetchedAt });
   closeSheet();
   renderData();
   if (state.spin.phase === 'result' && editKey(state.spin.winner) === d.key) { state.spin.winner = p; renderStage(); }
   toast(d.rating != null && wasNew ? `Marked visited · ${fmtRating(d.rating)}` : 'Saved');
+}
+
+function photoError(msg) {
+  const el = $('[data-photo-err]');
+  if (!el) return;
+  el.hidden = !msg;
+  el.textContent = msg || '';
+}
+
+async function pickPhotoFile(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  try {
+    state.editing.photo = await resizeImage(file);
+    renderSheet();
+  } catch (err) {
+    photoError(err.message);
+  }
+}
+
+function applyPhotoLink() {
+  const url = ($('[data-photo-url]')?.value || '').trim();
+  if (!/^https:\/\/\S+$/i.test(url)) return photoError('Paste a full https:// link to an image.');
+  photoError('');
+  const img = new Image();
+  img.onload = () => { state.editing.photo = url; renderSheet(); };
+  img.onerror = () => photoError("That link didn't load as an image. Try copying the image address itself.");
+  img.src = url;
 }
 
 function ratingsCsv() {
@@ -1171,6 +1243,14 @@ function onClick(e) {
       return;
     }
     if (q('[data-edit-save]')) return saveEditing();
+    if (q('[data-photo-delete]')) { d.photo = null; return renderSheet(); }
+    if (q('[data-photo-link]')) {
+      const row = $('[data-photo-link-row]');
+      row.hidden = !row.hidden;
+      if (!row.hidden) $('[data-photo-url]').focus();
+      return;
+    }
+    if (q('[data-photo-url-apply]')) return applyPhotoLink();
   }
   if ((el = q('[data-cancel]'))) {
     state.ui.editing[el.dataset.cancel] = false;
@@ -1300,6 +1380,7 @@ function boot() {
 
   document.addEventListener('click', onClick);
   document.addEventListener('input', onInput);
+  document.addEventListener('change', (e) => { if (e.target.matches('[data-photo-file]')) pickPhotoFile(e.target); });
   document.addEventListener('keydown', onKey);
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && Date.now() - state.fetchedAt > 60000) refresh();
@@ -1315,6 +1396,7 @@ function boot() {
   renderTabs();
   if (state.tab === 'map') showMap();
   restoreCache();
+  loadPhotos().then((m) => { photos = m; if (m.size) renderFood(); });
   renderData();
   renderStage();
   refresh();

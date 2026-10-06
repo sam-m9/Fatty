@@ -929,3 +929,23 @@ button, a, input, select, textarea, [role="button"] { touch-action: manipulation
 /* Taps shouldn't select or highlight text in the controls. */
 .sheet button, .sheet .sheet-label, .rate-row, .chip-pick, .tabbar, .filter-grid { -webkit-user-select: none; user-select: none; }
 .range { touch-action: pan-x; }
+
+/* ---------- Photo editing ---------- */
+
+.photo-edit { display: flex; gap: 14px; align-items: center; }
+.photo-preview {
+  width: 96px; height: 96px;
+  flex: none;
+  border-radius: 22px;
+  background: var(--ph) center / cover no-repeat;
+  color: var(--ph-ink);
+  display: grid; place-items: center;
+}
+.photo-preview svg { width: 30px; height: 30px; }
+.photo-actions { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.sheet-card .photo-btn { min-height: 36px; padding: 7px 12px; font-size: 13px; gap: 7px; justify-content: flex-start; cursor: pointer; }
+.photo-btn svg { width: 15px; height: 15px; flex: none; }
+.photo-del { background: transparent; color: var(--danger); box-shadow: inset 0 0 0 1.5px var(--danger); }
+.photo-link-row { display: flex; gap: 8px; margin-top: 10px; }
+.photo-link-row .field { flex: 1; min-width: 0; }
+.photo-link-row .btn { flex: none; min-height: 44px; padding: 0 16px; }
